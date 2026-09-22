@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
     "spring.datasource.url=jdbc:h2:mem:auth;MODE=PostgreSQL;DB_CLOSE_DELAY=-1",
     "spring.datasource.username=sa", "spring.datasource.password=",
     "spring.flyway.enabled=false", "spring.sql.init.mode=always",
-    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql",
+    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql",
     "app.bootstrap-admin.username=owner",
     "app.bootstrap-admin.email=owner@example.com",
     "app.bootstrap-admin.password=a-secure-test-password1!"

@@ -13,3 +13,56 @@ h2 { margin-top: 0; font-size: 18px; }
 ul { list-style: none; padding: 0; }
 li { padding: 12px 0; }
 .note { color: #64736a; font-size: 14px; margin-top: 24px; }
+/* 后台采用原生表单控件，保持键盘操作和小屏幕下的清晰布局。 */
+.workspace { max-width: 1320px; padding-top: 32px; }
+.workspace h1 { margin-top: 24px; font-size: clamp(28px, 4vw, 42px); }
+a { color: #286557; text-underline-offset: 4px; }
+button, .button-link { background: #286557; color: white; border: 1px solid transparent; border-radius: 8px; padding: 10px 16px; font: inherit; cursor: pointer; text-decoration: none; display: inline-block; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.secondary { color: #286557; background: #f1f5ef; border-color: #d1ded5; }
+.quiet { background: transparent; color: #286557; padding: 5px 8px; }
+.danger { color: #a52f2f; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid #85b4a6; outline-offset: 2px; }
+.actions, .section-heading, .pagination, .tabs { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.section-heading { justify-content: space-between; margin-bottom: 18px; }
+.section-heading h2, .section-heading h3 { margin: 0; }
+.tabs { margin-top: 28px; }
+.tabs button { color: #536963; background: transparent; border-color: #d1ded5; }
+.tabs button.active { color: white; background: #286557; }
+.admin-grid { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 24px; align-items: start; }
+.admin-grid section { margin-top: 24px; min-width: 0; }
+.editor-fields, fieldset { display: grid; gap: 18px; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+legend { font-weight: 600; margin-bottom: 18px; }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+label { display: grid; gap: 7px; font-size: 14px; color: #344b45; }
+input, select, textarea { box-sizing: border-box; width: 100%; background: white; color: #183b36; border: 1px solid #bdcfc4; border-radius: 7px; padding: 10px 12px; font: inherit; min-height: 42px; }
+textarea { resize: vertical; }
+input:disabled, select:disabled { background: #f3f5f0; }
+.check-label { display: flex; align-items: center; }
+.check-label input { width: 18px; }
+.search-form { display: flex; gap: 12px; align-items: end; flex-wrap: wrap; margin: 20px 0; }
+.search-form label { flex: 1; min-width: 120px; }
+.catalog-panel .search-form { display: grid; }
+.entry-list { display: grid; gap: 8px; }
+.entry-row { display: flex; flex-direction: column; gap: 8px; align-items: start; width: 100%; padding: 16px; text-align: left; background: #f7f8f4; color: #183b36; border: 1px solid #e0e6db; border-radius: 9px; text-decoration: none; overflow-wrap: anywhere; }
+.entry-row span { color: #64736a; font-size: 13px; }
+.entry-row.selected { border-color: #286557; background: #edf5ed; }
+.pagination { justify-content: space-between; margin-top: 20px; font-size: 14px; }
+.subcard { background: #f7f8f4; border: 1px solid #e0e6db; border-radius: 10px; padding: 18px; display: grid; gap: 14px; }
+.example-fields { border-left: 3px solid #cdddcf; padding-left: 16px; display: grid; gap: 12px; }
+.publish-panel { margin-top: 24px; border-top: 1px solid #dfe4da; padding-top: 24px; }
+.tag { display: inline-block; background: #edf2e9; padding: 5px 10px; border-radius: 6px; font-size: 13px; }
+.readings { display: flex; gap: 8px; flex-wrap: wrap; }
+.history-list { margin-top: 32px; }
+.history-card { padding: 16px 0; border-top: 1px solid #e0e6db; margin-top: 18px; }
+summary { cursor: pointer; font-weight: 600; }
+.entry-content { overflow-wrap: anywhere; line-height: 1.7; }
+.entry-content .note { margin-top: 12px; }
+.sense { margin-top: 24px; }
+blockquote { margin: 16px 0; padding-left: 16px; border-left: 3px solid #cdddcf; }
+.preserve-lines { white-space: pre-wrap; }
+.entry-title { margin: 0; }
+.feedback { padding: 14px 18px; border-radius: 8px; background: #fff; overflow-wrap: anywhere; }
+.empty-state { padding: 40px 0; color: #64736a; line-height: 1.8; }
+@media (max-width: 850px) { .admin-grid { grid-template-columns: 1fr; } .form-grid { grid-template-columns: 1fr; } .workspace { padding: 24px 16px; } section { padding: 20px; } }

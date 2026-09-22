@@ -1,0 +1,61 @@
+name: language-lean
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: language_lean
+      POSTGRES_USER: language_lean
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U language_lean -d language_lean"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  # 后端源码挂载后由监听脚本编译，DevTools 检测 classpath 变化并重启应用。
+  api:
+    image: maven:3.9-eclipse-temurin-21
+    working_dir: /workspace
+    command: ["sh", "/workspace/dev-entrypoint.sh"]
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DEVTOOLS_RESTART_POLL_INTERVAL: 1s
+      SPRING_DEVTOOLS_RESTART_QUIET_PERIOD: 400ms
+      DB_URL: jdbc:postgresql://db:5432/language_lean
+      DB_USER: language_lean
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      BOOTSTRAP_ADMIN_USERNAME: ${BOOTSTRAP_ADMIN_USERNAME:-}
+      BOOTSTRAP_ADMIN_EMAIL: ${BOOTSTRAP_ADMIN_EMAIL:-}
+      BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD:-}
+      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-false}
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./backend:/workspace
+      - backend_maven_cache:/root/.m2
+    depends_on:
+      db:
+        condition: service_healthy
+  # 每次启动按 lock 文件重建容器内依赖，npm 下载缓存仍由独立数据卷复用。
+  web:
+    image: node:22-alpine
+    working_dir: /workspace
+    command: ["sh", "-c", "npm ci && exec npm run dev"]
+    environment:
+      VITE_DEV_HOST: 0.0.0.0
+      VITE_API_PROXY_TARGET: http://api:8080
+      VITE_USE_POLLING: "true"
+    ports:
+      - "127.0.0.1:5173:5173"
+    volumes:
+      - ./frontend:/workspace
+      - frontend_node_modules:/workspace/node_modules
+      - frontend_npm_cache:/root/.npm
+    depends_on:
+      - api
+volumes:
+  postgres_data:
+  backend_maven_cache:
+  frontend_node_modules:
+  frontend_npm_cache:

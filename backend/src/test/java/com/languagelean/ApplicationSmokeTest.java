@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
     "spring.datasource.username=sa", "spring.datasource.password=",
     "spring.flyway.enabled=false",
     "spring.sql.init.mode=always",
-    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql"
+    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql"
 })
 class ApplicationSmokeTest {
     @Value("${local.server.port}") int port;

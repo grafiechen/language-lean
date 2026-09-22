@@ -27,6 +27,10 @@ async function changePassword() {
       </header>
       <h1>让熟悉的词，<br>也能听得出来。</h1>
       <p class="intro">配合你的单词本，练习听觉回忆。</p>
+      <nav class="actions" aria-label="主要功能">
+        <router-link class="button-link" to="/dictionary">浏览基础词典</router-link>
+        <router-link v-if="auth.user?.roles.includes('ADMIN')" class="button-link secondary" to="/admin">后台词典管理</router-link>
+      </nav>
       <section v-if="auth.user?.mustChangePassword" aria-labelledby="password-title">
         <h2 id="password-title">修改初始密码</h2>
         <form class="password-form" @submit.prevent="changePassword">
@@ -45,7 +49,7 @@ async function changePassword() {
         <ul v-else-if="languages.items.length"><li v-for="language in languages.items" :key="language.code">{{ language.displayName }}</li></ul>
         <p v-else>暂未启用学习语言。</p>
       </section>
-      <p class="note">词典与复习功能正在准备中。</p>
+      <p class="note">基础词典已开放查看，复习功能正在准备中。</p>
     </main>
   </ion-content></ion-page>
 </template>

@@ -18,6 +18,8 @@ const router = createRouter({
   routes: [
     { path: '/', component: HomePage, meta: { requiresAuth: true } },
     { path: '/login', component: LoginPage },
+    { path: '/admin', component: () => import('./pages/AdminPage.vue'), meta: { requiresAuth: true, requiresAdmin: true } },
+    { path: '/dictionary/:id?', component: () => import('./pages/DictionaryPage.vue'), meta: { requiresAuth: true } },
   ],
 })
 /** 在首次导航时恢复会话，并保护需要登录的业务页面。 */
@@ -27,6 +29,7 @@ router.beforeEach(async to => {
     try { await auth.restore() } catch { /* The login page handles connectivity failures. */ }
   }
   if (to.meta.requiresAuth && !auth.authenticated) return '/login'
+  if (to.meta.requiresAdmin && !auth.user?.roles.includes('ADMIN')) return '/'
   if (to.path === '/login' && auth.authenticated) return '/'
 })
 const app = createApp(App).use(IonicVue).use(pinia).use(router)

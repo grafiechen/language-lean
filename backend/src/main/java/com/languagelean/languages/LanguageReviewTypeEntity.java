@@ -19,6 +19,15 @@ class LanguageReviewTypeEntity {
 
     /** 仅供 JPA 反射创建实体。 */
     protected LanguageReviewTypeEntity() {}
+    /** 为新语言启用第一版唯一支持的听音回忆题型。 */
+    static LanguageReviewTypeEntity listenRecall(LanguageEntity language) {
+        var type = new LanguageReviewTypeEntity();
+        type.id = new LanguageReviewTypeId(language.getCode(), "LISTEN_RECALL");
+        type.language = language;
+        type.contractVersion = 1;
+        type.enabled = true;
+        return type;
+    }
     String getTypeId() { return id.getTypeId(); }
     int getContractVersion() { return contractVersion; }
     boolean isEnabled() { return enabled; }

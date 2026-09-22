@@ -15,6 +15,11 @@ class LanguageReviewTypeId implements Serializable {
 
     /** 仅供 JPA 反射创建复合键。 */
     protected LanguageReviewTypeId() {}
+    /** 构造语言内唯一的题型标识。 */
+    LanguageReviewTypeId(String languageCode, String typeId) {
+        this.languageCode = languageCode;
+        this.typeId = typeId;
+    }
     String getTypeId() { return typeId; }
     @Override public boolean equals(Object other) {
         if (this == other) return true;
