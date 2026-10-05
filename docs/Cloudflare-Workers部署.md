@@ -8,7 +8,7 @@
 
 | 项目 | 值 |
 | --- | --- |
-| Worker 名称 | `language-lean-web`（与 `frontend/wrangler.jsonc` 一致） |
+| Worker 名称 | `language-lean`（与 `frontend/wrangler.jsonc` 一致） |
 | 根目录 | `/frontend` |
 | 构建命令 | 留空（Wrangler 在部署前自动执行 `npm run build`） |
 | 部署命令 | `npx wrangler deploy` |

@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "language-lean-web",
+  "name": "language-lean",
   "main": "./worker.ts",
   "compatibility_date": "2026-10-01",
   // 在上传前编译，避免 Cloudflare 未填写构建命令时缺少 dist。
