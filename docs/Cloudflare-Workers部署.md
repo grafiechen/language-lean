@@ -10,15 +10,17 @@
 | --- | --- |
 | Worker 名称 | `language-lean`（与 `frontend/wrangler.jsonc` 一致） |
 | 根目录 | `/frontend` |
-| 构建命令 | 留空（Wrangler 在部署前自动执行 `npm run build`） |
+| 构建命令 | `npm run build`（Cloudflare 构建环境自动编译） |
 | 部署命令 | `npx wrangler deploy` |
 | 分支控制 / 生产分支 | `main` |
 
 Cloudflare 根据锁文件自动安装依赖。已创建的 Worker 可在 Settings → Build → Branch control 修改生产分支；推送到该分支后自动构建部署。
 
-`wrangler.jsonc` 已配置自定义构建命令，执行 `npx wrangler deploy` 会先完成 TypeScript 检查和 Vite 编译，再上传生成的 `dist`。无需提交 `dist` 到 Git。若控制台此前填写了 `npm run build`，可以清空以避免重复编译；编译失败时不会继续发布。
+`wrangler.jsonc` 也配置了自定义构建命令，供直接执行 Wrangler 时完成 TypeScript 检查和 Vite 编译。Cloudflare Workers Builds 仍建议显式填写上表的构建命令，确保云端生成 `dist` 后再部署。无需提交 `dist` 到 Git；编译失败时不会继续发布。
 
 在 **Build 的环境变量**中设置 `VITE_API_BASE_URL=https://api.example.com`（替换为实际后端地址，不含 `/api` 路径），可设置 `NODE_VERSION=22`。Vite 会把地址编译进 JavaScript，仅修改 Worker 运行时变量不生效，改地址后需重新构建。
+
+构建变量和 Worker 的运行时「变量和密钥」是两个不同位置。在 Worker 的 Settings → Build → 构建变量和密钥中添加上述值，再重新构建部署。Workers CI 缺失或填错该变量时，构建会报出明确错误，避免部署后才在前端域名得到 `/api` 的 404。普通本地/Docker 构建仍允许留空使用同源代理。
 
 `frontend/.env.example` 默认留空，便于本地开发继续走 Vite 或 Docker 的 `/api` 同源代理。生产分开部署必须设置 API 地址，否则请求会发往静态前端域名。
 
