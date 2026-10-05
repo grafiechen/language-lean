@@ -11,7 +11,8 @@
     "build": "vue-tsc --noEmit && vite build",
     "test": "vitest run",
     "preview": "vite preview --host 127.0.0.1",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "preview:cloudflare": "wrangler preview"
   },
   "dependencies": {
     "@ionic/vue": "^8.0.0",

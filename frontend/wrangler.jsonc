@@ -12,5 +12,7 @@
   "assets": {
     "directory": "./dist",
     "not_found_handling": "single-page-application"
-  }
+  },
+  // 非生产分支使用 wrangler preview；仅预览当前分支代码，不新增数据库、R2 或后端绑定。
+  "previews": {}
 }

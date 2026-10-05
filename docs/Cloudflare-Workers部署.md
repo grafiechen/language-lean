@@ -13,8 +13,32 @@
 | 构建命令 | `npm run build`（Cloudflare 构建环境自动编译） |
 | 部署命令 | `npx wrangler deploy` |
 | 分支控制 / 生产分支 | `main` |
+| Preview 命令 / 非 `main` 分支 | `npx wrangler preview` |
 
 Cloudflare 根据锁文件自动安装依赖。已创建的 Worker 可在 Settings → Build → Branch control 修改生产分支；推送到该分支后自动构建部署。
+
+## Worker Previews
+
+当前项目固定使用 `wrangler@4.147.0`（2026-10-06 查询 npm 时的最新版本），满足 Worker Previews 的最低版本 `4.135.0`。升级应同时更新 `package.json` 与 `package-lock.json`，不要只升级全局命令。
+
+`frontend/wrangler.jsonc` 已加入空的 `previews: {}`，静态资源和兼容日期继续使用顶层配置。Preview 上传当前分支的前端代码，不添加独立 R2、数据库、后端服务或资源绑定，也不修改生产域名与 DNS。
+
+在 Cloudflare 控制台完成以下设置：
+
+1. Settings → Build → Branch control：生产分支保持 `main`，勾选 **Enable Preview Builds**。
+2. 生产部署命令保持 `npx wrangler deploy`，**Preview 命令**填 `npx wrangler preview`。不要把生产部署命令直接替换为 Preview 命令。
+3. 若现有项目出现 **Set up Worker Previews** 提示，按提示切换到 Worker Previews。仓库配置已准备好；该平台开关不能通过 `wrangler.jsonc` 自动开启。
+4. 从更新后的 `main` 创建 `feature/xxx`、`bugfix/xxx` 等分支。已有旧分支先合并最新 `main`，避免沿用旧 Worker 名称或缺少 `previews`。
+
+随后推送 `main` 发布生产环境，推送其他分支创建/更新对应 Preview。Preview 名称默认来自分支，每次部署返回分支 Preview 地址和单次部署地址。
+
+Preview 的 Vite 构建也需要 Build 变量 `VITE_API_BASE_URL`；`previews.vars` 是 Worker 运行时变量，不能替代它。暂不配置独立后端时，可沿用已配置 API 地址查看页面，但目前生产 API 的 CORS 白名单和 `SameSite=Strict` Cookie 不支持默认跨站 Preview 地址登录。完整登录、学习提交仍在生产域名测试，后续再配置测试后端或 Preview 域名；本次不放宽生产鉴权设置。
+
+本地可执行 `npx wrangler preview`，或等价的 `npm run preview:cloudflare`；现有 `npm run preview` 继续用于 Vite 本地构建预览。实际创建远程 Preview 需要 Cloudflare 授权，本机 `--dry-run` 只能检查生产打包，不代表已创建远程 Preview。
+
+参考：[Worker Previews 配置](https://developers.cloudflare.com/workers/previews/configuration/)、[分支构建设置](https://developers.cloudflare.com/workers/ci-cd/builds/build-branches/)。
+
+## 构建变量
 
 `wrangler.jsonc` 也配置了自定义构建命令，供直接执行 Wrangler 时完成 TypeScript 检查和 Vite 编译。Cloudflare Workers Builds 仍建议显式填写上表的构建命令，确保云端生成 `dist` 后再部署。无需提交 `dist` 到 Git；编译失败时不会继续发布。
 
