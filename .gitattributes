@@ -1,2 +1,5 @@
 * text=auto eol=lf
 *.cmd text eol=crlf
+*.gz binary
+# 固定发布的 CSV 按原始字节核对 SHA-256，不转换其换行。
+data/jitendex/source/uncertain.csv -text

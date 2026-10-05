@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2240" height="1120" viewBox="0 0 2240 1120">
+  <title>Language Lean · 第一版前端界面</title>
+  <desc>可导入 Figma 的可编辑 SVG 设计稿，包含学习首页、单词本、基础词典和后台词典工作台。</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#183b36" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .screen { fill: #f6f5ef; stroke: #dfe4da; stroke-width: 1; }
+      .card { fill: #ffffff; stroke: #dfe4da; stroke-width: 1; }
+      .subcard { fill: #f7f8f4; stroke: #e0e6db; stroke-width: 1; }
+      .primary { fill: #286557; }
+      .secondary { fill: #f1f5ef; stroke: #d1ded5; stroke-width: 1; }
+      .tag { fill: #edf2e9; }
+      .border { stroke: #dfe4da; stroke-width: 1; }
+      .text { fill: #183b36; font-family: "Microsoft YaHei", system-ui, sans-serif; }
+      .muted { fill: #64736a; font-family: "Microsoft YaHei", system-ui, sans-serif; }
+      .label { fill: #344b45; font-family: "Microsoft YaHei", system-ui, sans-serif; }
+      .danger { fill: #a52f2f; font-family: "Microsoft YaHei", system-ui, sans-serif; }
+      .small { font-size: 12px; }
+      .body { font-size: 14px; }
+      .title { font-size: 28px; font-weight: 700; }
+      .section { font-size: 18px; font-weight: 700; }
+      .button-text { fill: #ffffff; font-family: "Microsoft YaHei", system-ui, sans-serif; font-size: 14px; font-weight: 600; text-anchor: middle; }
+      .secondary-text { fill: #286557; font-family: "Microsoft YaHei", system-ui, sans-serif; font-size: 14px; font-weight: 600; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="2240" height="1120" fill="#e9ece5"/>
+  <text x="60" y="54" class="text" font-size="20" font-weight="700">LANGUAGE LEAN · 第一版前端界面</text>
+  <text x="60" y="78" class="muted small">可编辑 SVG 设计稿 · 导入 Figma 后可调整文字、颜色和布局</text>
+
+  <!-- Home -->
+  <g id="screen-home" transform="translate(60 112)">
+    <rect class="screen" width="430" height="760" rx="18" filter="url(#shadow)"/>
+    <text x="28" y="42" class="text small" letter-spacing="3">LANGUAGE LEAN</text>
+    <text x="350" y="42" class="secondary-text" font-size="12">退出</text>
+    <line x1="28" y1="62" x2="402" y2="62" class="border"/>
+    <text x="28" y="128" class="text" font-size="38" font-weight="700">让熟悉的词，</text>
+    <text x="28" y="176" class="text" font-size="38" font-weight="700">也能听得出来。</text>
+    <text x="28" y="220" class="muted body">配合你的单词本，练习听觉回忆。</text>
+    <rect x="28" y="264" width="374" height="48" rx="8" class="primary"/>
+    <text x="215" y="294" class="button-text">浏览基础词典</text>
+    <rect x="28" y="326" width="374" height="48" rx="8" class="secondary"/>
+    <text x="215" y="356" class="secondary-text">我的单词本</text>
+    <rect x="28" y="388" width="374" height="48" rx="8" class="secondary"/>
+    <text x="215" y="418" class="secondary-text">后台词典管理</text>
+    <rect x="28" y="484" width="374" height="168" rx="14" class="card"/>
+    <text x="48" y="520" class="text section">学习语言</text>
+    <text x="48" y="558" class="text body">日语</text>
+    <rect x="48" y="574" width="58" height="24" rx="6" class="tag"/>
+    <text x="77" y="591" class="muted small" text-anchor="middle">启用</text>
+    <text x="48" y="630" class="muted small">第一版：基础词典与单词本已开放</text>
+  </g>
+
+  <!-- Wordbooks -->
+  <g id="screen-wordbooks" transform="translate(540 112)">
+    <rect class="screen" width="520" height="760" rx="18" filter="url(#shadow)"/>
+    <text x="28" y="40" class="secondary-text" text-anchor="start">← 学习首页</text>
+    <text x="400" y="40" class="secondary-text" text-anchor="start">查基础词典</text>
+    <text x="28" y="76" class="text small" letter-spacing="3">LANGUAGE LEAN · 我的学习</text>
+    <text x="28" y="122" class="text title">单词本</text>
+    <text x="28" y="151" class="muted body">单词本只负责分类，同一个词加入多个单词本时共享一份学习进度。</text>
+    <rect x="28" y="182" width="464" height="154" rx="14" class="card"/>
+    <text x="48" y="216" class="text section">新建单词本</text>
+    <text x="48" y="247" class="label small">名称</text>
+    <rect x="48" y="258" width="196" height="40" rx="7" class="subcard"/>
+    <text x="62" y="283" class="muted body">例如：旅行日语</text>
+    <text x="260" y="247" class="label small">说明</text>
+    <rect x="260" y="258" width="212" height="40" rx="7" class="subcard"/>
+    <text x="274" y="283" class="muted body">可留空</text>
+    <rect x="48" y="308" width="136" height="38" rx="8" class="primary"/>
+    <text x="116" y="332" class="button-text">创建单词本</text>
+    <rect x="28" y="358" width="464" height="154" rx="14" class="card"/>
+    <text x="48" y="392" class="text section">我的单词本</text>
+    <rect x="416" y="374" width="52" height="24" rx="6" class="tag"/>
+    <text x="442" y="391" class="muted small" text-anchor="middle">2 个</text>
+    <rect x="48" y="414" width="424" height="42" rx="9" class="subcard"/>
+    <text x="64" y="440" class="text body" font-weight="600">旅行日语</text>
+    <text x="458" y="440" class="muted small" text-anchor="end">18 个词条</text>
+    <rect x="48" y="464" width="424" height="42" rx="9" fill="#edf5ed" stroke="#286557"/>
+    <text x="64" y="490" class="text body" font-weight="600">本周重点</text>
+    <text x="458" y="490" class="muted small" text-anchor="end">6 个词条</text>
+    <rect x="28" y="534" width="464" height="192" rx="14" class="card"/>
+    <text x="48" y="570" class="text section">当前单词本词条</text>
+    <rect x="300" y="550" width="90" height="34" rx="7" class="secondary"/>
+    <text x="345" y="572" class="secondary-text" font-size="12">重置进度</text>
+    <text x="48" y="605" class="text body" font-weight="600">猫</text>
+    <text x="48" y="628" class="muted small">日语 · 已发布 · 0 次完整复习 · 待复习</text>
+    <text x="48" y="668" class="text body" font-weight="600">旅行</text>
+    <text x="48" y="691" class="muted small">日语 · 已发布 · 2 次完整复习</text>
+    <text x="472" y="696" class="danger small" text-anchor="end">移除</text>
+  </g>
+
+  <!-- Dictionary -->
+  <g id="screen-dictionary" transform="translate(1110 112)">
+    <rect class="screen" width="520" height="760" rx="18" filter="url(#shadow)"/>
+    <text x="28" y="40" class="secondary-text" text-anchor="start">← 学习首页</text>
+    <text x="28" y="76" class="text small" letter-spacing="3">LANGUAGE LEAN · 基础词典</text>
+    <text x="28" y="122" class="text title">查一个词</text>
+    <text x="28" y="151" class="muted body">这里展示管理员已确认发布的基础词条。</text>
+    <rect x="28" y="180" width="464" height="94" rx="14" class="card"/>
+    <text x="48" y="208" class="label small">单词写法</text>
+    <rect x="48" y="218" width="250" height="40" rx="7" class="subcard"/>
+    <text x="62" y="243" class="muted body">输入要查询的单词</text>
+    <rect x="314" y="218" width="86" height="40" rx="8" class="primary"/>
+    <text x="357" y="243" class="button-text">查询</text>
+    <text x="28" y="318" class="text section">词条 <tspan class="muted body">208,684</tspan></text>
+    <rect x="28" y="338" width="464" height="54" rx="9" class="subcard"/>
+    <text x="48" y="371" class="text body" font-weight="600">猫</text>
+    <text x="466" y="371" class="muted small" text-anchor="end">日语 · 已发布</text>
+    <rect x="28" y="402" width="464" height="54" rx="9" class="subcard"/>
+    <text x="48" y="435" class="text body" font-weight="600">旅行</text>
+    <text x="466" y="435" class="muted small" text-anchor="end">日语 · 已发布</text>
+    <rect x="28" y="466" width="464" height="54" rx="9" class="subcard"/>
+    <text x="48" y="499" class="text body" font-weight="600">勉強</text>
+    <text x="466" y="499" class="muted small" text-anchor="end">日语 · 已发布</text>
+    <rect x="28" y="552" width="464" height="154" rx="14" class="card"/>
+    <text x="48" y="587" class="text section">猫</text>
+    <rect x="405" y="569" width="67" height="24" rx="6" class="tag"/>
+    <text x="438" y="586" class="muted small" text-anchor="middle">已发布</text>
+    <text x="48" y="620" class="muted small">ja · 第 1 版 · 开源词典</text>
+    <text x="48" y="653" class="text body">ねこ · cat</text>
+    <rect x="48" y="670" width="178" height="28" rx="7" class="secondary"/>
+    <text x="137" y="689" class="secondary-text" font-size="12">加入我的单词本</text>
+  </g>
+
+  <!-- Admin -->
+  <g id="screen-admin" transform="translate(1680 112)">
+    <rect class="screen" width="500" height="760" rx="18" filter="url(#shadow)"/>
+    <text x="28" y="40" class="secondary-text" text-anchor="start">← 学习首页</text>
+    <text x="28" y="76" class="text small" letter-spacing="3">LANGUAGE LEAN · 后台管理</text>
+    <text x="28" y="122" class="text title">词典工作台</text>
+    <text x="28" y="151" class="muted body">整理词条、核对释义，让每次发布都有记录。</text>
+    <rect x="28" y="180" width="444" height="42" rx="8" class="secondary"/>
+    <text x="50" y="207" class="secondary-text" text-anchor="start" font-size="12">基础词典</text>
+    <text x="160" y="207" class="muted small">批量导入</text>
+    <text x="260" y="207" class="muted small">语言配置</text>
+    <text x="360" y="207" class="muted small">系统字典</text>
+    <rect x="28" y="246" width="190" height="458" rx="14" class="card"/>
+    <text x="48" y="280" class="text section">词条目录</text>
+    <rect x="48" y="296" width="150" height="34" rx="7" class="subcard"/>
+    <text x="62" y="318" class="muted small">输入单词</text>
+    <rect x="48" y="344" width="150" height="44" rx="8" fill="#edf5ed" stroke="#286557"/>
+    <text x="64" y="371" class="text body" font-weight="600">猫</text>
+    <text x="64" y="387" class="muted small">日语 · 已发布</text>
+    <rect x="48" y="398" width="150" height="44" rx="8" class="subcard"/>
+    <text x="64" y="425" class="text body" font-weight="600">旅行</text>
+    <text x="64" y="441" class="muted small">日语 · 草稿</text>
+    <rect x="242" y="246" width="230" height="458" rx="14" class="card"/>
+    <text x="262" y="280" class="text section">编辑词条</text>
+    <text x="262" y="314" class="label small">内容来源</text>
+    <rect x="262" y="322" width="98" height="36" rx="7" class="subcard"/>
+    <text x="276" y="345" class="text small">JMdict</text>
+    <text x="376" y="314" class="label small">内容许可</text>
+    <rect x="376" y="322" width="78" height="36" rx="7" class="subcard"/>
+    <text x="390" y="345" class="muted small">可留空</text>
+    <text x="262" y="388" class="label small">读音</text>
+    <rect x="262" y="396" width="192" height="36" rx="7" class="subcard"/>
+    <text x="276" y="419" class="text small">ねこ</text>
+    <text x="262" y="462" class="label small">释义</text>
+    <rect x="262" y="470" width="192" height="56" rx="7" class="subcard"/>
+    <text x="276" y="503" class="text small">cat</text>
+    <rect x="262" y="548" width="110" height="38" rx="8" class="primary"/>
+    <text x="317" y="572" class="button-text" font-size="12">保存草稿</text>
+    <rect x="382" y="548" width="72" height="38" rx="8" class="secondary"/>
+    <text x="418" y="572" class="secondary-text" font-size="12">发布</text>
+    <text x="262" y="638" class="muted small">内容许可：用于说明词典数据的授权条件，</text>
+    <text x="262" y="657" class="muted small">便于后续展示署名和部署合规信息。</text>
+  </g>
+
+  <!-- Token legend -->
+  <g id="design-tokens" transform="translate(60 930)">
+    <text x="0" y="0" class="text section">设计令牌</text>
+    <rect x="0" y="20" width="28" height="28" rx="6" fill="#286557"/>
+    <text x="40" y="39" class="muted body">Primary #286557</text>
+    <rect x="190" y="20" width="28" height="28" rx="6" fill="#f6f5ef" stroke="#dfe4da"/>
+    <text x="230" y="39" class="muted body">Background #f6f5ef</text>
+    <rect x="440" y="20" width="28" height="28" rx="6" fill="#ffffff" stroke="#dfe4da"/>
+    <text x="480" y="39" class="muted body">Surface #ffffff</text>
+    <rect x="650" y="20" width="28" height="28" rx="6" fill="#edf5ed" stroke="#286557"/>
+    <text x="690" y="39" class="muted body">Selected #edf5ed</text>
+    <text x="930" y="39" class="muted body">字体：Microsoft YaHei / system-ui · 8px 圆角体系 · 16px 卡片圆角</text>
+  </g>
+</svg>

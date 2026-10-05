@@ -31,6 +31,8 @@ class AccountService {
         var normalizedUsername = UserAccountEntity.normalize(username);
         var normalizedEmail = UserAccountEntity.normalize(email);
         if (identifiers.existsById(normalizedUsername) || identifiers.existsById(normalizedEmail)) return;
+        // 仅空库创建首个管理员；已注销的初始化身份不能在重启时由旧环境配置复活。
+        if (repository.count() > 0) return;
         // 已有账号不重新初始化；新规则只校验本次真正创建的账号。
         if (!PasswordPolicy.isValid(rawPassword)) {
             throw new IllegalStateException(PasswordPolicy.MESSAGE);
@@ -41,19 +43,22 @@ class AccountService {
 
     /** 校验当前密码和两次新密码后，以新的随机盐生成并保存哈希。 */
     @Transactional
-    void changePassword(java.util.UUID userId, String currentPassword, String newPassword, String confirmation) {
+    UserAccountPrincipal changePassword(java.util.UUID userId, String currentPassword, String newPassword, String confirmation) {
         if (!PasswordPolicy.isValid(newPassword)) {
             throw new ResponseStatusException(BAD_REQUEST, PasswordPolicy.MESSAGE);
         }
         if (!newPassword.equals(confirmation)) {
             throw new ResponseStatusException(BAD_REQUEST, "Password confirmation does not match");
         }
-        var account = repository.findById(userId)
+        var account = repository.lockById(userId)
                 .orElseThrow(() -> new ResponseStatusException(UNAUTHORIZED, "Account no longer exists"));
-        if (!passwordEncoder.matches(currentPassword, account.getPasswordHash())) {
+        if (account.getStatus() != AccountStatus.ACTIVE) throw new ResponseStatusException(FORBIDDEN, "Account is disabled");
+        if (currentPassword == null || !passwordEncoder.matches(currentPassword, account.getPasswordHash())) {
             throw new ResponseStatusException(BAD_REQUEST, "Current password is incorrect");
         }
         account.changePassword(passwordEncoder.encode(newPassword));
+        // 返回本次改密的凭据快照；提交后不重新读取并误认领并发重置生成的下一代凭据。
+        return UserAccountPrincipal.from(account);
     }
 
     /** 每次读取当前用户时回查数据库，使禁用状态和改密标志及时生效。 */
@@ -65,10 +70,20 @@ class AccountService {
             throw new ResponseStatusException(FORBIDDEN, "Account is disabled");
         }
         return new AccountProfile(account.getId(), account.getUsername(), account.getEmail(),
-                account.getRoles(), account.isMustChangePassword());
+                account.getRoles(), account.isMustChangePassword(), account.getNativeLanguage());
+    }
+
+    /** 只修改已认证用户自己的译文偏好；代码与页面可选语言保持一致。 */
+    @Transactional
+    void changeNativeLanguage(java.util.UUID userId, String language) {
+        if (language == null || !Set.of("zh-Hans", "zh-Hant", "zh", "en", "ja", "ko", "de", "fr", "es").contains(language))
+            throw new ResponseStatusException(BAD_REQUEST, "请选择支持的母语");
+        var account = repository.findById(userId).orElseThrow(() -> new ResponseStatusException(UNAUTHORIZED, "Account no longer exists"));
+        if (account.getStatus() != AccountStatus.ACTIVE) throw new ResponseStatusException(FORBIDDEN, "Account is disabled");
+        account.changeNativeLanguage(language);
     }
 
     /** 暴露给认证 API 的账户快照，不包含密码哈希。 */
     record AccountProfile(java.util.UUID id, String username, String email,
-                          Set<Role> roles, boolean mustChangePassword) {}
+                          Set<Role> roles, boolean mustChangePassword, String nativeLanguage) {}
 }

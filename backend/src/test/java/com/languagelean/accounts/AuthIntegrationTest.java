@@ -18,7 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
     "spring.datasource.url=jdbc:h2:mem:auth;MODE=PostgreSQL;DB_CLOSE_DELAY=-1",
     "spring.datasource.username=sa", "spring.datasource.password=",
     "spring.flyway.enabled=false", "spring.sql.init.mode=always",
-    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql",
+    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql",
+    "app.cors.allowed-origins=https://learn.example.com",
     "app.bootstrap-admin.username=owner",
     "app.bootstrap-admin.email=owner@example.com",
     "app.bootstrap-admin.password=a-secure-test-password1!"
@@ -26,6 +27,35 @@ import static org.junit.jupiter.api.Assertions.*;
 class AuthIntegrationTest {
     private static final Pattern TOKEN = Pattern.compile("\"token\":\"([^\"]+)\"");
     @Value("${local.server.port}") int port;
+
+    /** 浏览器预检不带登录 Cookie，也必须能完成并允许实际学习提交使用的请求头。 */
+    @Test
+    void allowedFrontendCanPreflightWithoutASession() throws Exception {
+        var request = HttpRequest.newBuilder(uri("/api/v1/learning/reviews"))
+                .header("Origin", "https://learn.example.com")
+                .header("Access-Control-Request-Method", "POST")
+                .header("Access-Control-Request-Headers", "content-type,x-xsrf-token,x-learning-account")
+                .method("OPTIONS", HttpRequest.BodyPublishers.noBody()).build();
+        var response = client().send(request, HttpResponse.BodyHandlers.ofString());
+        assertEquals(200, response.statusCode());
+        assertEquals("https://learn.example.com", response.headers().firstValue("Access-Control-Allow-Origin").orElseThrow());
+        assertEquals("true", response.headers().firstValue("Access-Control-Allow-Credentials").orElseThrow());
+        assertTrue(response.headers().firstValue("Access-Control-Allow-Headers").orElseThrow().contains("x-xsrf-token"));
+    }
+
+    /** 未授权网页不能读取 CSRF 或借助登录 Cookie 发起跨域写请求。 */
+    @Test
+    void untrustedFrontendIsRejectedForReadsAndPreflights() throws Exception {
+        for (var method : new String[]{"GET", "OPTIONS"}) {
+            var builder = HttpRequest.newBuilder(uri("/api/v1/auth/csrf"))
+                    .header("Origin", "https://untrusted.example.com");
+            if (method.equals("OPTIONS")) builder.header("Access-Control-Request-Method", "POST");
+            var response = client().send(builder.method(method, HttpRequest.BodyPublishers.noBody()).build(),
+                    HttpResponse.BodyHandlers.ofString());
+            assertEquals(403, response.statusCode());
+            assertTrue(response.headers().firstValue("Access-Control-Allow-Origin").isEmpty());
+        }
+    }
 
     @Test
     void usernameAndEmailCanLoginIntoTheSameStableAccount() throws Exception {
@@ -38,8 +68,13 @@ class AuthIntegrationTest {
         assertTrue(usernameMe.contains("\"roles\":["));
         assertTrue(usernameMe.contains("\"ADMIN\""));
         assertEquals(extractId(usernameMe), extractId(emailMe));
+        assertTrue(usernameMe.contains("\"nativeLanguage\":\"zh-Hans\""));
 
         var csrf = csrf(usernameSession);
+        assertEquals(200, postJson(usernameSession, "/api/v1/auth/preferences", csrf, "{\"nativeLanguage\":\"en\"}").statusCode());
+        assertTrue(get(emailSession, "/api/v1/auth/me").body().contains("\"nativeLanguage\":\"en\""));
+        assertEquals(400, postJson(usernameSession, "/api/v1/auth/preferences", csrf, "{\"nativeLanguage\":\"invalid\"}").statusCode());
+        assertTrue(get(usernameSession, "/api/v1/auth/me").body().contains("\"nativeLanguage\":\"en\""));
         // 通过真实 HTTP 验证长度和三类字符约束，失败请求不能改变旧密码。
         for (var invalid : new String[]{"abcde1!", "abcdefgh!", "abcdef12", "1234567!", "abcdef1 "}) {
             var rejected = postJson(usernameSession, "/api/v1/auth/password", csrf,
@@ -54,6 +89,7 @@ class AuthIntegrationTest {
                         + "\"confirmation\":\"abcdef1!\"}");
         assertEquals(200, changed.statusCode());
         assertTrue(get(usernameSession, "/api/v1/auth/me").body().contains("\"mustChangePassword\":false"));
+        assertEquals(401, get(emailSession, "/api/v1/auth/me").statusCode());
     }
 
     @Test
@@ -86,6 +122,7 @@ class AuthIntegrationTest {
 
     private HttpResponse<String> postForm(HttpClient client, String path, Csrf csrf, String body) throws Exception {
         var request = HttpRequest.newBuilder(uri(path))
+                .header("Origin", "https://learn.example.com")
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .header(csrf.header(), csrf.token())
                 .POST(HttpRequest.BodyPublishers.ofString(body))
@@ -95,6 +132,7 @@ class AuthIntegrationTest {
 
     private HttpResponse<String> postJson(HttpClient client, String path, Csrf csrf, String body) throws Exception {
         var request = HttpRequest.newBuilder(uri(path))
+                .header("Origin", "https://learn.example.com")
                 .header("Content-Type", "application/json")
                 .header(csrf.header(), csrf.token())
                 .POST(HttpRequest.BodyPublishers.ofString(body))
@@ -103,7 +141,10 @@ class AuthIntegrationTest {
     }
 
     private HttpResponse<String> get(HttpClient client, String path) throws Exception {
-        return client.send(HttpRequest.newBuilder(uri(path)).GET().build(), HttpResponse.BodyHandlers.ofString());
+        var response = client.send(HttpRequest.newBuilder(uri(path)).header("Origin", "https://learn.example.com").GET().build(), HttpResponse.BodyHandlers.ofString());
+        assertEquals("https://learn.example.com", response.headers().firstValue("Access-Control-Allow-Origin").orElseThrow());
+        assertEquals("true", response.headers().firstValue("Access-Control-Allow-Credentials").orElseThrow());
+        return response;
     }
 
     private HttpClient client() {

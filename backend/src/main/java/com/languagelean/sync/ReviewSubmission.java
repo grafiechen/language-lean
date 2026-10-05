@@ -13,7 +13,7 @@ import com.languagelean.reviews.domain.Rating;
  */
 public record ReviewSubmission(
         UUID eventId, UUID attemptId, UUID learningItemId, UUID progressEpoch,
-        String baseVersion, String submissionVersion, Instant completedAt,
+        String baseVersion, String submissionVersion, Instant completedAt, UUID baseEventId,
         List<TypeResult> results) {
     /** 一次用户判定；失败与后续重试都必须保留。 */
     public record Trial(UUID id, Instant ratedAt, Rating rating) {}

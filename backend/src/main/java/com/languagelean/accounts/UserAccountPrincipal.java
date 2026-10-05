@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public record UserAccountPrincipal(
         UUID userId, String username, String email, String password,
-        boolean enabled, boolean mustChangePassword, Collection<? extends GrantedAuthority> authorities)
+        boolean enabled, boolean mustChangePassword, long securityVersion, Collection<? extends GrantedAuthority> authorities)
         implements UserDetails {
 
     /** 将数据库角色转换为 Spring Security 的 ROLE_* 权限。 */
@@ -23,7 +23,7 @@ public record UserAccountPrincipal(
                 .toList();
         return new UserAccountPrincipal(account.getId(), account.getUsername(), account.getEmail(),
                 account.getPasswordHash(), account.getStatus() == AccountStatus.ACTIVE,
-                account.isMustChangePassword(), authorities);
+                account.isMustChangePassword(), account.getSecurityVersion(), authorities);
     }
 
     @Override public Collection<? extends GrantedAuthority> getAuthorities() { return authorities; }

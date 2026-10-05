@@ -8,4 +8,11 @@ describe('review completion', () => {
     expect(aggregate(['A', 'B'], [passed])).toBeNull()
     expect(aggregate(['A'], [passed])).toBe('AGAIN')
   })
+  it('rejects unknown ratings, duplicate trials and attempts appended after passing', () => {
+    const trial = { id: '1', ratedAt: '2026-09-12T00:00:00Z', rating: 'GOOD' as const }
+    const result = { typeId: 'A', contractVersion: 1, trials: [trial] }
+    expect(() => aggregate(['A'], [{ ...result, trials: [{ ...trial, rating: 'EASY' as never }] }])).toThrow()
+    expect(() => aggregate(['A'], [{ ...result, trials: [trial, trial] }])).toThrow()
+    expect(() => aggregate(['A'], [{ ...result, trials: [trial, { ...trial, id: '2' }] }])).toThrow()
+  })
 })

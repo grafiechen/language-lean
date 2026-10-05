@@ -1,0 +1,21 @@
+{
+  "status": "local-model-passed",
+  "actualFigmaVerified": false,
+  "frameCount": 186,
+  "componentCount": 16,
+  "instanceCount": 1292,
+  "textCount": 3298,
+  "simulatedNodeCount": 5936,
+  "localModelOverflow": [],
+  "checks": [
+    "all screen pairs generated",
+    "native editable text and instances",
+    "no image fills",
+    "horizontal height hugs content",
+    "frame bounds contain visible descendants",
+    "font mismatch rejected",
+    "duplicate run preserves existing design",
+    "all created IDs reported",
+    "prototype targets exist"
+  ]
+}

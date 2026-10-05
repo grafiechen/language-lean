@@ -15,7 +15,7 @@ class BootstrapPasswordTest {
         var service = new AccountService(repository, encoder, identifiers);
         assertThrows(IllegalStateException.class,
                 () -> service.createBootstrapAdmin("admin", "admin@example.com", "abcdefgh"));
-        verifyNoInteractions(repository, encoder);
+        verify(repository).count(); verifyNoMoreInteractions(repository); verifyNoInteractions(encoder);
     }
 
     @Test
@@ -27,5 +27,16 @@ class BootstrapPasswordTest {
         var service = new AccountService(repository, encoder, identifiers);
         assertDoesNotThrow(() -> service.createBootstrapAdmin("admin", "admin@example.com", "old-password"));
         verifyNoInteractions(repository, encoder);
+    }
+
+    @Test
+    void deletedBootstrapIdentityIsNotRecreatedInAnInitializedDatabase() {
+        var repository = mock(UserAccountRepository.class);
+        var encoder = mock(PasswordEncoder.class);
+        var identifiers = mock(UserLoginIdentifierRepository.class);
+        when(repository.count()).thenReturn(1L);
+        var service = new AccountService(repository, encoder, identifiers);
+        assertDoesNotThrow(() -> service.createBootstrapAdmin("deleted-admin", "deleted@example.com", "old-password"));
+        verify(repository).count(); verifyNoMoreInteractions(repository); verifyNoInteractions(encoder);
     }
 }

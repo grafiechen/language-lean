@@ -1,0 +1,14 @@
+{
+  "source": "JMDICT",
+  "sourceVersion": "2026-09-22",
+  "sourceUrl": "https://www.edrdg.org/pub/Nihongo/JMdict_b.gz",
+  "projectUrl": "https://www.edrdg.org/wiki/JMdict-EDICT_Dictionary_Project.html",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://www.edrdg.org/edrdg/licence.html",
+  "sourceSha256": "28b903cfce3f22370334bfc803c29db245ba38f84940b402d95e577734ef56d9",
+  "sourceEntries": 211496,
+  "generatedEntries": 208684,
+  "skippedEntries": 2812,
+  "sqlFile": "jmdict-initial.sql.gz",
+  "sqlGzipSha256": "e9874a743eb37e589d562cdcc3c95b1330a337b8632d504329d10ca8579613a7"
+}

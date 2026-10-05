@@ -22,4 +22,9 @@ class ApiExceptionHandler {
     ResponseEntity<Map<String, String>> conflict(Exception ex) {
         return ResponseEntity.status(409).body(Map.of("detail", "记录已存在或已被其他操作修改，请刷新后检查"));
     }
+    /** 删除与正在进行的编辑/生成锁冲突时回滚，客户端刷新后可重新操作。 */
+    @ExceptionHandler(org.springframework.dao.PessimisticLockingFailureException.class)
+    ResponseEntity<Map<String, String>> locked(Exception ex) {
+        return ResponseEntity.status(409).body(Map.of("detail", "账号数据正在被其他操作修改，请稍后刷新重试"));
+    }
 }

@@ -1,0 +1,382 @@
+{
+  "source": "TOMOSHI",
+  "sourceVersion": "2026-09-02",
+  "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/download/v2026-09-02/tomoshi-dict-open.db.zst",
+  "projectUrl": "https://github.com/tomoshi-app/tomoshi-dict-data",
+  "license": "CC BY-SA 4.0",
+  "author": "Y1Z",
+  "translationMethod": "LLM-assisted, reviewed by another model; not fully human-verified",
+  "sourceSha256": "7153dfd7a8e42e2d920308370eac90cf9f2e4b4cfe67fb9a86e9aa1c89494073",
+  "databaseSha256": "8b19c7d65a7d7d6df9afc58832b17b22fd349724e5d06d2acf3bb9a6c4b0ed9d",
+  "baseVersion": "2026-09-22",
+  "baseSha256": "28b903cfce3f22370334bfc803c29db245ba38f84940b402d95e577734ef56d9",
+  "examplesSqlSha256": "c8f88ab9bc15f7364f5d8800029b4e524cd4da1ceecd9e9f998e8ff3ffc4c3c5",
+  "tableLicenses": [
+    [
+      "entries",
+      "CC-BY-SA-4.0",
+      "JMdict, Electronic Dictionary Research and Development Group — https://www.edrdg.org/; examples stripped, see meta"
+    ],
+    [
+      "zh_defs",
+      "CC-BY-SA-4.0",
+      "JMdict-derived Chinese gloss translations © Y1Z"
+    ],
+    [
+      "zh_defs_zhtw",
+      "CC-BY-SA-4.0",
+      "JMdict-derived Chinese gloss translations © Y1Z"
+    ]
+  ],
+  "counts": {
+    "baselineEntries": 208684,
+    "zh-Hans": 238780,
+    "zh-Hant": 238783,
+    "translatedSenses": 238783,
+    "preparedEntries": 206826,
+    "changedSourceSense": 795,
+    "missingSourceSense": 468,
+    "entriesWithoutSafeTranslation": 626,
+    "invalidOrMissingTranslation": 109,
+    "missingSourceEntry": 1232
+  },
+  "samples": [
+    {
+      "entryId": "7798f06c-ade9-5f53-b4bd-cada4b4b1758",
+      "written": "苛める",
+      "translations": {
+        "79d60b44-2260-585f-bb13-bb03acb5a4b1": {
+          "zh-Hans": {
+            "text": "欺凌；欺负；折磨；嘲弄；残害；迫害",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "欺凌；欺負；折磨；嘲弄；殘害；迫害",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "16c8a92e-43e8-5d49-98c4-af14748c228b": {
+          "zh-Hans": {
+            "text": "苛待；严苛对待",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "苛待；嚴苛對待",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        }
+      }
+    },
+    {
+      "entryId": "b405bb5c-6fe2-5883-8589-7f40e6eb755b",
+      "written": "学校",
+      "translations": {
+        "4d4170f5-5c65-55ca-91a9-96676c245d80": {
+          "zh-Hans": {
+            "text": "学校",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "學校",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        }
+      }
+    },
+    {
+      "entryId": "26aafe86-2373-5382-b19a-b589d52774f4",
+      "written": "食べる",
+      "translations": {
+        "2065471c-f63c-5900-8780-38548f36170a": {
+          "zh-Hans": {
+            "text": "吃；食用",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "吃；食用",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "d10371e8-25ac-5ec8-adf1-177448cf485a": {
+          "zh-Hans": {
+            "text": "靠……生活；以……为生；依靠……维持生计",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "靠……生活；以……為生；依靠……維持生計",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        }
+      }
+    },
+    {
+      "entryId": "7726cf45-634d-575f-ac70-09636c3ee523",
+      "written": "走る",
+      "translations": {
+        "71d0d602-6a6d-56aa-9e8e-8ba25442b09c": {
+          "zh-Hans": {
+            "text": "跑",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "跑",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "77f00cbd-078c-5924-89a1-19223957c556": {
+          "zh-Hans": {
+            "text": "行驶；驾驶；行进；移动；航行",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "行駛；駕駛；行進；移動；航行",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "43554ad3-ce8f-55f1-90c0-bbaa9a73c17d": {
+          "zh-Hans": {
+            "text": "冲；疾速前进；竞速",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "衝；疾速前進；競速",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "a5389aad-9705-5673-b5f5-7c8ec3a7647c": {
+          "zh-Hans": {
+            "text": "撤退；逃离；背叛",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "撤退；逃離；背叛",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "ab036a3b-074e-5819-be77-83fdf0d15ddd": {
+          "zh-Hans": {
+            "text": "逃跑；潜逃；私奔",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "逃跑；潛逃；私奔",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "a8531c83-4b0a-5ecf-9cae-0c24f7c1d35f": {
+          "zh-Hans": {
+            "text": "闪现；划过；射穿；窜过；迅速蔓延",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "閃現；劃過；射穿；竄過；迅速蔓延",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "2154441a-5eed-54d8-a10b-86a4b50059f5": {
+          "zh-Hans": {
+            "text": "变坏；走向极端；转变；沦为；被情感所左右；卷入；陷入",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "變壞；走向極端；轉變；淪為；被情感所左右；捲入；陷入",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "1e287fbb-15f0-508e-860b-f40ef0857433": {
+          "zh-Hans": {
+            "text": "贯通；延伸；伸展；坐落",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "貫通；延伸；伸展；坐落",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        }
+      }
+    },
+    {
+      "entryId": "8e13ca81-654d-5257-9bcd-f6ab24f5ea11",
+      "written": "猫",
+      "translations": {
+        "9408c7b9-013d-5a77-900f-4acd8a2c5542": {
+          "zh-Hans": {
+            "text": "猫；家猫",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "貓；家貓",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "a3ca8e61-4b49-5a5e-9877-99db42b1ceae": {
+          "zh-Hans": {
+            "text": "三味线",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "三味線",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "0e1fd84a-a4f8-591a-9679-fc3cc3c7ebf6": {
+          "zh-Hans": {
+            "text": "艺妓",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "藝妓",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "2d794239-d483-5aad-8770-6e51d509e80e": {
+          "zh-Hans": {
+            "text": "独轮车；手推车",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "獨輪車；手推車",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "14cbaf4d-57c3-5d0b-8bd3-d243d414425d": {
+          "zh-Hans": {
+            "text": "陶制暖床器",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "陶製暖床器",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        },
+        "f60c447f-b605-5239-9013-52dfe830c2b3": {
+          "zh-Hans": {
+            "text": "（同性关系中的）被动方",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          },
+          "zh-Hant": {
+            "text": "（同性關係中的）被動方",
+            "sourceName": "Tomoshi (Y1Z) 2026-09-02 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/tomoshi-app/tomoshi-dict-data/releases/tag/v2026-09-02",
+            "author": "Y1Z"
+          }
+        }
+      }
+    }
+  ],
+  "sqlFile": "tomoshi-translations.sql.gz",
+  "sqlGzipSha256": "faff1c2ea27d8269f54b2673748dc376603bc3d2994a45736c10ee76acf12368",
+  "selection": "same JMdict ID + original sense index + exact English gloss and POS; known seed revisions only; examples excluded"
+}

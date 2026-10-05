@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { IonPage, IonContent, IonInput, IonButton } from '@ionic/vue'
 import { useAuth } from '../features/auth/store'
 const identifier = ref('')
 const password = ref('')
 const auth = useAuth()
 const router = useRouter()
+const route = useRoute()
 /** 提交登录信息；成功后进入受保护的首页。 */
 async function submit() {
   if (!identifier.value.trim() || !password.value) return
@@ -18,6 +20,7 @@ async function submit() {
     <main class="login">
       <p class="brand">LANGUAGE LEAN</p>
       <h1>继续学习</h1>
+      <p v-if="route.query.closed === '1'" role="status">账号已注销。再次创建同名账号将从零开始。</p>
       <form @submit.prevent="submit">
         <label>用户名或邮箱<ion-input v-model="identifier" autocomplete="username" fill="outline" /></label>
         <label>密码<ion-input v-model="password" type="password" autocomplete="current-password" fill="outline" /></label>
@@ -27,6 +30,8 @@ async function submit() {
         </ion-button>
       </form>
       <p class="note">第一版账号由管理员创建。</p>
+      <p><router-link to="/forgot-password">忘记密码？</router-link></p>
+      <router-link to="/offline">使用已准备的离线内容</router-link>
     </main>
   </ion-content></ion-page>
 </template>

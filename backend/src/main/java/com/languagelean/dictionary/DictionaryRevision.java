@@ -15,6 +15,11 @@ class DictionaryRevision {
     @Column(name = "published_by", nullable = false) UUID publishedBy;
     @Column(name = "published_at", nullable = false) Instant publishedAt;
     @Column(nullable = false, length = 500) String note;
+    @Column(name = "contribution_id") UUID contributionId;
+    @Column(name = "contributed_by") UUID contributedBy;
+    @Column(name = "contributor_deleted", nullable = false) boolean contributorDeleted;
+    @Column(name = "contribution_source", length = 200) String contributionSource;
+    @Column(name = "contribution_license", length = 200) String contributionLicense;
 
     /** 仅供 JPA 创建历史实体。 */
     protected DictionaryRevision() {}

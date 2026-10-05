@@ -1,15 +1,25 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { onBeforeRouteLeave } from 'vue-router'
-import { IonPage, IonContent } from '@ionic/vue'
+import { IonPage, IonContent, onIonViewWillLeave, onIonViewWillEnter } from '@ionic/vue'
 import { getJson, postJson } from '../shared/api'
 import ContentEditor from '../features/dictionary/ContentEditor.vue'
 import ContentView from '../features/dictionary/ContentView.vue'
 import LanguageSettings from '../features/dictionary/LanguageSettings.vue'
+import DictionaryImport from '../features/dictionary/DictionaryImport.vue'
+import SystemDictionarySettings from '../features/dictionary/SystemDictionarySettings.vue'
+import TtsSettings from '../features/audio/TtsSettings.vue'
+import AudioFeedbackManagement from '../features/audio/AudioFeedbackManagement.vue'
+import ContributionList from '../features/dictionary/ContributionList.vue'
+import AccountManagement from '../features/accounts/AccountManagement.vue'
 import { emptyContent, statusLabel } from '../features/dictionary/types'
 import type { AdminEntry, AdminLanguage, EntryRow, History, Results } from '../features/dictionary/types'
 
 const tab = ref('dictionary')
+const contributions = ref<InstanceType<typeof ContributionList> | null>(null)
+const audioFeedback = ref<InstanceType<typeof AudioFeedbackManagement> | null>(null)
+onIonViewWillLeave(() => { contributions.value?.suspend(); audioFeedback.value?.suspend() })
+onIonViewWillEnter(() => { if (tab.value === 'contributions') void contributions.value?.load(); if (tab.value === 'audio-feedback') void audioFeedback.value?.load() })
 const languages = ref<AdminLanguage[]>([])
 const list = ref<Results<EntryRow>>({ items: [], total: 0, page: 0 })
 const q = ref('')
@@ -112,6 +122,8 @@ function switchTab(next: string) {
   editing.value = false; tab.value = next
   if (next === 'dictionary') void search()
 }
+/** 发音反馈定位到既有后台编辑器，修正仍需保存草稿和确认发布。 */
+function editReportedEntry(id: string) { if (!canLeave()) return; tab.value = 'dictionary'; void open(id) }
 onMounted(() => {
   window.addEventListener('beforeunload', beforeUnload)
   void run(load)
@@ -122,13 +134,25 @@ onBeforeUnmount(() => window.removeEventListener('beforeunload', beforeUnload))
   <ion-page><ion-content>
     <main class="workspace">
       <header class="account-bar"><router-link to="/">← 学习首页</router-link><router-link to="/dictionary">查看用户词典</router-link></header>
-      <p class="brand">LANGUAGE LEAN · 后台管理</p><h1>词典工作台</h1>
-      <p class="intro">整理词条、核对释义，让每次发布都有记录。</p>
+      <p class="brand">LANGUAGE LEAN · 后台管理</p><h1>管理工作台</h1>
+      <p class="intro">维护词典、管理账号和系统配置。</p>
       <nav class="tabs" aria-label="后台模块">
+        <button :class="{ active: tab === 'accounts' }" :disabled="busy" @click="switchTab('accounts')">账号管理</button>
         <button :class="{ active: tab === 'dictionary' }" :disabled="busy" @click="switchTab('dictionary')">基础词典</button>
+        <button :class="{ active: tab === 'imports' }" :disabled="busy" @click="switchTab('imports')">批量导入</button>
+        <button :class="{ active: tab === 'contributions' }" :disabled="busy" @click="switchTab('contributions')">贡献审核</button>
         <button :class="{ active: tab === 'languages' }" :disabled="busy" @click="switchTab('languages')">语言配置</button>
+        <button :class="{ active: tab === 'system-dictionaries' }" :disabled="busy" @click="switchTab('system-dictionaries')">系统字典</button>
+        <button :class="{ active: tab === 'tts' }" :disabled="busy" @click="switchTab('tts')">TTS 配置</button>
+        <button :class="{ active: tab === 'audio-feedback' }" :disabled="busy" @click="switchTab('audio-feedback')">发音反馈</button>
       </nav>
       <section v-if="tab === 'languages'"><LanguageSettings /></section>
+      <SystemDictionarySettings v-else-if="tab === 'system-dictionaries'" />
+      <AccountManagement v-else-if="tab === 'accounts'" />
+      <TtsSettings v-else-if="tab === 'tts'" />
+      <AudioFeedbackManagement v-else-if="tab === 'audio-feedback'" ref="audioFeedback" @edit="editReportedEntry" />
+      <DictionaryImport v-else-if="tab === 'imports'" />
+      <ContributionList v-else-if="tab === 'contributions'" ref="contributions" admin />
       <template v-else>
         <p v-if="error" class="error feedback" role="alert">{{ error }} <button v-if="entry" class="quiet" :disabled="busy" @click="open(entry.id)">重新读取</button></p>
         <p v-if="message" class="feedback" role="status">{{ message }}</p>
@@ -170,7 +194,7 @@ onBeforeUnmount(() => window.removeEventListener('beforeunload', beforeUnload))
                   <button class="secondary danger" :disabled="busy || dirty || !entry.currentRevision" @click="act('ban')">封禁词条</button>
                   <router-link v-if="entry.currentRevision" :to="'/dictionary/' + entry.id">用户视角</router-link></div>
               </div>
-              <details v-if="entry?.published" class="history-card"><summary>当前公开内容 · 第 {{ entry.currentRevision }} 版</summary><ContentView :content="entry.published" /></details>
+              <details v-if="entry?.published" class="history-card"><summary>当前公开内容 · 第 {{ entry.currentRevision }} 版</summary><ContentView :content="entry.published" :entry-id="entry.id" /></details>
               <div v-if="entry" class="history-list">
                 <h3>发布历史</h3><p v-if="!history.total" class="note">尚未发布，没有历史版本。</p>
                 <details v-for="version in history.items" :key="version.revision" class="history-card">

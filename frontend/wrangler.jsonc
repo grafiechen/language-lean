@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "language-lean-web",
+  "main": "./worker.ts",
+  "compatibility_date": "2026-10-01",
+  // Vite 输出的静态前端；API 由 VITE_API_BASE_URL 在构建阶段指定。
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}

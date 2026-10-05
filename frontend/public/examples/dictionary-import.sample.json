@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "name": "Language Lean 测试词典",
+    "version": "2026-09-22",
+    "license": "CC0-1.0"
+  },
+  "entries": [
+    {
+      "languageCode": "ja",
+      "scriptCode": "Jpan",
+      "written": "猫",
+      "readings": [{ "reading": "ねこ", "pronunciationText": "ねこ" }],
+      "senses": [{
+        "partOfSpeech": "名词",
+        "gloss": "猫",
+        "examples": [{ "text": "猫がいる。", "pronunciationText": "ねこがいる", "translation": "有一只猫。" }]
+      }]
+    },
+    {
+      "languageCode": "ja",
+      "scriptCode": "Jpan",
+      "written": "犬",
+      "readings": [{ "reading": "いぬ", "pronunciationText": "いぬ" }],
+      "senses": [{ "partOfSpeech": "名词", "gloss": "狗", "examples": [] }]
+    },
+    {
+      "languageCode": "ja",
+      "scriptCode": "Jpan",
+      "written": "学ぶ",
+      "readings": [{ "reading": "まなぶ", "pronunciationText": "まなぶ" }],
+      "senses": [{ "partOfSpeech": "动词", "gloss": "学习；掌握", "examples": [] }]
+    }
+  ]
+}

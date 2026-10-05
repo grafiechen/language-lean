@@ -28,10 +28,20 @@ node_modules/
 dist/
 target/
 .cache/
+.secrets/
 .env
 .env.*
 !.env.example
 coverage/
 *.tsbuildinfo
+__pycache__/
+*.pyc
+# Tatoeba完整关联文件很大；仅提交被使用例句的可追溯元数据和生成SQL。
+data/tatoeba/source/
+# Tomoshi 完整数据库较大；保存固定下载地址、校验值、许可及可部署 SQL。
+data/tomoshi/source/*.db*
 .idea/
 .vscode/
+.wrangler/
+.dev.vars
+.dev.vars.*

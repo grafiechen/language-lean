@@ -1,0 +1,28 @@
+{
+  "status": "local-preview-passed",
+  "screenCount": 93,
+  "frameCount": 186,
+  "checkedSourceFiles": [
+    "frontend/src/main.ts",
+    "frontend/src/style.css",
+    "frontend/src/pages/HomePage.vue",
+    "frontend/src/pages/LoginPage.vue",
+    "frontend/src/pages/LearningPage.vue",
+    "frontend/src/pages/DictionaryPage.vue",
+    "frontend/src/pages/AdminPage.vue",
+    "frontend/src/features/dictionary/ContentEditor.vue",
+    "frontend/src/features/dictionary/ContentView.vue",
+    "frontend/src/features/dictionary/DictionaryImport.vue",
+    "frontend/src/features/dictionary/LanguageSettings.vue",
+    "frontend/src/features/dictionary/SystemDictionarySettings.vue",
+    "docs/设计文档.md",
+    "docs/项目概要.md"
+  ],
+  "sourceHashCheck": true,
+  "localOverflowIssues": [],
+  "consoleErrors": [],
+  "sampleScreenshots": 24,
+  "moduleBoards": 13,
+  "figmaImportVerified": false,
+  "figmaVisualVerified": false
+}

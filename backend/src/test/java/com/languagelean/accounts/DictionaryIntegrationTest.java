@@ -2,6 +2,7 @@ package com.languagelean.accounts;
 
 import com.languagelean.dictionary.*;
 import com.languagelean.languages.LanguageAdminService;
+import com.languagelean.systemdictionary.SystemDictionaryService;
 import java.net.*;
 import java.net.http.*;
 import java.util.*;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
     "spring.datasource.url=jdbc:h2:mem:dictionary;MODE=PostgreSQL;DB_CLOSE_DELAY=-1",
     "spring.datasource.username=sa", "spring.datasource.password=",
     "spring.flyway.enabled=false", "spring.sql.init.mode=always",
-    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql",
+    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql",
     "app.bootstrap-admin.username=editor", "app.bootstrap-admin.email=editor@example.com",
     "app.bootstrap-admin.password=Editor12!"
 })
@@ -29,6 +30,30 @@ class DictionaryIntegrationTest {
     @Autowired PasswordEncoder encoder;
     @Autowired DictionaryService dictionary;
     @Autowired LanguageAdminService languages;
+    @Autowired SystemDictionaryService systemDictionaries;
+
+    /** 多语种内容在草稿、公开和历史恢复中保留，外部出处必须安全且有来源。 */
+    @Test
+    void retainsTranslationsAndValidatesTheirProvenance() {
+        var actor = UUID.randomUUID();
+        var translation = new DictionaryContent.Translation("猫", "手工录入", "", "https://example.test/source");
+        var example = new DictionaryContent.Example(UUID.randomUUID(), "猫がいます。", "猫がいます。", "There is a cat.", "en",
+            Map.of("zh-Hans", new DictionaryContent.Translation("有一只猫。", "手工录入", "", "")),
+            new DictionaryContent.Attribution("原创例句", "CC0", "", "", ""));
+        var sense = new DictionaryContent.Sense(UUID.randomUUID(), "名词", "cat", List.of(example), "en", Map.of("zh-Hans", translation));
+        var content = new DictionaryContent(1, List.of(), List.of(sense), "测试内容", "CC0");
+        var draft = dictionary.create(new DictionaryService.Create("ja", "Jpan", "译文验证词", content), actor);
+        var published = dictionary.publish(draft.id(), new DictionaryService.Action(draft.version(), "译文验收"), actor);
+        assertEquals(translation, dictionary.detail(draft.id()).content().senses().getFirst().translations().get("zh-Hans"));
+        assertEquals(example, published.published().senses().getFirst().examples().getFirst());
+        var restored = dictionary.restore(draft.id(), 1, new DictionaryService.Action(published.version(), ""), actor);
+        assertEquals(content, restored.draft());
+        var badTranslation = new DictionaryContent.Translation("猫", "手工录入", "", "javascript:alert(1)");
+        assertThrows(ResponseStatusException.class, () -> dictionary.validatePersonalContent(new DictionaryContent(1, List.of(),
+            List.of(new DictionaryContent.Sense(UUID.randomUUID(), "", "cat", List.of(), "en", Map.of("zh-Hans", badTranslation))), "", "")));
+        assertThrows(ResponseStatusException.class, () -> dictionary.validatePersonalContent(new DictionaryContent(1, List.of(),
+            List.of(new DictionaryContent.Sense(UUID.randomUUID(), "", "cat", List.of(), "en", Map.of("invalid language", translation))), "", "")));
+    }
 
     /** 普通用户无法管理，草稿编辑与恢复不能提前影响用户看到的版本。 */
     @Test
@@ -98,6 +123,62 @@ class DictionaryIntegrationTest {
         assertEquals(1, dictionary.list(true, "ABC", "en", 0).total());
         assertThrows(org.springframework.dao.DataIntegrityViolationException.class,
                 () -> dictionary.create(new DictionaryService.Create("en", "Latn", "ABC", content("duplicate")), actor));
+    }
+
+    /** 系统字典选项可以维护和停用，稳定 value 与陈旧版本都由服务端保护。 */
+    @Test
+    void maintainsSystemDictionaryOptions() {
+        var sources = systemDictionaries.detail("CONTENT_SOURCE");
+        assertEquals("手工录入", sources.items().getFirst().value());
+        sources = systemDictionaries.createItem("CONTENT_SOURCE",
+                new SystemDictionaryService.ItemEdit("JMdict", "JMdict", "日英开源词典", 20, true, null));
+        var item = sources.items().stream().filter(value -> value.value().equals("JMdict")).findFirst().orElseThrow();
+        sources = systemDictionaries.updateItem("CONTENT_SOURCE", item.id(),
+                new SystemDictionaryService.ItemEdit("JMdict", "JMdict 开源词典", "日英开源词典", 20, false, item.version()));
+        var updated = sources.items().stream().filter(value -> value.id().equals(item.id())).findFirst().orElseThrow();
+        assertEquals("JMdict 开源词典", updated.displayName());
+        assertFalse(updated.enabled());
+        assertThrows(ResponseStatusException.class, () -> systemDictionaries.updateItem("CONTENT_SOURCE", item.id(),
+                new SystemDictionaryService.ItemEdit("changed", "错误修改", "", 20, true, updated.version())));
+        assertThrows(ResponseStatusException.class, () -> systemDictionaries.createItem("CONTENT_SOURCE",
+                new SystemDictionaryService.ItemEdit("JMdict", "重复", "", 30, true, null)));
+    }
+
+    /** 假名与写法共用包含匹配，Unicode空白及通配符均按普通输入处理，匹配多个读音只返回一个词条。 */
+    @Test
+    void searchesPublishedReadingsLikeWrittenWords() {
+        var actor = UUID.randomUUID();
+        var content = new DictionaryContent(1, List.of(
+                new DictionaryContent.Reading(UUID.randomUUID(), "いじめる", "いじめる"),
+                new DictionaryContent.Reading(UUID.randomUUID(), "いじめ", "いじめ")),
+                content("欺负；虐待").senses(), "手工录入", "");
+        var draft = dictionary.create(new DictionaryService.Create("ja", "Jpan", "虐める", content), actor);
+        assertEquals(0, dictionary.list(false, "いじめ", "ja", 0).total());
+        assertEquals(1, dictionary.list(true, "いじめ", "ja", 0).total());
+        var published = dictionary.publish(draft.id(), new DictionaryService.Action(draft.version(), ""), actor);
+        for (var query : List.of("いじめる", "じめ", "\u3000いじめる\u3000", "虐め"))
+            assertEquals(1, dictionary.list(false, query, "ja", 0).total(), query);
+        assertEquals(0, dictionary.list(false, "%", "ja", 0).total());
+        assertEquals(0, dictionary.list(false, "_", "ja", 0).total());
+        assertEquals(0, dictionary.list(false, "\\", "ja", 0).total());
+        assertEquals(0, dictionary.list(false, "欺负", "ja", 0).total());
+        assertEquals(0, dictionary.list(false, "いじめ", "en", 0).total());
+        var updated = new DictionaryContent(1, List.of(new DictionaryContent.Reading(UUID.randomUUID(), "いじめなおす", "")), content.senses(), content.sourceName(), "");
+        var saved = dictionary.save(published.id(), new DictionaryService.Edit(published.version(), updated), actor);
+        assertEquals(0, dictionary.list(false, "なおす", "ja", 0).total());
+        assertEquals(1, dictionary.list(true, "なおす", "ja", 0).total());
+        var changed = dictionary.publish(saved.id(), new DictionaryService.Action(saved.version(), ""), actor);
+        assertEquals(1, dictionary.list(false, "なおす", "ja", 0).total());
+        var restored = dictionary.restore(changed.id(), 1, new DictionaryService.Action(changed.version(), ""), actor);
+        assertEquals(1, dictionary.list(false, "なおす", "ja", 0).total());
+        dictionary.publish(restored.id(), new DictionaryService.Action(restored.version(), ""), actor);
+        assertEquals(0, dictionary.list(false, "なおす", "ja", 0).total());
+        assertEquals(1, dictionary.list(false, "いじめる", "ja", 0).total());
+        var halfWidth = dictionary.create(new DictionaryService.Create("ja", "Jpan", "珈琲試験", new DictionaryContent(1,
+                List.of(new DictionaryContent.Reading(UUID.randomUUID(), "ｺｰﾋｰ", "")), content.senses(), "手工录入", "")), actor);
+        dictionary.publish(halfWidth.id(), new DictionaryService.Action(halfWidth.version(), ""), actor);
+        assertEquals(1, dictionary.list(false, "コーヒー", "ja", 0).total());
+        assertEquals(1, dictionary.list(false, "ｺｰﾋｰ", "ja", 0).total());
     }
 
     /** 测试快照包含读音、词义和例句，验证历史可恢复完整结构。 */

@@ -1,4 +1,5 @@
 import type { AccountScope, CompletedReview } from './reviews'
+import type { TrainingBatch } from './training'
 
 /** 复习排程能力边界；具体 FSRS 实现及算法版本将在排程模块中选择。 */
 export interface ReviewScheduler {
@@ -14,4 +15,11 @@ export interface PendingReviewStore {
   enqueue(scope: AccountScope, review: CompletedReview): Promise<void>
   list(scope: AccountScope): Promise<CompletedReview[]>
   acknowledge(scope: AccountScope, eventIds: string[]): Promise<void>
+}
+
+/** 复习中途退出时保存的批次草稿；保存和删除都限定在账号分区内。 */
+export interface TrainingDraftStore {
+  save(scope: AccountScope, batch: TrainingBatch): Promise<void>
+  load(scope: AccountScope, batchId: string): Promise<TrainingBatch | undefined>
+  remove(scope: AccountScope, batchId: string): Promise<void>
 }

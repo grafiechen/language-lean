@@ -1,0 +1,11 @@
+{
+  "sourceVersion": "2026-09-22",
+  "counts": {
+    "sourceEntries": 211496,
+    "generatedEntries": 208684,
+    "skippedByExistingImportRules": 2812
+  },
+  "damagedEntries": [],
+  "damagedEntryCount": 0,
+  "policy": "只将乱码、非法控制字符和空必填正文列为明确损坏；罕用词、古语、专名、数字词及外来语不自动删除。源同写法跳过不代表词义错误。"
+}

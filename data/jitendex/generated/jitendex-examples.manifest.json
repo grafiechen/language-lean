@@ -1,0 +1,81 @@
+{
+  "source": "JITENDEX_ZH_EXAMPLES",
+  "sourceVersion": "2026.08.11-zh.4",
+  "sourceUrl": "https://github.com/greyindex/jitendex-yomitan-zh/releases/download/v2026.08.11-zh.4/jitendex-yomitan-zh-full-review-dedup-20260927.zip",
+  "sourceSha256": "9872fc32d05e3f7ea9b5b70a253610e49d99b6eef7db519b96faad1bbec2b678",
+  "uncertainSha256": "f17391c9ad9db1226fbea7cc771ff9a27d6f0c2c8cb46ee72f213961cb814a5c",
+  "uncertainIds": 2508,
+  "license": "CC BY-SA 4.0",
+  "originalExampleLicense": "CC BY 2.0 FR",
+  "projectUrl": "https://github.com/greyindex/jitendex-yomitan-zh",
+  "baselineSqlSha256": "e9874a743eb37e589d562cdcc3c95b1330a337b8632d504329d10ca8579613a7",
+  "examplesSqlSha256": "c8f88ab9bc15f7364f5d8800029b4e524cd4da1ceecd9e9f998e8ff3ffc4c3c5",
+  "tomoshiSqlSha256": "faff1c2ea27d8269f54b2673748dc376603bc3d2994a45736c10ee76acf12368",
+  "counts": {
+    "existingChinesePreserved": 1245,
+    "uncertainEntriesSkipped": 105,
+    "translatedExamples": 29691,
+    "preparedEntries": 26990,
+    "conflictingTranslationSkipped": 157,
+    "unmatchedExampleSkipped": 329
+  },
+  "samples": [
+    {
+      "entryId": "7798f06c-ade9-5f53-b4bd-cada4b4b1758",
+      "written": "苛める",
+      "translations": {
+        "bf903574-42c4-53e9-8eb3-cfad1423c3e9": {
+          "zh-Hans": {
+            "text": "我后悔欺负了他。",
+            "sourceName": "Jitendex 中文版（greyindex）2026-09-27 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/greyindex/jitendex-yomitan-zh/releases/tag/v2026.08.11-zh.4",
+            "author": "greyindex；原词典 Stephen Kraus"
+          }
+        }
+      }
+    },
+    {
+      "entryId": "26aafe86-2373-5382-b19a-b589d52774f4",
+      "written": "食べる",
+      "translations": {
+        "2ffe9ce2-1ebb-5817-996b-5bd05692245d": {
+          "zh-Hans": {
+            "text": "应该多吃水果。",
+            "sourceName": "Jitendex 中文版（greyindex）2026-09-27 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/greyindex/jitendex-yomitan-zh/releases/tag/v2026.08.11-zh.4",
+            "author": "greyindex；原词典 Stephen Kraus"
+          }
+        },
+        "bedadc1e-0925-581c-b2be-d9caa78c5349": {
+          "zh-Hans": {
+            "text": "我已下定决心靠剧本为生。",
+            "sourceName": "Jitendex 中文版（greyindex）2026-09-27 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/greyindex/jitendex-yomitan-zh/releases/tag/v2026.08.11-zh.4",
+            "author": "greyindex；原词典 Stephen Kraus"
+          }
+        }
+      }
+    },
+    {
+      "entryId": "8e13ca81-654d-5257-9bcd-f6ab24f5ea11",
+      "written": "猫",
+      "translations": {
+        "6b2f6b7a-9d3d-5d06-a011-e3b08153f932": {
+          "zh-Hans": {
+            "text": "你的网站对喜欢猫的人很有吸引力。",
+            "sourceName": "Jitendex 中文版（greyindex）2026-09-27 · 机器翻译（模型校订）",
+            "license": "CC BY-SA 4.0",
+            "sourceUrl": "https://github.com/greyindex/jitendex-yomitan-zh/releases/tag/v2026.08.11-zh.4",
+            "author": "greyindex；原词典 Stephen Kraus"
+          }
+        }
+      }
+    }
+  ],
+  "selection": "same JMdict ID + primary written form + allowed reading + Tatoeba ID + exact Japanese text; conflicting translations and uncertain IDs skipped; existing Chinese preserved",
+  "sqlFile": "jitendex-examples.sql.gz",
+  "sqlGzipSha256": "687a6d83200b9e0fdf73d70f6d2f264729c46bf3ee9c07a74dea4cdb0bede9cd"
+}

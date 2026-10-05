@@ -1,0 +1,2701 @@
+[ {
+  "label" : "0.9/AGAIN/0",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-01-01T00:00:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 0,
+    "stability" : 0.2172,
+    "difficulty" : 7.0114,
+    "due" : "2025-01-01T00:01:00Z",
+    "lastReview" : "2025-01-01T00:00:00Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/1",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":0,\"stability\":0.2172,\"difficulty\":7.0114,\"due\":\"2025-01-01T00:01:00Z\",\"lastReview\":\"2025-01-01T00:00:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-01T00:01:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 0,
+    "stability" : 0.16365145806222992,
+    "difficulty" : 7.671557283421727,
+    "due" : "2025-01-01T00:07:00Z",
+    "lastReview" : "2025-01-01T00:01:30Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/2",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":0,\"stability\":0.16365145806222992,\"difficulty\":7.671557283421727,\"due\":\"2025-01-01T00:07:00Z\",\"lastReview\":\"2025-01-01T00:01:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-01T00:07:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 1,
+    "stability" : 0.2728542535074799,
+    "difficulty" : 7.635752363970511,
+    "due" : "2025-01-01T00:17:00Z",
+    "lastReview" : "2025-01-01T00:07:00Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/3",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":1,\"stability\":0.2728542535074799,\"difficulty\":7.635752363970511,\"due\":\"2025-01-01T00:17:00Z\",\"lastReview\":\"2025-01-01T00:07:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-16T00:07:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 3.6777397584244533,
+    "difficulty" : 7.600194498463508,
+    "due" : "2025-01-20T00:07:00Z",
+    "lastReview" : "2025-01-16T00:07:00Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/4",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":3.6777397584244533,\"difficulty\":7.600194498463508,\"due\":\"2025-01-20T00:07:00Z\",\"lastReview\":\"2025-01-16T00:07:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-16T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.845329056522733,
+    "difficulty" : 8.12007257469975,
+    "due" : "2025-01-18T00:08:30Z",
+    "lastReview" : "2025-01-16T00:08:30Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/5",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.845329056522733,\"difficulty\":8.12007257469975,\"due\":\"2025-01-18T00:08:30Z\",\"lastReview\":\"2025-01-16T00:08:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-18T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 4.447120176105472,
+    "difficulty" : 8.081172899738716,
+    "due" : "2025-01-22T00:08:30Z",
+    "lastReview" : "2025-01-18T00:08:30Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/6",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":4.447120176105472,\"difficulty\":8.081172899738716,\"due\":\"2025-01-22T00:08:30Z\",\"lastReview\":\"2025-01-18T00:08:30Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-02-02T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.6673611790394116,
+    "difficulty" : 8.930375879070201,
+    "due" : "2025-02-02T00:18:30Z",
+    "lastReview" : "2025-02-02T00:08:30Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/7",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.6673611790394116,\"difficulty\":8.930375879070201,\"due\":\"2025-02-02T00:18:30Z\",\"lastReview\":\"2025-02-02T00:08:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-02-02T00:10:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 0.9373263676526764,
+    "difficulty" : 9.133340685954682,
+    "due" : "2025-02-02T00:25:00Z",
+    "lastReview" : "2025-02-02T00:10:00Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/8",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":0.9373263676526764,\"difficulty\":9.133340685954682,\"due\":\"2025-02-02T00:25:00Z\",\"lastReview\":\"2025-02-02T00:10:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-02T00:25:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.216133515187849,
+    "difficulty" : 9.08744946102599,
+    "due" : "2025-02-03T00:25:00Z",
+    "lastReview" : "2025-02-02T00:25:00Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/9",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.216133515187849,\"difficulty\":9.08744946102599,\"due\":\"2025-02-03T00:25:00Z\",\"lastReview\":\"2025-02-02T00:25:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-17T00:25:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 5.898705417313577,
+    "difficulty" : 9.041874885549305,
+    "due" : "2025-02-23T00:25:00Z",
+    "lastReview" : "2025-02-17T00:25:00Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/10",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":5.898705417313577,\"difficulty\":9.041874885549305,\"due\":\"2025-02-23T00:25:00Z\",\"lastReview\":\"2025-02-17T00:25:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-02-17T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 2.7654498259621025,
+    "difficulty" : 9.218275259050534,
+    "due" : "2025-02-20T00:26:30Z",
+    "lastReview" : "2025-02-17T00:26:30Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/11",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":2.7654498259621025,\"difficulty\":9.218275259050534,\"due\":\"2025-02-20T00:26:30Z\",\"lastReview\":\"2025-02-17T00:26:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-20T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 5.072466051996206,
+    "difficulty" : 9.17179798556748,
+    "due" : "2025-02-25T00:26:30Z",
+    "lastReview" : "2025-02-20T00:26:30Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/12",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":5.072466051996206,\"difficulty\":9.17179798556748,\"due\":\"2025-02-25T00:26:30Z\",\"lastReview\":\"2025-02-20T00:26:30Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-03-07T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.7241371403044206,
+    "difficulty" : 9.50884743324687,
+    "due" : "2025-03-07T00:36:30Z",
+    "lastReview" : "2025-03-07T00:26:30Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/13",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.7241371403044206,\"difficulty\":9.50884743324687,\"due\":\"2025-03-07T00:36:30Z\",\"lastReview\":\"2025-03-07T00:26:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-03-07T00:28:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 0.964591105424504,
+    "difficulty" : 9.573992455450925,
+    "due" : "2025-03-07T00:43:00Z",
+    "lastReview" : "2025-03-07T00:28:00Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/14",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":0.964591105424504,\"difficulty\":9.573992455450925,\"due\":\"2025-03-07T00:43:00Z\",\"lastReview\":\"2025-03-07T00:28:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-07T00:43:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.246362183655076,
+    "difficulty" : 9.525060733312708,
+    "due" : "2025-03-08T00:43:00Z",
+    "lastReview" : "2025-03-07T00:43:00Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/15",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.246362183655076,\"difficulty\":9.525060733312708,\"due\":\"2025-03-08T00:43:00Z\",\"lastReview\":\"2025-03-07T00:43:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-22T00:43:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 4.90310411231974,
+    "difficulty" : 9.476466640057245,
+    "due" : "2025-03-27T00:43:00Z",
+    "lastReview" : "2025-03-22T00:43:00Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/16",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":4.90310411231974,\"difficulty\":9.476466640057245,\"due\":\"2025-03-27T00:43:00Z\",\"lastReview\":\"2025-03-22T00:43:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-03-22T00:44:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 2.360571885053787,
+    "difficulty" : 9.549326326730027,
+    "due" : "2025-03-24T00:44:30Z",
+    "lastReview" : "2025-03-22T00:44:30Z"
+  }
+}, {
+  "label" : "0.9/AGAIN/17",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":2.360571885053787,\"difficulty\":9.549326326730027,\"due\":\"2025-03-24T00:44:30Z\",\"lastReview\":\"2025-03-22T00:44:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-24T00:44:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 3.7059946473433367,
+    "difficulty" : 9.500564800879985,
+    "due" : "2025-03-28T00:44:30Z",
+    "lastReview" : "2025-03-24T00:44:30Z"
+  }
+}, {
+  "label" : "0.9/HARD/0",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-01T00:00:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 0,
+    "stability" : 1.1771,
+    "difficulty" : 6.243132948566265,
+    "due" : "2025-01-01T00:05:30Z",
+    "lastReview" : "2025-01-01T00:00:00Z"
+  }
+}, {
+  "label" : "0.9/HARD/1",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":0,\"stability\":1.1771,\"difficulty\":6.243132948566265,\"due\":\"2025-01-01T00:05:30Z\",\"lastReview\":\"2025-01-01T00:00:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-01T00:01:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 0,
+    "stability" : 0.6956716322824089,
+    "difficulty" : 7.086328445087965,
+    "due" : "2025-01-01T00:07:00Z",
+    "lastReview" : "2025-01-01T00:01:30Z"
+  }
+}, {
+  "label" : "0.9/HARD/2",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":0,\"stability\":0.6956716322824089,\"difficulty\":7.086328445087965,\"due\":\"2025-01-01T00:07:00Z\",\"lastReview\":\"2025-01-01T00:01:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-01T00:07:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 1,
+    "stability" : 0.9421106931418148,
+    "difficulty" : 7.054561604621252,
+    "due" : "2025-01-01T00:17:00Z",
+    "lastReview" : "2025-01-01T00:07:00Z"
+  }
+}, {
+  "label" : "0.9/HARD/3",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":1,\"stability\":0.9421106931418148,\"difficulty\":7.054561604621252,\"due\":\"2025-01-01T00:17:00Z\",\"lastReview\":\"2025-01-01T00:07:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-16T00:07:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 9.383538524327037,
+    "difficulty" : 7.023013955353759,
+    "due" : "2025-01-25T00:07:00Z",
+    "lastReview" : "2025-01-16T00:07:00Z"
+  }
+}, {
+  "label" : "0.9/HARD/4",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":9.383538524327037,\"difficulty\":7.023013955353759,\"due\":\"2025-01-25T00:07:00Z\",\"lastReview\":\"2025-01-16T00:07:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-16T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 4.115327187762639,
+    "difficulty" : 7.680404235256322,
+    "due" : "2025-01-20T00:08:30Z",
+    "lastReview" : "2025-01-16T00:08:30Z"
+  }
+}, {
+  "label" : "0.9/HARD/5",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":4.115327187762639,\"difficulty\":7.680404235256322,\"due\":\"2025-01-20T00:08:30Z\",\"lastReview\":\"2025-01-16T00:08:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-20T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 9.736255719199299,
+    "difficulty" : 7.6445382718374475,
+    "due" : "2025-01-30T00:08:30Z",
+    "lastReview" : "2025-01-20T00:08:30Z"
+  }
+}, {
+  "label" : "0.9/HARD/6",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":9.736255719199299,\"difficulty\":7.6445382718374475,\"due\":\"2025-01-30T00:08:30Z\",\"lastReview\":\"2025-01-20T00:08:30Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-02-04T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 2.204142537378085,
+    "difficulty" : 8.698783267556536,
+    "due" : "2025-02-04T00:18:30Z",
+    "lastReview" : "2025-02-04T00:08:30Z"
+  }
+}, {
+  "label" : "0.9/HARD/7",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":2.204142537378085,\"difficulty\":8.698783267556536,\"due\":\"2025-02-04T00:18:30Z\",\"lastReview\":\"2025-02-04T00:08:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-02-04T00:10:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.1903726746472962,
+    "difficulty" : 8.956924588518392,
+    "due" : "2025-02-04T00:25:00Z",
+    "lastReview" : "2025-02-04T00:10:00Z"
+  }
+}, {
+  "label" : "0.9/HARD/8",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.1903726746472962,\"difficulty\":8.956924588518392,\"due\":\"2025-02-04T00:25:00Z\",\"lastReview\":\"2025-02-04T00:10:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-04T00:25:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.4923079243009,
+    "difficulty" : 8.91225063466201,
+    "due" : "2025-02-05T00:25:00Z",
+    "lastReview" : "2025-02-04T00:25:00Z"
+  }
+}, {
+  "label" : "0.9/HARD/9",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.4923079243009,\"difficulty\":8.91225063466201,\"due\":\"2025-02-05T00:25:00Z\",\"lastReview\":\"2025-02-04T00:25:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-19T00:25:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 7.153854543744043,
+    "difficulty" : 8.867884931087238,
+    "due" : "2025-02-26T00:25:00Z",
+    "lastReview" : "2025-02-19T00:25:00Z"
+  }
+}, {
+  "label" : "0.9/HARD/10",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":7.153854543744043,\"difficulty\":8.867884931087238,\"due\":\"2025-02-26T00:25:00Z\",\"lastReview\":\"2025-02-19T00:25:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-02-19T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 3.262191913170107,
+    "difficulty" : 9.085738091484183,
+    "due" : "2025-02-22T00:26:30Z",
+    "lastReview" : "2025-02-19T00:26:30Z"
+  }
+}, {
+  "label" : "0.9/HARD/11",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":3.262191913170107,\"difficulty\":9.085738091484183,\"due\":\"2025-02-22T00:26:30Z\",\"lastReview\":\"2025-02-19T00:26:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-22T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 5.787363477639767,
+    "difficulty" : 9.040175324457337,
+    "due" : "2025-02-28T00:26:30Z",
+    "lastReview" : "2025-02-22T00:26:30Z"
+  }
+}, {
+  "label" : "0.9/HARD/12",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":5.787363477639767,\"difficulty\":9.040175324457337,\"due\":\"2025-02-28T00:26:30Z\",\"lastReview\":\"2025-02-22T00:26:30Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-03-09T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.8098208125558413,
+    "difficulty" : 9.439034290007648,
+    "due" : "2025-03-09T00:36:30Z",
+    "lastReview" : "2025-03-09T00:26:30Z"
+  }
+}, {
+  "label" : "0.9/HARD/13",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.8098208125558413,\"difficulty\":9.439034290007648,\"due\":\"2025-03-09T00:36:30Z\",\"lastReview\":\"2025-03-09T00:26:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-03-09T00:28:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.0054955664520402,
+    "difficulty" : 9.520812165287404,
+    "due" : "2025-03-09T00:43:00Z",
+    "lastReview" : "2025-03-09T00:28:00Z"
+  }
+}, {
+  "label" : "0.9/HARD/14",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.0054955664520402,\"difficulty\":9.520812165287404,\"due\":\"2025-03-09T00:43:00Z\",\"lastReview\":\"2025-03-09T00:28:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-09T00:43:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.2914847042277393,
+    "difficulty" : 9.472247387151317,
+    "due" : "2025-03-10T00:43:00Z",
+    "lastReview" : "2025-03-09T00:43:00Z"
+  }
+}, {
+  "label" : "0.9/HARD/15",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.2914847042277393,\"difficulty\":9.472247387151317,\"due\":\"2025-03-10T00:43:00Z\",\"lastReview\":\"2025-03-09T00:43:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-24T00:43:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 5.148102668642896,
+    "difficulty" : 9.424017705984367,
+    "due" : "2025-03-29T00:43:00Z",
+    "lastReview" : "2025-03-24T00:43:00Z"
+  }
+}, {
+  "label" : "0.9/HARD/16",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":5.148102668642896,\"difficulty\":9.424017705984367,\"due\":\"2025-03-29T00:43:00Z\",\"lastReview\":\"2025-03-24T00:43:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-03-24T00:44:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 2.461219295837688,
+    "difficulty" : 9.509373254810527,
+    "due" : "2025-03-26T00:44:30Z",
+    "lastReview" : "2025-03-24T00:44:30Z"
+  }
+}, {
+  "label" : "0.9/HARD/17",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":2.461219295837688,\"difficulty\":9.509373254810527,\"due\":\"2025-03-26T00:44:30Z\",\"lastReview\":\"2025-03-24T00:44:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-26T00:44:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 3.8486663624723167,
+    "difficulty" : 9.460887405156729,
+    "due" : "2025-03-30T00:44:30Z",
+    "lastReview" : "2025-03-26T00:44:30Z"
+  }
+}, {
+  "label" : "0.9/GOOD/0",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-01T00:00:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 1,
+    "stability" : 3.2602,
+    "difficulty" : 4.884631634813845,
+    "due" : "2025-01-01T00:10:00Z",
+    "lastReview" : "2025-01-01T00:00:00Z"
+  }
+}, {
+  "label" : "0.9/GOOD/1",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":1,\"stability\":3.2602,\"difficulty\":4.884631634813845,\"due\":\"2025-01-01T00:10:00Z\",\"lastReview\":\"2025-01-01T00:00:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-01T00:01:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 1,
+    "stability" : 1.6644005848819015,
+    "difficulty" : 6.051487572713533,
+    "due" : "2025-01-01T00:11:30Z",
+    "lastReview" : "2025-01-01T00:01:30Z"
+  }
+}, {
+  "label" : "0.9/GOOD/2",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":1,\"stability\":1.6644005848819015,\"difficulty\":6.051487572713533,\"due\":\"2025-01-01T00:11:30Z\",\"lastReview\":\"2025-01-01T00:01:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-01T00:11:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.9884480138327827,
+    "difficulty" : 6.026861134266204,
+    "due" : "2025-01-03T00:11:30Z",
+    "lastReview" : "2025-01-01T00:11:30Z"
+  }
+}, {
+  "label" : "0.9/GOOD/3",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.9884480138327827,\"difficulty\":6.026861134266204,\"due\":\"2025-01-03T00:11:30Z\",\"lastReview\":\"2025-01-01T00:11:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-16T00:11:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 17.405091895671912,
+    "difficulty" : 6.002404618244161,
+    "due" : "2025-02-02T00:11:30Z",
+    "lastReview" : "2025-01-16T00:11:30Z"
+  }
+}, {
+  "label" : "0.9/GOOD/4",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":17.405091895671912,\"difficulty\":6.002404618244161,\"due\":\"2025-02-02T00:11:30Z\",\"lastReview\":\"2025-01-16T00:11:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-16T00:13:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 6.984863890685535,
+    "difficulty" : 6.902953197059927,
+    "due" : "2025-01-23T00:13:00Z",
+    "lastReview" : "2025-01-16T00:13:00Z"
+  }
+}, {
+  "label" : "0.9/GOOD/5",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":6.984863890685535,\"difficulty\":6.902953197059927,\"due\":\"2025-01-23T00:13:00Z\",\"lastReview\":\"2025-01-16T00:13:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-23T00:13:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 18.349088114281358,
+    "difficulty" : 6.872451645804607,
+    "due" : "2025-02-10T00:13:00Z",
+    "lastReview" : "2025-01-23T00:13:00Z"
+  }
+}, {
+  "label" : "0.9/GOOD/6",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":18.349088114281358,\"difficulty\":6.872451645804607,\"due\":\"2025-02-10T00:13:00Z\",\"lastReview\":\"2025-01-23T00:13:00Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-02-07T00:13:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 2.760926950290997,
+    "difficulty" : 8.28926568326143,
+    "due" : "2025-02-07T00:23:00Z",
+    "lastReview" : "2025-02-07T00:13:00Z"
+  }
+}, {
+  "label" : "0.9/GOOD/7",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":2.760926950290997,\"difficulty\":8.28926568326143,\"due\":\"2025-02-07T00:23:00Z\",\"lastReview\":\"2025-02-07T00:13:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-02-07T00:14:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.4435842629241764,
+    "difficulty" : 8.644973816079279,
+    "due" : "2025-02-07T00:29:30Z",
+    "lastReview" : "2025-02-07T00:14:30Z"
+  }
+}, {
+  "label" : "0.9/GOOD/8",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.4435842629241764,\"difficulty\":8.644973816079279,\"due\":\"2025-02-07T00:29:30Z\",\"lastReview\":\"2025-02-07T00:14:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-07T00:29:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.7602787230299923,
+    "difficulty" : 8.602452322552727,
+    "due" : "2025-02-09T00:29:30Z",
+    "lastReview" : "2025-02-07T00:29:30Z"
+  }
+}, {
+  "label" : "0.9/GOOD/9",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.7602787230299923,\"difficulty\":8.602452322552727,\"due\":\"2025-02-09T00:29:30Z\",\"lastReview\":\"2025-02-07T00:29:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-22T00:29:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 8.792128689263883,
+    "difficulty" : 8.560224227331508,
+    "due" : "2025-03-03T00:29:30Z",
+    "lastReview" : "2025-02-22T00:29:30Z"
+  }
+}, {
+  "label" : "0.9/GOOD/10",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":8.792128689263883,\"difficulty\":8.560224227331508,\"due\":\"2025-03-03T00:29:30Z\",\"lastReview\":\"2025-02-22T00:29:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-02-22T00:31:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 3.892194526341936,
+    "difficulty" : 8.851376984986251,
+    "due" : "2025-02-26T00:31:00Z",
+    "lastReview" : "2025-02-22T00:31:00Z"
+  }
+}, {
+  "label" : "0.9/GOOD/11",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":3.892194526341936,\"difficulty\":8.851376984986251,\"due\":\"2025-02-26T00:31:00Z\",\"lastReview\":\"2025-02-22T00:31:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-26T00:31:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 7.507588572738026,
+    "difficulty" : 8.807431309594241,
+    "due" : "2025-03-06T00:31:00Z",
+    "lastReview" : "2025-02-26T00:31:00Z"
+  }
+}, {
+  "label" : "0.9/GOOD/12",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":7.507588572738026,\"difficulty\":8.807431309594241,\"due\":\"2025-03-06T00:31:00Z\",\"lastReview\":\"2025-02-26T00:31:00Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-03-13T00:31:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.9863346837634566,
+    "difficulty" : 9.315586009060706,
+    "due" : "2025-03-13T00:41:00Z",
+    "lastReview" : "2025-03-13T00:31:00Z"
+  }
+}, {
+  "label" : "0.9/GOOD/13",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.9863346837634566,\"difficulty\":9.315586009060706,\"due\":\"2025-03-13T00:41:00Z\",\"lastReview\":\"2025-03-13T00:31:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-03-13T00:32:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.0889027804045543,
+    "difficulty" : 9.426775210405564,
+    "due" : "2025-03-13T00:47:30Z",
+    "lastReview" : "2025-03-13T00:32:30Z"
+  }
+}, {
+  "label" : "0.9/GOOD/14",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.0889027804045543,\"difficulty\":9.426775210405564,\"due\":\"2025-03-13T00:47:30Z\",\"lastReview\":\"2025-03-13T00:32:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-13T00:47:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.3826902742043392,
+    "difficulty" : 9.37885928725816,
+    "due" : "2025-03-14T00:47:30Z",
+    "lastReview" : "2025-03-13T00:47:30Z"
+  }
+}, {
+  "label" : "0.9/GOOD/15",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.3826902742043392,\"difficulty\":9.37885928725816,\"due\":\"2025-03-14T00:47:30Z\",\"lastReview\":\"2025-03-13T00:47:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-28T00:47:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 5.617241462598537,
+    "difficulty" : 9.331273983980473,
+    "due" : "2025-04-03T00:47:30Z",
+    "lastReview" : "2025-03-28T00:47:30Z"
+  }
+}, {
+  "label" : "0.9/GOOD/16",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":5.617241462598537,\"difficulty\":9.331273983980473,\"due\":\"2025-04-03T00:47:30Z\",\"lastReview\":\"2025-03-28T00:47:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-03-28T00:49:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 2.652060570967899,
+    "difficulty" : 9.43872555413171,
+    "due" : "2025-03-31T00:49:00Z",
+    "lastReview" : "2025-03-28T00:49:00Z"
+  }
+}, {
+  "label" : "0.9/GOOD/17",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":2.652060570967899,\"difficulty\":9.43872555413171,\"due\":\"2025-03-31T00:49:00Z\",\"lastReview\":\"2025-03-28T00:49:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-31T00:49:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.9,
+    "maximumIntervalDays" : 36500,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 4.662811044454294,
+    "difficulty" : 9.390727173612595,
+    "due" : "2025-04-05T00:49:00Z",
+    "lastReview" : "2025-03-31T00:49:00Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/0",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-01-01T00:00:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 0,
+    "stability" : 0.2172,
+    "difficulty" : 7.0114,
+    "due" : "2025-01-01T00:01:00Z",
+    "lastReview" : "2025-01-01T00:00:00Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/1",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":0,\"stability\":0.2172,\"difficulty\":7.0114,\"due\":\"2025-01-01T00:01:00Z\",\"lastReview\":\"2025-01-01T00:00:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-01T00:01:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 0,
+    "stability" : 0.16365145806222992,
+    "difficulty" : 7.671557283421727,
+    "due" : "2025-01-01T00:07:00Z",
+    "lastReview" : "2025-01-01T00:01:30Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/2",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":0,\"stability\":0.16365145806222992,\"difficulty\":7.671557283421727,\"due\":\"2025-01-01T00:07:00Z\",\"lastReview\":\"2025-01-01T00:01:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-01T00:07:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 1,
+    "stability" : 0.2728542535074799,
+    "difficulty" : 7.635752363970511,
+    "due" : "2025-01-01T00:17:00Z",
+    "lastReview" : "2025-01-01T00:07:00Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/3",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":1,\"stability\":0.2728542535074799,\"difficulty\":7.635752363970511,\"due\":\"2025-01-01T00:17:00Z\",\"lastReview\":\"2025-01-01T00:07:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-16T00:07:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 3.6777397584244533,
+    "difficulty" : 7.600194498463508,
+    "due" : "2025-01-27T00:07:00Z",
+    "lastReview" : "2025-01-16T00:07:00Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/4",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":3.6777397584244533,\"difficulty\":7.600194498463508,\"due\":\"2025-01-27T00:07:00Z\",\"lastReview\":\"2025-01-16T00:07:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-16T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.845329056522733,
+    "difficulty" : 8.12007257469975,
+    "due" : "2025-01-21T00:08:30Z",
+    "lastReview" : "2025-01-16T00:08:30Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/5",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.845329056522733,\"difficulty\":8.12007257469975,\"due\":\"2025-01-21T00:08:30Z\",\"lastReview\":\"2025-01-16T00:08:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-21T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 6.7328643857627535,
+    "difficulty" : 8.081172899738716,
+    "due" : "2025-02-10T00:08:30Z",
+    "lastReview" : "2025-01-21T00:08:30Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/6",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":6.7328643857627535,\"difficulty\":8.081172899738716,\"due\":\"2025-02-10T00:08:30Z\",\"lastReview\":\"2025-01-21T00:08:30Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-02-05T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.9321857271030034,
+    "difficulty" : 8.930375879070201,
+    "due" : "2025-02-05T00:18:30Z",
+    "lastReview" : "2025-02-05T00:08:30Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/7",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.9321857271030034,\"difficulty\":8.930375879070201,\"due\":\"2025-02-05T00:18:30Z\",\"lastReview\":\"2025-02-05T00:08:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-02-05T00:10:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.063433804299871,
+    "difficulty" : 9.133340685954682,
+    "due" : "2025-02-05T00:25:00Z",
+    "lastReview" : "2025-02-05T00:10:00Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/8",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.063433804299871,\"difficulty\":9.133340685954682,\"due\":\"2025-02-05T00:25:00Z\",\"lastReview\":\"2025-02-05T00:10:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-05T00:25:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.3549501086824922,
+    "difficulty" : 9.08744946102599,
+    "due" : "2025-02-09T00:25:00Z",
+    "lastReview" : "2025-02-05T00:25:00Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/9",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.3549501086824922,\"difficulty\":9.08744946102599,\"due\":\"2025-02-09T00:25:00Z\",\"lastReview\":\"2025-02-05T00:25:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-20T00:25:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 6.300580175007719,
+    "difficulty" : 9.041874885549305,
+    "due" : "2025-03-11T00:25:00Z",
+    "lastReview" : "2025-02-20T00:25:00Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/10",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":6.300580175007719,\"difficulty\":9.041874885549305,\"due\":\"2025-03-11T00:25:00Z\",\"lastReview\":\"2025-02-20T00:25:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-02-20T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 2.9260138183746167,
+    "difficulty" : 9.218275259050534,
+    "due" : "2025-03-01T00:26:30Z",
+    "lastReview" : "2025-02-20T00:26:30Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/11",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":2.9260138183746167,\"difficulty\":9.218275259050534,\"due\":\"2025-03-01T00:26:30Z\",\"lastReview\":\"2025-02-20T00:26:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-01T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 7.838484125894843,
+    "difficulty" : 9.17179798556748,
+    "due" : "2025-03-24T00:26:30Z",
+    "lastReview" : "2025-03-01T00:26:30Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/12",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":7.838484125894843,\"difficulty\":9.17179798556748,\"due\":\"2025-03-24T00:26:30Z\",\"lastReview\":\"2025-03-01T00:26:30Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-03-16T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 2.006522304268342,
+    "difficulty" : 9.50884743324687,
+    "due" : "2025-03-16T00:36:30Z",
+    "lastReview" : "2025-03-16T00:26:30Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/13",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":2.006522304268342,\"difficulty\":9.50884743324687,\"due\":\"2025-03-16T00:36:30Z\",\"lastReview\":\"2025-03-16T00:26:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-03-16T00:28:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.0983723824698541,
+    "difficulty" : 9.573992455450925,
+    "due" : "2025-03-16T00:43:00Z",
+    "lastReview" : "2025-03-16T00:28:00Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/14",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.0983723824698541,\"difficulty\":9.573992455450925,\"due\":\"2025-03-16T00:43:00Z\",\"lastReview\":\"2025-03-16T00:28:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-16T00:43:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.3929804530029946,
+    "difficulty" : 9.525060733312708,
+    "due" : "2025-03-20T00:43:00Z",
+    "lastReview" : "2025-03-16T00:43:00Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/15",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.3929804530029946,\"difficulty\":9.525060733312708,\"due\":\"2025-03-20T00:43:00Z\",\"lastReview\":\"2025-03-16T00:43:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-31T00:43:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 5.259824775347538,
+    "difficulty" : 9.476466640057245,
+    "due" : "2025-04-16T00:43:00Z",
+    "lastReview" : "2025-03-31T00:43:00Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/16",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":5.259824775347538,\"difficulty\":9.476466640057245,\"due\":\"2025-04-16T00:43:00Z\",\"lastReview\":\"2025-03-31T00:43:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-03-31T00:44:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 2.506885615504263,
+    "difficulty" : 9.549326326730027,
+    "due" : "2025-04-07T00:44:30Z",
+    "lastReview" : "2025-03-31T00:44:30Z"
+  }
+}, {
+  "label" : "0.8/AGAIN/17",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":2.506885615504263,\"difficulty\":9.549326326730027,\"due\":\"2025-04-07T00:44:30Z\",\"lastReview\":\"2025-03-31T00:44:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-04-07T00:44:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 5.7981998118351274,
+    "difficulty" : 9.500564800879985,
+    "due" : "2025-04-24T00:44:30Z",
+    "lastReview" : "2025-04-07T00:44:30Z"
+  }
+}, {
+  "label" : "0.8/HARD/0",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-01T00:00:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 0,
+    "stability" : 1.1771,
+    "difficulty" : 6.243132948566265,
+    "due" : "2025-01-01T00:05:30Z",
+    "lastReview" : "2025-01-01T00:00:00Z"
+  }
+}, {
+  "label" : "0.8/HARD/1",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":0,\"stability\":1.1771,\"difficulty\":6.243132948566265,\"due\":\"2025-01-01T00:05:30Z\",\"lastReview\":\"2025-01-01T00:00:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-01T00:01:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 0,
+    "stability" : 0.6956716322824089,
+    "difficulty" : 7.086328445087965,
+    "due" : "2025-01-01T00:07:00Z",
+    "lastReview" : "2025-01-01T00:01:30Z"
+  }
+}, {
+  "label" : "0.8/HARD/2",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":0,\"stability\":0.6956716322824089,\"difficulty\":7.086328445087965,\"due\":\"2025-01-01T00:07:00Z\",\"lastReview\":\"2025-01-01T00:01:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-01T00:07:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 1,
+    "stability" : 0.9421106931418148,
+    "difficulty" : 7.054561604621252,
+    "due" : "2025-01-01T00:17:00Z",
+    "lastReview" : "2025-01-01T00:07:00Z"
+  }
+}, {
+  "label" : "0.8/HARD/3",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":1,\"stability\":0.9421106931418148,\"difficulty\":7.054561604621252,\"due\":\"2025-01-01T00:17:00Z\",\"lastReview\":\"2025-01-01T00:07:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-16T00:07:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 9.383538524327037,
+    "difficulty" : 7.023013955353759,
+    "due" : "2025-02-13T00:07:00Z",
+    "lastReview" : "2025-01-16T00:07:00Z"
+  }
+}, {
+  "label" : "0.8/HARD/4",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":9.383538524327037,\"difficulty\":7.023013955353759,\"due\":\"2025-02-13T00:07:00Z\",\"lastReview\":\"2025-01-16T00:07:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-16T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 4.115327187762639,
+    "difficulty" : 7.680404235256322,
+    "due" : "2025-01-28T00:08:30Z",
+    "lastReview" : "2025-01-16T00:08:30Z"
+  }
+}, {
+  "label" : "0.8/HARD/5",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":4.115327187762639,\"difficulty\":7.680404235256322,\"due\":\"2025-01-28T00:08:30Z\",\"lastReview\":\"2025-01-16T00:08:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-28T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 16.119886830935716,
+    "difficulty" : 7.6445382718374475,
+    "due" : "2025-02-27T00:08:30Z",
+    "lastReview" : "2025-01-28T00:08:30Z"
+  }
+}, {
+  "label" : "0.8/HARD/6",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":16.119886830935716,\"difficulty\":7.6445382718374475,\"due\":\"2025-02-27T00:08:30Z\",\"lastReview\":\"2025-01-28T00:08:30Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-02-12T00:08:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 2.6108799171233406,
+    "difficulty" : 8.698783267556536,
+    "due" : "2025-02-12T00:18:30Z",
+    "lastReview" : "2025-02-12T00:08:30Z"
+  }
+}, {
+  "label" : "0.8/HARD/7",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":2.6108799171233406,\"difficulty\":8.698783267556536,\"due\":\"2025-02-12T00:18:30Z\",\"lastReview\":\"2025-02-12T00:08:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-02-12T00:10:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.3761362491166051,
+    "difficulty" : 8.956924588518392,
+    "due" : "2025-02-12T00:25:00Z",
+    "lastReview" : "2025-02-12T00:10:00Z"
+  }
+}, {
+  "label" : "0.8/HARD/8",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.3761362491166051,\"difficulty\":8.956924588518392,\"due\":\"2025-02-12T00:25:00Z\",\"lastReview\":\"2025-02-12T00:10:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-12T00:25:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.6896117560181187,
+    "difficulty" : 8.91225063466201,
+    "due" : "2025-02-17T00:25:00Z",
+    "lastReview" : "2025-02-12T00:25:00Z"
+  }
+}, {
+  "label" : "0.8/HARD/9",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.6896117560181187,\"difficulty\":8.91225063466201,\"due\":\"2025-02-17T00:25:00Z\",\"lastReview\":\"2025-02-12T00:25:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-27T00:25:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 7.697016825334052,
+    "difficulty" : 8.867884931087238,
+    "due" : "2025-03-22T00:25:00Z",
+    "lastReview" : "2025-02-27T00:25:00Z"
+  }
+}, {
+  "label" : "0.8/HARD/10",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":7.697016825334052,\"difficulty\":8.867884931087238,\"due\":\"2025-03-22T00:25:00Z\",\"lastReview\":\"2025-02-27T00:25:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-02-27T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 3.4731594049497065,
+    "difficulty" : 9.085738091484183,
+    "due" : "2025-03-09T00:26:30Z",
+    "lastReview" : "2025-02-27T00:26:30Z"
+  }
+}, {
+  "label" : "0.8/HARD/11",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":3.4731594049497065,\"difficulty\":9.085738091484183,\"due\":\"2025-03-09T00:26:30Z\",\"lastReview\":\"2025-02-27T00:26:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-09T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 9.382574790914225,
+    "difficulty" : 9.040175324457337,
+    "due" : "2025-04-06T00:26:30Z",
+    "lastReview" : "2025-03-09T00:26:30Z"
+  }
+}, {
+  "label" : "0.8/HARD/12",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":9.382574790914225,\"difficulty\":9.040175324457337,\"due\":\"2025-04-06T00:26:30Z\",\"lastReview\":\"2025-03-09T00:26:30Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-03-24T00:26:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 2.135894910428019,
+    "difficulty" : 9.439034290007648,
+    "due" : "2025-03-24T00:36:30Z",
+    "lastReview" : "2025-03-24T00:26:30Z"
+  }
+}, {
+  "label" : "0.8/HARD/13",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":2.135894910428019,\"difficulty\":9.439034290007648,\"due\":\"2025-03-24T00:36:30Z\",\"lastReview\":\"2025-03-24T00:26:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-03-24T00:28:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.1587401792813714,
+    "difficulty" : 9.520812165287404,
+    "due" : "2025-03-24T00:43:00Z",
+    "lastReview" : "2025-03-24T00:28:00Z"
+  }
+}, {
+  "label" : "0.8/HARD/14",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.1587401792813714,\"difficulty\":9.520812165287404,\"due\":\"2025-03-24T00:43:00Z\",\"lastReview\":\"2025-03-24T00:28:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-24T00:43:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.4582849863691323,
+    "difficulty" : 9.472247387151317,
+    "due" : "2025-03-28T00:43:00Z",
+    "lastReview" : "2025-03-24T00:43:00Z"
+  }
+}, {
+  "label" : "0.8/HARD/15",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.4582849863691323,\"difficulty\":9.472247387151317,\"due\":\"2025-03-28T00:43:00Z\",\"lastReview\":\"2025-03-24T00:43:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-04-08T00:43:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 5.554915948007937,
+    "difficulty" : 9.424017705984367,
+    "due" : "2025-04-24T00:43:00Z",
+    "lastReview" : "2025-04-08T00:43:00Z"
+  }
+}, {
+  "label" : "0.8/HARD/16",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":5.554915948007937,\"difficulty\":9.424017705984367,\"due\":\"2025-04-24T00:43:00Z\",\"lastReview\":\"2025-04-08T00:43:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-04-08T00:44:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 2.626843205161133,
+    "difficulty" : 9.509373254810527,
+    "due" : "2025-04-16T00:44:30Z",
+    "lastReview" : "2025-04-08T00:44:30Z"
+  }
+}, {
+  "label" : "0.8/HARD/17",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":2.626843205161133,\"difficulty\":9.509373254810527,\"due\":\"2025-04-16T00:44:30Z\",\"lastReview\":\"2025-04-08T00:44:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-04-16T00:44:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 6.339590638939891,
+    "difficulty" : 9.460887405156729,
+    "due" : "2025-05-05T00:44:30Z",
+    "lastReview" : "2025-04-16T00:44:30Z"
+  }
+}, {
+  "label" : "0.8/GOOD/0",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-01T00:00:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 1,
+    "stability" : 3.2602,
+    "difficulty" : 4.884631634813845,
+    "due" : "2025-01-01T00:10:00Z",
+    "lastReview" : "2025-01-01T00:00:00Z"
+  }
+}, {
+  "label" : "0.8/GOOD/1",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":1,\"stability\":3.2602,\"difficulty\":4.884631634813845,\"due\":\"2025-01-01T00:10:00Z\",\"lastReview\":\"2025-01-01T00:00:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-01T00:01:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "LEARNING",
+    "step" : 1,
+    "stability" : 1.6644005848819015,
+    "difficulty" : 6.051487572713533,
+    "due" : "2025-01-01T00:11:30Z",
+    "lastReview" : "2025-01-01T00:01:30Z"
+  }
+}, {
+  "label" : "0.8/GOOD/2",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"LEARNING\",\"step\":1,\"stability\":1.6644005848819015,\"difficulty\":6.051487572713533,\"due\":\"2025-01-01T00:11:30Z\",\"lastReview\":\"2025-01-01T00:01:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-01T00:11:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.9884480138327827,
+    "difficulty" : 6.026861134266204,
+    "due" : "2025-01-07T00:11:30Z",
+    "lastReview" : "2025-01-01T00:11:30Z"
+  }
+}, {
+  "label" : "0.8/GOOD/3",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.9884480138327827,\"difficulty\":6.026861134266204,\"due\":\"2025-01-07T00:11:30Z\",\"lastReview\":\"2025-01-01T00:11:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-01-16T00:11:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 17.405091895671912,
+    "difficulty" : 6.002404618244161,
+    "due" : "2025-02-15T00:11:30Z",
+    "lastReview" : "2025-01-16T00:11:30Z"
+  }
+}, {
+  "label" : "0.8/GOOD/4",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":17.405091895671912,\"difficulty\":6.002404618244161,\"due\":\"2025-02-15T00:11:30Z\",\"lastReview\":\"2025-01-16T00:11:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-01-16T00:13:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 6.984863890685535,
+    "difficulty" : 6.902953197059927,
+    "due" : "2025-02-06T00:13:00Z",
+    "lastReview" : "2025-01-16T00:13:00Z"
+  }
+}, {
+  "label" : "0.8/GOOD/5",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":6.984863890685535,\"difficulty\":6.902953197059927,\"due\":\"2025-02-06T00:13:00Z\",\"lastReview\":\"2025-01-16T00:13:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-06T00:13:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 31.119920866082094,
+    "difficulty" : 6.872451645804607,
+    "due" : "2025-03-08T00:13:00Z",
+    "lastReview" : "2025-02-06T00:13:00Z"
+  }
+}, {
+  "label" : "0.8/GOOD/6",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":31.119920866082094,\"difficulty\":6.872451645804607,\"due\":\"2025-03-08T00:13:00Z\",\"lastReview\":\"2025-02-06T00:13:00Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-02-21T00:13:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 3.3111912060296422,
+    "difficulty" : 8.28926568326143,
+    "due" : "2025-02-21T00:23:00Z",
+    "lastReview" : "2025-02-21T00:13:00Z"
+  }
+}, {
+  "label" : "0.8/GOOD/7",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":3.3111912060296422,\"difficulty\":8.28926568326143,\"due\":\"2025-02-21T00:23:00Z\",\"lastReview\":\"2025-02-21T00:13:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-02-21T00:14:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.6866669543846478,
+    "difficulty" : 8.644973816079279,
+    "due" : "2025-02-21T00:29:30Z",
+    "lastReview" : "2025-02-21T00:14:30Z"
+  }
+}, {
+  "label" : "0.8/GOOD/8",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.6866669543846478,\"difficulty\":8.644973816079279,\"due\":\"2025-02-21T00:29:30Z\",\"lastReview\":\"2025-02-21T00:14:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-02-21T00:29:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 2.0112050764356746,
+    "difficulty" : 8.602452322552727,
+    "due" : "2025-02-27T00:29:30Z",
+    "lastReview" : "2025-02-21T00:29:30Z"
+  }
+}, {
+  "label" : "0.8/GOOD/9",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":2.0112050764356746,\"difficulty\":8.602452322552727,\"due\":\"2025-02-27T00:29:30Z\",\"lastReview\":\"2025-02-21T00:29:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-08T00:29:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 9.48127824680843,
+    "difficulty" : 8.560224227331508,
+    "due" : "2025-04-05T00:29:30Z",
+    "lastReview" : "2025-03-08T00:29:30Z"
+  }
+}, {
+  "label" : "0.8/GOOD/10",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":9.48127824680843,\"difficulty\":8.560224227331508,\"due\":\"2025-04-05T00:29:30Z\",\"lastReview\":\"2025-03-08T00:29:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-03-08T00:31:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 4.152005632512512,
+    "difficulty" : 8.851376984986251,
+    "due" : "2025-03-20T00:31:00Z",
+    "lastReview" : "2025-03-08T00:31:00Z"
+  }
+}, {
+  "label" : "0.8/GOOD/11",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":4.152005632512512,\"difficulty\":8.851376984986251,\"due\":\"2025-03-20T00:31:00Z\",\"lastReview\":\"2025-03-08T00:31:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-03-20T00:31:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 11.942047429692849,
+    "difficulty" : 8.807431309594241,
+    "due" : "2025-04-19T00:31:00Z",
+    "lastReview" : "2025-03-20T00:31:00Z"
+  }
+}, {
+  "label" : "0.8/GOOD/12",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":11.942047429692849,\"difficulty\":8.807431309594241,\"due\":\"2025-04-19T00:31:00Z\",\"lastReview\":\"2025-03-20T00:31:00Z\"}",
+  "rating" : "AGAIN",
+  "completedAt" : "2025-04-04T00:31:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 2.3229385298236074,
+    "difficulty" : 9.315586009060706,
+    "due" : "2025-04-04T00:41:00Z",
+    "lastReview" : "2025-04-04T00:31:00Z"
+  }
+}, {
+  "label" : "0.8/GOOD/13",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":2.3229385298236074,\"difficulty\":9.315586009060706,\"due\":\"2025-04-04T00:41:00Z\",\"lastReview\":\"2025-04-04T00:31:00Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-04-04T00:32:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "RELEARNING",
+    "step" : 0,
+    "stability" : 1.2451019460668855,
+    "difficulty" : 9.426775210405564,
+    "due" : "2025-04-04T00:47:30Z",
+    "lastReview" : "2025-04-04T00:32:30Z"
+  }
+}, {
+  "label" : "0.8/GOOD/14",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"RELEARNING\",\"step\":0,\"stability\":1.2451019460668855,\"difficulty\":9.426775210405564,\"due\":\"2025-04-04T00:47:30Z\",\"lastReview\":\"2025-04-04T00:32:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-04-04T00:47:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 1.5508689534916809,
+    "difficulty" : 9.37885928725816,
+    "due" : "2025-04-09T00:47:30Z",
+    "lastReview" : "2025-04-04T00:47:30Z"
+  }
+}, {
+  "label" : "0.8/GOOD/15",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":1.5508689534916809,\"difficulty\":9.37885928725816,\"due\":\"2025-04-09T00:47:30Z\",\"lastReview\":\"2025-04-04T00:47:30Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-04-19T00:47:30Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 6.02962891239373,
+    "difficulty" : 9.331273983980473,
+    "due" : "2025-05-07T00:47:30Z",
+    "lastReview" : "2025-04-19T00:47:30Z"
+  }
+}, {
+  "label" : "0.8/GOOD/16",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":6.02962891239373,\"difficulty\":9.331273983980473,\"due\":\"2025-05-07T00:47:30Z\",\"lastReview\":\"2025-04-19T00:47:30Z\"}",
+  "rating" : "HARD",
+  "completedAt" : "2025-04-19T00:49:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 2.817926375910309,
+    "difficulty" : 9.43872555413171,
+    "due" : "2025-04-27T00:49:00Z",
+    "lastReview" : "2025-04-19T00:49:00Z"
+  }
+}, {
+  "label" : "0.8/GOOD/17",
+  "itemId" : "12345678-1234-4321-9876-123456789abc",
+  "baseline" : "{\"cardId\":-837902895,\"state\":\"REVIEW\",\"step\":null,\"stability\":2.817926375910309,\"difficulty\":9.43872555413171,\"due\":\"2025-04-27T00:49:00Z\",\"lastReview\":\"2025-04-19T00:49:00Z\"}",
+  "rating" : "GOOD",
+  "completedAt" : "2025-04-27T00:49:00Z",
+  "profile" : {
+    "schemaVersion" : 1,
+    "algorithmVersion" : "FSRS-6/java-fsrs-1.0.0",
+    "desiredRetention" : 0.8,
+    "maximumIntervalDays" : 30,
+    "parameters" : [ 0.2172, 1.1771, 3.2602, 16.1507, 7.0114, 0.57, 2.0966, 0.0069, 1.5261, 0.112, 1.0178, 1.849, 0.1133, 0.3127, 2.2934, 0.2191, 3.0004, 0.7536, 0.3332, 0.1437, 0.2 ],
+    "learningStepsMillis" : [ 60000, 600000 ],
+    "relearningStepsMillis" : [ 600000 ],
+    "enableFuzzing" : false
+  },
+  "stateAfter" : {
+    "cardId" : -837902895,
+    "state" : "REVIEW",
+    "step" : null,
+    "stability" : 6.78732780289845,
+    "difficulty" : 9.390727173612595,
+    "due" : "2025-05-17T00:49:00Z",
+    "lastReview" : "2025-04-27T00:49:00Z"
+  }
+} ]

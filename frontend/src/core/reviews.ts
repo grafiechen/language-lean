@@ -17,6 +17,7 @@ export interface CompletedReview {
   learningItemId: string
   progressEpoch: string
   baseVersion: string
+  baseEventId?: string | null
   submissionVersion: string
   completedAt: string
   results: ReviewTypeResult[]
@@ -43,9 +44,22 @@ export function aggregate(requiredTypes: readonly string[], results: readonly Re
   if (results.some(r => !requiredTypes.includes(r.typeId)) || new Set(results.map(r => r.typeId)).size !== results.length)
     throw new Error('Unexpected or duplicate type result')
   const ratings: Rating[] = []
+  const trialIds = new Set<string>()
+  for (const result of results) {
+    if (!Number.isInteger(result.contractVersion) || result.contractVersion < 1) throw new Error('Invalid type version')
+    let previous = -Infinity
+    result.trials.forEach((trial, index) => {
+      const time = Date.parse(trial.ratedAt)
+      if (!trial.id || trialIds.has(trial.id) || !Number.isFinite(time) || time < previous
+        || !['AGAIN', 'HARD', 'GOOD'].includes(trial.rating)) throw new Error('Invalid review trial')
+      if (index < result.trials.length - 1 && trial.rating !== 'AGAIN') throw new Error('Trial appended after passing')
+      trialIds.add(trial.id)
+      previous = time
+    })
+  }
   for (const type of requiredTypes) {
     const result = results.find(r => r.typeId === type)
-    if (!result || !result.trials.some(t => t.rating !== 'AGAIN')) return null
+    if (!result?.trials.length || result.trials[result.trials.length - 1].rating === 'AGAIN') return null
     ratings.push(...result.trials.map(t => t.rating))
   }
   return ratings.includes('AGAIN') ? 'AGAIN' : ratings.includes('HARD') ? 'HARD' : 'GOOD'

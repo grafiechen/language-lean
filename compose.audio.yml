@@ -1,0 +1,10 @@
+# 默认预览不要求云凭据；配置后叠加到生产或开发 Compose。
+services:
+  api:
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/google-credentials.json
+    volumes:
+      - type: bind
+        source: ${GOOGLE_CREDENTIALS_FILE:?Set GOOGLE_CREDENTIALS_FILE to a server credential file}
+        target: /run/secrets/google-credentials.json
+        read_only: true

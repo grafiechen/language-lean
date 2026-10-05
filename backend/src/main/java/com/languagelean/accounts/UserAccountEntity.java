@@ -33,6 +33,8 @@ class UserAccountEntity {
     private AccountStatus status;
     @Column(name = "must_change_password", nullable = false)
     private boolean mustChangePassword;
+    @Column(name = "native_language", nullable = false, length = 35)
+    private String nativeLanguage = "zh-Hans";
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_account_role", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role", nullable = false, length = 24)
@@ -42,6 +44,8 @@ class UserAccountEntity {
     private Set<UserLoginIdentifierEntity> loginIdentifiers = new LinkedHashSet<>();
     @Version
     private long version;
+    @Column(name = "security_version", nullable = false)
+    private long securityVersion;
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
     @Column(name = "updated_at", nullable = false)
@@ -76,16 +80,25 @@ class UserAccountEntity {
     }
 
     UUID getId() { return id; }
+    long getVersion() { return version; }
+    long getSecurityVersion() { return securityVersion; }
+    Instant getCreatedAt() { return createdAt; }
+    /** 禁用仅阻止在线访问，不清除账户的学习数据。 */
+    void changeStatus(AccountStatus value) { status = value; securityVersion++; updatedAt = Instant.now(); }
     String getUsername() { return username; }
     String getEmail() { return email; }
     String getPasswordHash() { return passwordHash; }
     AccountStatus getStatus() { return status; }
     boolean isMustChangePassword() { return mustChangePassword; }
+    String getNativeLanguage() { return nativeLanguage; }
+    /** 更新展示偏好，不创建或重置任何学习记录。 */
+    void changeNativeLanguage(String language) { nativeLanguage = language; updatedAt = Instant.now(); }
     Set<Role> getRoles() { return Set.copyOf(roles); }
 
     /** 保存新密码哈希并清除“需要修改初始密码”标志。 */
     void changePassword(String encodedPassword) {
         passwordHash = encodedPassword;
+        securityVersion++;
         mustChangePassword = false;
         updatedAt = Instant.now();
     }

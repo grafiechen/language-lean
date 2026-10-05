@@ -1,0 +1,15 @@
+{
+  "baseVersion": "2026-09-22",
+  "exampleVersion": "2026-10-03",
+  "entryCount": 28347,
+  "exampleCount": 31527,
+  "mismatchedSensesSkipped": 19,
+  "baseSha256": "28b903cfce3f22370334bfc803c29db245ba38f84940b402d95e577734ef56d9",
+  "exampleSourceSha256": "79c221c510a67f4bf4a8c7ef08772cbda0c86e0556c5f318257e8fa3e4ecdc69",
+  "sqlGzipSha256": "c8f88ab9bc15f7364f5d8800029b4e524cd4da1ceecd9e9f998e8ff3ffc4c3c5",
+  "metadataSha256": "223207e5d484202af3c4cff3747db21fc645067fade35978397e1edb5abde044",
+  "chineseExampleTranslations": 1245,
+  "sourceUrl": "https://www.edrdg.org/pub/Nihongo/JMdict_e_examp.gz",
+  "exampleLicense": "CC BY 2.0 FR",
+  "selection": "official sense-linked examples, 4..100 Japanese characters, <=400 English characters, <=3 per sense, shortest first"
+}

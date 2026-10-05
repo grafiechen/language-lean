@@ -10,9 +10,9 @@ import java.util.UUID;
  */
 public interface AudioGenerationPort {
     /** 调用方据此区分可播放、生成中、缺少发音、关闭和失败状态。 */
-    enum Status { READY, PENDING, MISSING_PRONUNCIATION, DISABLED, FAILED }
+    enum Status { READY, PENDING, MISSING_PRONUNCIATION, DISABLED, NOT_CONFIGURED, FAILED }
     /** 确保生成后的状态；没有就绪版本时 audioVersionId 可以为空。 */
-    record Result(Status status, UUID audioVersionId) {}
+    record Result(Status status, UUID audioVersionId, String url, boolean stale, String message, String textHash) {}
     /** 为当前用户有权限访问的音频资产确保存在可用版本。 */
     Result ensureGenerated(UUID authenticatedUserId, UUID audioAssetId);
 }
