@@ -1,3 +1,5 @@
+import { encryptPasswordBody, passwordPath, type PasswordKey } from './passwordEncryption'
+
 /** HTTP 非成功响应，保留状态码和稳定错误码供页面判断。 */
 export class ApiError extends Error {
   constructor(readonly status: number, readonly code: string, detail = code) {
@@ -43,6 +45,7 @@ async function csrf(): Promise<{ headerName: string; token: string }> {
 }
 /** 提交表单编码请求，供登录和退出端点使用。 */
 export async function postForm<T>(path: string, values: Record<string, string>): Promise<T> {
+  if (passwordPath(path)) return postJson<T>(path, values)
   const token = await csrf()
   return parse<T>(await apiFetch(path, {
     method: 'POST',
@@ -53,6 +56,14 @@ export async function postForm<T>(path: string, values: Record<string, string>):
 /** 提交 JSON 请求，并自动附带 CSRF 令牌。 */
 export async function postJson<T>(path: string, body?: unknown, headers?: Record<string, string>): Promise<T> {
   const token = await csrf()
+  if (passwordPath(path)) {
+    if (!globalThis.crypto?.subtle) throw new Error('密码加密需要 HTTPS 或 localhost，请使用安全地址访问。')
+    const issued = await parse<PasswordKey>(await apiFetch('/api/v1/auth/password-key', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', [token.headerName]: token.token },
+      body: JSON.stringify({ path }), cache: 'no-store',
+    }))
+    body = await encryptPasswordBody(path, body, issued)
+  }
   return parse<T>(await apiFetch(path, {
     method: 'POST',
     headers: { ...headers, 'Content-Type': 'application/json', [token.headerName]: token.token },

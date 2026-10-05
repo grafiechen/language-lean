@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
     "spring.datasource.url=jdbc:h2:mem:dictionary-import;MODE=PostgreSQL;DB_CLOSE_DELAY=-1",
     "spring.datasource.username=sa", "spring.datasource.password=",
     "spring.flyway.enabled=false", "spring.sql.init.mode=always",
-    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql",
+    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql,classpath:db/migration/V20__password_transport_keys.sql",
     "app.bootstrap-admin.username=importer", "app.bootstrap-admin.email=importer@example.com",
     "app.bootstrap-admin.password=Importer12!"
 })
@@ -98,8 +98,8 @@ class DictionaryImportIntegrationTest {
         var body = "identifier=" + URLEncoder.encode(name, StandardCharsets.UTF_8)
                 + "&password=" + URLEncoder.encode(password, StandardCharsets.UTF_8);
         var request = HttpRequest.newBuilder(uri("/api/v1/auth/login")).header("X-XSRF-TOKEN", token)
-                .header("Content-Type", "application/x-www-form-urlencoded")
-                .POST(HttpRequest.BodyPublishers.ofString(body)).build();
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(PasswordTransportClient.sealForm(client, uri("/api/v1/auth/login"), body))).build();
         assertEquals(200, client.send(request, HttpResponse.BodyHandlers.ofString()).statusCode());
         return client;
     }

@@ -11,7 +11,6 @@ import { offlinePreparations, prepareOfflineWordbook } from '../platform/web/off
 import { getJson } from '../shared/api'
 import { reconcileLearning } from '../platform/web/reconciliation'
 import { currentReviewScope } from '../platform/web/reviewSync'
-import { learningExport, downloadLearningExport } from '../platform/web/learningExport'
 import LearningRecoveryDialog from '../features/learning/LearningRecoveryDialog.vue'
 import { accountCacheUsage, siteStorageUsage, formatBytes, clearUnusedAudio, clearAccountDownloads, removeOfflineDownload,
   requestStoragePersistence, learningStorageError, type AccountCacheUsage, type SiteStorageUsage } from '../platform/web/cacheManagement'
@@ -22,17 +21,6 @@ const scope = computed(() => auth.user ? { serverId: location.origin, userId: au
 const online = computed(() => auth.serverAuthenticated && networkOnline.value)
 const usage = ref<AccountCacheUsage | null>(null), storage = ref<SiteStorageUsage | null>(null)
 const preparing = ref(false)
-/** 离线备份明确只包含本机数据；联网时读取所属账户完整服务器快照。 */
-async function exportData() {
-  if (!scope.value || busy.value) return
-  const owner = { ...scope.value }; busy.value = true; error.value = ''; message.value = ''
-  try {
-    const value = await learningExport(owner, online.value)
-    if (scope.value?.userId !== owner.userId) throw new Error('学习账号已变化，请重新导出。')
-    downloadLearningExport(value); message.value = value.includesServerData ? '已导出服务器数据和本机未同步记录。' : '已导出本机缓存及未同步记录，未包含服务器上未下载的数据。'
-  } catch (cause) { error.value = learningStorageError(cause, '备份失败，请重试。') }
-  finally { busy.value = false }
-}
 let loadSequence = 0
 let usageSequence = 0
 /** 浏览器额度读取失败不阻止账号清理；异步结果只能写回其原归属页面。 */
@@ -119,7 +107,7 @@ onIonViewWillEnter(load)
     <p class="note">先联网下载单词本，再断网学习。首次访问或未准备内容需要联网。</p>
     <p v-if="error" class="error" role="alert">{{ error }}</p><p v-if="message" class="feedback" role="status">{{ message }}</p>
     <p v-if="preparing" role="status">准备中：{{ done }} / {{ total }}</p>
-    <section v-if="scope" aria-labelledby="learning-export-title"><h2 id="learning-export-title">学习数据备份</h2><p class="note">导出单词本、个人内容、学习进度及本机草稿和待上传记录。离线时只导出本机已有内容；音频文件需另行准备。恢复先核对当前账号和进度，只补回本机学习记录。</p><div class="actions"><button :disabled="busy" @click="exportData">导出学习数据 JSON</button><LearningRecoveryDialog :scope="scope" :online="online" :disabled="busy" @restored="load" /></div></section>
+    <section v-if="scope" aria-labelledby="learning-recovery-title"><h2 id="learning-recovery-title">恢复已有学习备份</h2><p class="note">恢复先核对当前账号和进度，只补回本机学习记录。</p><div class="actions"><LearningRecoveryDialog :scope="scope" :online="online" :disabled="busy" @restored="load" /></div></section>
     <section><h2>当前学习账号</h2><p>{{ auth.user?.username || '尚未选择账号' }}{{ auth.mode === 'CACHED' ? ' · 使用本地缓存，上传需重新登录' : '' }}</p>
       <div class="actions"><button v-for="account in accounts" :key="account.accountKey" class="quiet" :disabled="busy || (!!scope && account.accountKey === accountKey(scope))" @click="select(account.accountKey)">使用 {{ account.username }} 的离线内容</button></div>
       <p v-if="!accounts.length" class="note">还没有离线准备或待上传记录，请先登录并准备一个单词本。</p>

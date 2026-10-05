@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
     "spring.datasource.url=jdbc:h2:mem:dictionary;MODE=PostgreSQL;DB_CLOSE_DELAY=-1",
     "spring.datasource.username=sa", "spring.datasource.password=",
     "spring.flyway.enabled=false", "spring.sql.init.mode=always",
-    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql",
+    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql,classpath:db/migration/V20__password_transport_keys.sql",
     "app.bootstrap-admin.username=editor", "app.bootstrap-admin.email=editor@example.com",
     "app.bootstrap-admin.password=Editor12!"
 })
@@ -251,8 +251,8 @@ class ContributionIntegrationTest {
     private HttpResponse<String> get(HttpClient client, String path) throws Exception { return client.send(HttpRequest.newBuilder(uri(path)).GET().build(), HttpResponse.BodyHandlers.ofString()); }
     private HttpClient login(String name, String password) throws Exception {
         var c = client(); var token = json.readTree(get(c, "/api/v1/auth/csrf").body()).get("token").asText();
-        assertEquals(200, c.send(HttpRequest.newBuilder(uri("/api/v1/auth/login")).header("Content-Type", "application/x-www-form-urlencoded").header("X-XSRF-TOKEN", token)
-            .POST(HttpRequest.BodyPublishers.ofString("identifier=" + name + "&password=" + password)).build(), HttpResponse.BodyHandlers.ofString()).statusCode()); return c;
+        assertEquals(200, c.send(HttpRequest.newBuilder(uri("/api/v1/auth/login")).header("Content-Type", "application/json").header("X-XSRF-TOKEN", token)
+            .POST(HttpRequest.BodyPublishers.ofString(PasswordTransportClient.seal(c, uri("/api/v1/auth/login"), json.writeValueAsString(java.util.Map.of("identifier", name, "password", password))))).build(), HttpResponse.BodyHandlers.ofString()).statusCode()); return c;
     }
     private HttpResponse<String> post(HttpClient c, String path, Object body, UUID owner, boolean csrf) throws Exception {
         var builder = HttpRequest.newBuilder(uri(path)).header("Content-Type", "application/json").header("X-Learning-Account", owner.toString());

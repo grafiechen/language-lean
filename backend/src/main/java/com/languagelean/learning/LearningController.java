@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/learning")
 class LearningController {
     private final LearningService learning;
-    private final LearningExportService exports;
     private final LearningRecoveryService recovery;
 
-    LearningController(LearningService learning, LearningExportService exports, LearningRecoveryService recovery) {
-        this.learning = learning; this.exports = exports; this.recovery = recovery;
+    LearningController(LearningService learning, LearningRecoveryService recovery) {
+        this.learning = learning; this.recovery = recovery;
     }
     /** 恢复预检不写入服务器；固定学习账号，避免切换会话后错误接受备份。 */
     @PostMapping("/recovery-check")
@@ -31,9 +30,6 @@ class LearningController {
             throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.CONFLICT, "恢复账号与当前登录账号不一致");
         return recovery.check(user.userId(), request);
     }
-    /** 导出身份只取当前会话，不接受客户端请求其他账号备份。 */
-    @GetMapping("/export")
-    LearningExportService.Export export(@AuthenticationPrincipal UserAccountPrincipal user) { return exports.export(user.userId()); }
     /** 手动重点只改当前账号的共享学习条目，不影响自动重点及FSRS。 */
     @PostMapping("/items/{itemId}/ear-focus")
     LearningService.LearningItemView earFocus(@PathVariable UUID itemId, @RequestBody EarFocus request,

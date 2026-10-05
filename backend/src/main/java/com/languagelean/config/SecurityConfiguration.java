@@ -9,6 +9,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import com.languagelean.accounts.AccountSessionFilter;
+import com.languagelean.accounts.PasswordTransportFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,18 +32,19 @@ class SecurityConfiguration {
 
     /** 组装公开接口、个人接口与管理员接口的访问规则。 */
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http, AccountSessionFilter sessions,
+    SecurityFilterChain securityFilterChain(HttpSecurity http, AccountSessionFilter sessions, PasswordTransportFilter passwords,
             UrlBasedCorsConfigurationSource corsConfigurationSource) throws Exception {
         var csrf = CookieCsrfTokenRepository.withHttpOnlyFalse();
         csrf.setCookiePath("/");
         return http
                 .cors(config -> config.configurationSource(corsConfigurationSource))
                 .addFilterBefore(sessions, AuthorizationFilter.class)
+                .addFilterBefore(passwords, UsernamePasswordAuthenticationFilter.class)
                 .csrf(config -> config.csrfTokenRepository(csrf))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/languages", "/api/v1/auth/csrf",
                                 "/actuator/health", "/error", "/api/v1/auth/password-recovery",
-                                "/api/v1/auth/password-reset").permitAll()
+                                "/api/v1/auth/password-reset", "/api/v1/auth/password-key").permitAll()
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
@@ -94,6 +97,14 @@ class SecurityConfiguration {
     /** 只在安全链内运行，禁止容器再把同一过滤器注册为普通 Servlet Filter。 */
     @Bean
     FilterRegistrationBean<AccountSessionFilter> sessionFilterRegistration(AccountSessionFilter filter) {
+        var registration = new FilterRegistrationBean<>(filter);
+        registration.setEnabled(false);
+        return registration;
+    }
+
+    /** 密码解密只能在安全链中运行一次，且必须先完成 CSRF 校验。 */
+    @Bean
+    FilterRegistrationBean<PasswordTransportFilter> passwordFilterRegistration(PasswordTransportFilter filter) {
         var registration = new FilterRegistrationBean<>(filter);
         registration.setEnabled(false);
         return registration;

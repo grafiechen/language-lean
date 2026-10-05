@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.*;
     "spring.datasource.url=jdbc:h2:mem:accountadmin;MODE=PostgreSQL;DB_CLOSE_DELAY=-1",
     "spring.datasource.username=sa", "spring.datasource.password=",
     "spring.flyway.enabled=false", "spring.sql.init.mode=always",
-    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql",
+    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql,classpath:db/migration/V20__password_transport_keys.sql",
     "app.bootstrap-admin.username=owner", "app.bootstrap-admin.email=owner@example.test",
     "app.bootstrap-admin.password=Preview12!", "app.mail.public-url=https://learning.example.test", "app.audio.cleanup-enabled=false", "app.audio.auto-save-enabled=false"
 })
@@ -361,18 +361,22 @@ class AccountAdminIntegrationTest {
         var response = post(admin, "/api/v1/admin/accounts", Map.of("username", name, "email", name + "@example.test"));
         assertEquals(200, response.statusCode(), response.body()); return json.readTree(response.body());
     }
+    /** 当前版本按产品决定关闭所有个人导出接口，登录管理员同样不能调用。 */
+    @Test void personalExportEndpointIsUnavailable() throws Exception {
+        assertEquals(404, get(login("owner", "Preview12!"), "/api/v1/learning/export").statusCode());
+    }
     private HttpClient login(String name, String password) throws Exception { var c = client(); assertEquals(200, loginResponse(c, name, password).statusCode()); return c; }
     private HttpResponse<String> loginResponse(HttpClient c, String name, String password) throws Exception {
         var token = json.readTree(get(c, "/api/v1/auth/csrf").body());
-        return c.send(HttpRequest.newBuilder(uri("/api/v1/auth/login")).header("Content-Type", "application/x-www-form-urlencoded")
+        return c.send(HttpRequest.newBuilder(uri("/api/v1/auth/login")).header("Content-Type", "application/json")
                 .header(token.path("headerName").asText(), token.path("token").asText())
-                .POST(HttpRequest.BodyPublishers.ofString("identifier=" + URLEncoder.encode(name, StandardCharsets.UTF_8) + "&password=" + URLEncoder.encode(password, StandardCharsets.UTF_8))).build(), HttpResponse.BodyHandlers.ofString());
+                .POST(HttpRequest.BodyPublishers.ofString(PasswordTransportClient.seal(c, uri("/api/v1/auth/login"), json.writeValueAsString(Map.of("identifier", name, "password", password))))).build(), HttpResponse.BodyHandlers.ofString());
     }
     private HttpResponse<String> post(HttpClient c, String path, Object body) throws Exception {
         var token = json.readTree(get(c, "/api/v1/auth/csrf").body());
         return c.send(HttpRequest.newBuilder(uri(path)).header("Content-Type", "application/json")
                 .header(token.path("headerName").asText(), token.path("token").asText())
-                .POST(HttpRequest.BodyPublishers.ofString(json.writeValueAsString(body))).build(), HttpResponse.BodyHandlers.ofString());
+                .POST(HttpRequest.BodyPublishers.ofString(PasswordTransportController.protectedPath(path) ? PasswordTransportClient.seal(c, uri(path), json.writeValueAsString(body)) : json.writeValueAsString(body))).build(), HttpResponse.BodyHandlers.ofString());
     }
     private HttpResponse<String> get(HttpClient c, String path) throws Exception { return c.send(HttpRequest.newBuilder(uri(path)).GET().build(), HttpResponse.BodyHandlers.ofString()); }
     private HttpClient client() { return HttpClient.newBuilder().cookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ALL)).build(); }
