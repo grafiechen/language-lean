@@ -24,15 +24,17 @@ public class AudioService implements AudioGenerationPort {
     private final PrivateEntryService privateEntries;
     private final AudioCleanupService cleanup;
     private final PersonalContentService personal;
+    private final AudioUsageRecorder usage;
     private final java.util.concurrent.Semaphore generationCapacity = new java.util.concurrent.Semaphore(4);
     /** 注入可替换基础设施；不在业务类中保存或返回凭据。 */
     AudioService(AudioTransactions transactions, AudioAssetRepository assets, AudioVersionRepository versions,
                  DictionaryService dictionary, TtsSettingsService settings, SpeechSynthesizer speech, AudioObjectStore store,
-                 PrivateEntryService privateEntries, AudioCleanupService cleanup, PersonalContentService personal) {
+                 PrivateEntryService privateEntries, AudioCleanupService cleanup, PersonalContentService personal, AudioUsageRecorder usage) {
         this.transactions = transactions; this.assets = assets; this.versions = versions;
         this.dictionary = dictionary; this.settings = settings; this.speech = speech; this.store = store;
         this.privateEntries = privateEntries; this.cleanup = cleanup;
         this.personal = personal;
+        this.usage = usage;
     }
     /** 个人范围必须附当前认证账户，管理员也不能绕过归属。 */
     public enum Scope { PUBLISHED, DRAFT, PERSONAL, OVERRIDE }
@@ -90,9 +92,14 @@ public class AudioService implements AudioGenerationPort {
         }
         String uploadedKey = null;
         boolean committed = false;
+        UUID usageId = null;
+        Long responseBytes = null;
+        String usageOutcome = "FAILED";
         try {
+            usageId = usage.begin(profile, text.codePointCount(0, text.length()));
             var bytes = speech.synthesize(profile, text);
             if (bytes.length == 0 || bytes.length > 5_000_000) throw new IllegalStateException();
+            responseBytes = (long) bytes.length;
             var versionId = UUID.randomUUID();
             var key = "audio/" + scope.name().toLowerCase(Locale.ROOT) + "/" + id + "/" + versionId + ".mp3";
             store.put(key, bytes);
@@ -103,10 +110,12 @@ public class AudioService implements AudioGenerationPort {
             if (personalScope(scope) && (!latestProfile.enabled() || !latestProfile.personalAutoGenerate())
                     || !fingerprint.equals(fingerprint(id, latestProfile, latestText))) {
                 transactions.fail(id, claim.token(), "SOURCE_CHANGED");
+                usageOutcome = "DISCARDED";
                 return result(Status.PENDING, claim.current(), true, "发音或配置已变化，请重新生成当前内容。");
             }
             var completed = transactions.complete(id, claim.token(), fingerprint, profile, hash(text.getBytes(StandardCharsets.UTF_8)), hash(bytes), versionId, key);
             committed = completed != null;
+            usageOutcome = committed ? "READY" : "DISCARDED";
             return completed == null ? result(Status.PENDING, claim.current(), true, "已有新的生成任务，请稍候。")
                     : result(Status.READY, completed, false, "音频已就绪。");
         } catch (RuntimeException failed) {
@@ -114,6 +123,10 @@ public class AudioService implements AudioGenerationPort {
             return result(Status.FAILED, claim.current(), true, "音频生成或上传失败，请重试；旧版本仍保留。");
         } finally {
             generationCapacity.release();
+            if (usageId != null) {
+                try { usage.finish(usageId, usageOutcome, responseBytes); }
+                catch (RuntimeException unavailable) { AudioUsageRecorder.unconfirmed(); }
+            }
             if (personalScope(scope) && uploadedKey != null && !committed) cleanup.orphan(uploadedKey);
         }
     }

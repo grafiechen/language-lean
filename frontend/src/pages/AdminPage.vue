@@ -12,14 +12,16 @@ import TtsSettings from '../features/audio/TtsSettings.vue'
 import AudioFeedbackManagement from '../features/audio/AudioFeedbackManagement.vue'
 import ContributionList from '../features/dictionary/ContributionList.vue'
 import AccountManagement from '../features/accounts/AccountManagement.vue'
+import SystemUsage from '../features/operations/SystemUsage.vue'
 import { emptyContent, statusLabel } from '../features/dictionary/types'
 import type { AdminEntry, AdminLanguage, EntryRow, History, Results } from '../features/dictionary/types'
 
 const tab = ref('dictionary')
 const contributions = ref<InstanceType<typeof ContributionList> | null>(null)
 const audioFeedback = ref<InstanceType<typeof AudioFeedbackManagement> | null>(null)
-onIonViewWillLeave(() => { contributions.value?.suspend(); audioFeedback.value?.suspend() })
-onIonViewWillEnter(() => { if (tab.value === 'contributions') void contributions.value?.load(); if (tab.value === 'audio-feedback') void audioFeedback.value?.load() })
+const systemUsage = ref<InstanceType<typeof SystemUsage> | null>(null)
+onIonViewWillLeave(() => { contributions.value?.suspend(); audioFeedback.value?.suspend(); systemUsage.value?.suspend() })
+onIonViewWillEnter(() => { if (tab.value === 'contributions') void contributions.value?.load(); if (tab.value === 'audio-feedback') void audioFeedback.value?.load(); if (tab.value === 'usage') void systemUsage.value?.load() })
 const languages = ref<AdminLanguage[]>([])
 const list = ref<Results<EntryRow>>({ items: [], total: 0, page: 0 })
 const q = ref('')
@@ -145,10 +147,12 @@ onBeforeUnmount(() => window.removeEventListener('beforeunload', beforeUnload))
         <button :class="{ active: tab === 'system-dictionaries' }" :disabled="busy" @click="switchTab('system-dictionaries')">系统字典</button>
         <button :class="{ active: tab === 'tts' }" :disabled="busy" @click="switchTab('tts')">TTS 配置</button>
         <button :class="{ active: tab === 'audio-feedback' }" :disabled="busy" @click="switchTab('audio-feedback')">发音反馈</button>
+        <button :class="{ active: tab === 'usage' }" :disabled="busy" @click="switchTab('usage')">系统用量</button>
       </nav>
       <section v-if="tab === 'languages'"><LanguageSettings /></section>
       <SystemDictionarySettings v-else-if="tab === 'system-dictionaries'" />
       <AccountManagement v-else-if="tab === 'accounts'" />
+      <SystemUsage v-else-if="tab === 'usage'" ref="systemUsage" />
       <TtsSettings v-else-if="tab === 'tts'" />
       <AudioFeedbackManagement v-else-if="tab === 'audio-feedback'" ref="audioFeedback" @edit="editReportedEntry" />
       <DictionaryImport v-else-if="tab === 'imports'" />

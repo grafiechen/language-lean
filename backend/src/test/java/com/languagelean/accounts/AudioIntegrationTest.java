@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(properties = {
     "spring.datasource.url=jdbc:h2:mem:audio;MODE=PostgreSQL;DB_CLOSE_DELAY=-1",
     "spring.datasource.username=sa", "spring.datasource.password=", "spring.flyway.enabled=false", "spring.sql.init.mode=always",
-    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql,classpath:db/migration/V20__password_transport_keys.sql",
+    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql,classpath:db/migration/V20__password_transport_keys.sql,classpath:db/migration/V21__audio_generation_usage.sql",
     "app.bootstrap-admin.username=audio-editor", "app.bootstrap-admin.email=audio@example.test", "app.bootstrap-admin.password=Preview12!",
     "app.audio.auto-save-enabled=false", "app.audio.cleanup-enabled=false"
 })
@@ -40,7 +40,64 @@ class AudioIntegrationTest {
     @Autowired tools.jackson.databind.ObjectMapper json;
     @Autowired UserAccountRepository accounts;
     @Autowired org.springframework.security.crypto.password.PasswordEncoder encoder;
+    @Autowired com.languagelean.operations.SystemUsageService systemUsage;
     UUID actor;
+
+    /** 复用不计数；合成失败、上传失败及有效重试分别记录，字符数按码点而不是UTF16长度。 */
+    @Test void generationUsageTracksAttemptsWithoutPrivateContentsOrCachedHits() {
+        var before = systemUsage.overview(null).generation(); var entry = entry("あ𠮷");
+        assertEquals(AudioGenerationPort.Status.READY, ensure(entry).status());
+        assertEquals(AudioGenerationPort.Status.READY, ensure(entry).status());
+        assertEquals(1, speech.calls.get());
+        speech.fail = true;
+        assertEquals(AudioGenerationPort.Status.FAILED, audio.ensureResource(entry.id(), AudioService.Scope.PUBLISHED, AudioService.Kind.WORD, reading(entry), true, true).status());
+        speech.fail = false; objects.fail = true;
+        assertEquals(AudioGenerationPort.Status.FAILED, audio.ensureResource(entry.id(), AudioService.Scope.PUBLISHED, AudioService.Kind.WORD, reading(entry), true, true).status());
+        objects.fail = false;
+        assertEquals(AudioGenerationPort.Status.READY, audio.ensureResource(entry.id(), AudioService.Scope.PUBLISHED, AudioService.Kind.WORD, reading(entry), true, true).status());
+        var snapshot = systemUsage.overview(null); var after = snapshot.generation();
+        assertEquals(4, after.requests() - before.requests()); assertEquals(8, after.inputCharacters() - before.inputCharacters());
+        assertEquals(3, after.returned() - before.returned()); assertTrue(after.responseBytes() > before.responseBytes());
+        assertEquals(2, after.ready() - before.ready()); assertEquals(2, after.failed() - before.failed());
+        assertEquals(0, after.unconfirmed() - before.unconfirmed());
+        var body = json.writeValueAsString(snapshot);
+        assertFalse(body.contains("あ𠮷")); assertFalse(body.contains(actor.toString())); assertFalse(body.contains(entry.id().toString()));
+        assertFalse(body.contains("objectKey")); assertFalse(body.contains("passwordHash"));
+        var calls = speech.calls.get(); var reads = objects.reads.get();
+        systemUsage.overview(null); assertEquals(calls, speech.calls.get()); assertEquals(reads, objects.reads.get());
+    }
+
+    /** UTC月末只计算开始时刻在该月的请求，包含跨月完成及未确认尝试。 */
+    @Test void monthlyUsageUsesExclusiveUtcEndAndPreservesUnconfirmedOutcomes() {
+        var start = java.time.Instant.parse("1999-06-01T00:00:00Z"); var end = java.time.Instant.parse("1999-07-01T00:00:00Z");
+        var ids = List.of(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID());
+        try {
+            usageRow(ids.get(0), start.minusMillis(1), "READY", start, 100L);
+            usageRow(ids.get(1), start, "READY", end.plusSeconds(1), 100L);
+            usageRow(ids.get(2), end.minusMillis(1), "REQUESTED", null, null);
+            usageRow(ids.get(3), end, "FAILED", end, null);
+            var stats = systemUsage.overview("1999-06");
+            assertEquals("UTC", stats.timezone()); assertEquals(2, stats.generation().requests());
+            assertEquals(6, stats.generation().inputCharacters()); assertEquals(100, stats.generation().responseBytes());
+            assertEquals(1, stats.generation().ready()); assertEquals(1, stats.generation().unconfirmed()); assertEquals(0, stats.generation().failed());
+        } finally { ids.forEach(id -> jdbc.update("delete from audio_generation_usage where id = ?", id)); }
+    }
+    private void usageRow(UUID id, java.time.Instant requested, String outcome, java.time.Instant completed, Long bytes) {
+        jdbc.update("insert into audio_generation_usage(id, requested_at, completed_at, provider, model, input_characters, response_bytes, outcome) values (?, ?, ?, 'GOOGLE', 'Chirp3-HD', 3, ?, ?)",
+                id, java.time.OffsetDateTime.ofInstant(requested, java.time.ZoneOffset.UTC), completed == null ? null : java.time.OffsetDateTime.ofInstant(completed, java.time.ZoneOffset.UTC), bytes, outcome);
+    }
+
+    /** 没有发音、语言关闭、服务商未配置均不算已经发起合成。 */
+    @Test void blockedGenerationDoesNotCreateUsageRecords() {
+        var before = systemUsage.overview(null).generation().requests();
+        assertEquals(AudioGenerationPort.Status.MISSING_PRONUNCIATION, ensure(entry("")).status());
+        var word = entry("ねこ"); speech.enabled = false;
+        assertEquals(AudioGenerationPort.Status.NOT_CONFIGURED, ensure(word).status()); speech.enabled = true;
+        var setting = settings.list().getFirst();
+        settings.save("ja", new TtsSettingsService.Edit("GOOGLE", "Chirp3-HD", "ja-JP-Chirp3-HD-Aoede", false, true, setting.version()));
+        assertEquals(AudioGenerationPort.Status.DISABLED, ensure(word).status());
+        assertEquals(before, systemUsage.overview(null).generation().requests()); assertEquals(0, speech.calls.get());
+    }
 
     @BeforeEach void setup() {
         actor = jdbc.queryForObject("select id from user_account where username = 'audio-editor'", UUID.class);
@@ -90,6 +147,7 @@ class AudioIntegrationTest {
 
     /** 多个请求同时打开同一音频，只允许一个工作者调用 TTS。 */
     @Test void concurrentRequestsShareOneGenerationLease() throws Exception {
+        var beforeUsage = systemUsage.overview(null).generation().requests();
         var entry = entry("ねこ");
         var entered = new CountDownLatch(1); var release = new CountDownLatch(1);
         speech.callback = text -> { entered.countDown(); try { if (!release.await(10, TimeUnit.SECONDS)) throw new IllegalStateException(); }
@@ -105,8 +163,32 @@ class AudioIntegrationTest {
             assertEquals(AudioGenerationPort.Status.READY, ready.status());
             assertEquals(ready.audioVersionId(), ensure(entry).audioVersionId());
             assertEquals(1, speech.calls.get());
+            assertEquals(1, systemUsage.overview(null).generation().requests() - beforeUsage);
             assertTrue(audio.content(ready.audioVersionId(), false).length > 100);
         }
+    }
+
+    /** 统计开始事务失败时不调用云服务；失败认领释放后仍能重新生成。 */
+    @Test void usageReservationFailureDoesNotCallTheProvider() {
+        var word = entry("あ".repeat(227)); var before = systemUsage.overview(null).generation().requests();
+        jdbc.execute("alter table audio_generation_usage add constraint test_usage_insert check(input_characters <> 227)");
+        try {
+            assertEquals(AudioGenerationPort.Status.FAILED, ensure(word).status()); assertEquals(0, speech.calls.get());
+            assertEquals(before, systemUsage.overview(null).generation().requests());
+        } finally { jdbc.execute("alter table audio_generation_usage drop constraint test_usage_insert"); }
+        assertEquals(AudioGenerationPort.Status.READY, ensure(word).status()); assertEquals(1, speech.calls.get());
+    }
+
+    /** 统计最终确认失败不能破坏已切换的可用版本，数据库保留未确认而非虚报成功。 */
+    @Test void usageCompletionFailureKeepsTheGeneratedAudioAndAnUnconfirmedRecord() {
+        var word = entry("あ".repeat(223)); var before = systemUsage.overview(null).generation().unconfirmed();
+        jdbc.execute("alter table audio_generation_usage add constraint test_usage_finish check(input_characters <> 223 or outcome <> 'READY')");
+        AudioGenerationPort.Result result;
+        try { result = ensure(word); assertEquals(AudioGenerationPort.Status.READY, result.status()); }
+        finally { jdbc.execute("alter table audio_generation_usage drop constraint test_usage_finish"); }
+        assertEquals(before + 1, systemUsage.overview(null).generation().unconfirmed());
+        assertTrue(audio.content(result.audioVersionId(), false).length > 0);
+        assertEquals(result.audioVersionId(), ensure(word).audioVersionId()); assertEquals(1, speech.calls.get());
     }
 
     /** 文件缺失或被破坏时生成新版本；旧版本元数据保留用于追踪。 */
@@ -166,6 +248,7 @@ class AudioIntegrationTest {
 
     /** 生成途中内容变更不能将旧输入切为当前版本，下一次请求按新内容补齐。 */
     @Test void contentChangeDuringGenerationDoesNotPublishStaleAudio() {
+        var before = systemUsage.overview(null).generation().discarded();
         var entry = entry("ねこ");
         speech.callback = text -> {
             speech.callback = null;
@@ -174,6 +257,7 @@ class AudioIntegrationTest {
             dictionary.publish(saved.id(), new DictionaryService.Action(saved.version(), "修改发音"), actor);
         };
         assertEquals(AudioGenerationPort.Status.PENDING, ensure(entry).status());
+        assertEquals(before + 1, systemUsage.overview(null).generation().discarded());
         assertNull(jdbc.queryForObject("select current_version_id from audio_asset where dictionary_entry_id = ? and content_scope = 'PUBLISHED'", UUID.class, entry.id()));
         assertEquals(AudioGenerationPort.Status.READY, ensure(dictionary.adminDetail(entry.id())).status());
     }
