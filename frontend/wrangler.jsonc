@@ -3,6 +3,11 @@
   "name": "language-lean-web",
   "main": "./worker.ts",
   "compatibility_date": "2026-10-01",
+  // 在上传前编译，避免 Cloudflare 未填写构建命令时缺少 dist。
+  "build": {
+    "command": "npm run build",
+    "watch_dir": ["src", "public", "build"]
+  },
   // Vite 输出的静态前端；API 由 VITE_API_BASE_URL 在构建阶段指定。
   "assets": {
     "directory": "./dist",
