@@ -3,7 +3,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.*;
 import org.springframework.stereotype.Component;
 /** 每分钟限量重试已删除私人音频，重启后继续处理持久任务。 */
-@Component @EnableScheduling
+@Component
 @ConditionalOnProperty(name = "app.audio.cleanup-enabled", havingValue = "true", matchIfMissing = true)
 class AudioCleanupWorker {
     private final AudioCleanupService cleanup;

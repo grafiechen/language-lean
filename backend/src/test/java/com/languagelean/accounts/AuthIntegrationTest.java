@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
     "spring.flyway.enabled=false", "spring.sql.init.mode=always",
     "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql,classpath:db/migration/V20__password_transport_keys.sql",
     "app.cors.allowed-origins=https://learn.example.com",
+    "app.audio.cleanup-enabled=false",
     "app.bootstrap-admin.username=owner",
     "app.bootstrap-admin.email=owner@example.com",
     "app.bootstrap-admin.password=a-secure-test-password1!"
@@ -30,6 +31,7 @@ class AuthIntegrationTest {
     private static final Pattern TOKEN = Pattern.compile("\"token\":\"([^\"]+)\"");
     @Value("${local.server.port}") int port;
     @Autowired JdbcTemplate jdbc;
+    @Autowired org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor scheduled;
 
     /** 浏览器预检不带登录 Cookie，也必须能完成并允许实际学习提交使用的请求头。 */
     @Test
@@ -168,6 +170,20 @@ class AuthIntegrationTest {
         assertEquals(400, rawPost(c, "/api/v1/auth/password-key", "{\"path\":\"/api/v1/learning/reviews\"}").statusCode());
         for (int i = 0; i < 8; i++) PasswordTransportClient.issue(c, uri("/api/v1/auth/login"));
         assertEquals(429, rawPost(c, "/api/v1/auth/password-key", "{\"path\":\"/api/v1/auth/login\"}").statusCode());
+    }
+
+    /** 音频清理关闭时，系统仍注册并执行密钥过期清理；未到期的密钥保留。 */
+    @Test void keyExpiryCleanupRemainsScheduledWhenAudioCleanupIsDisabled() throws Exception {
+        var c = client(); var issued = PasswordTransportClient.issue(c, uri("/api/v1/auth/login"));
+        var activeId = java.util.UUID.fromString(issued.path("keyId").asText());
+        var expired = PasswordTransportClient.issue(c, uri("/api/v1/auth/login"));
+        var expiredId = java.util.UUID.fromString(expired.path("keyId").asText());
+        jdbc.update("update password_transport_key set expires_at = ? where id = ?", java.time.OffsetDateTime.now().minusSeconds(1), expiredId);
+        // 通过实际注册的任务运行，避免依赖 Spring 对 ScheduledMethodRunnable 的内部包装类型。
+        assertEquals(1, scheduled.getScheduledTasks().size());
+        scheduled.getScheduledTasks().forEach(task -> task.getTask().getRunnable().run());
+        assertEquals(0, jdbc.queryForObject("select count(*) from password_transport_key where id = ?", Integer.class, expiredId));
+        assertEquals(1, jdbc.queryForObject("select count(*) from password_transport_key where id = ?", Integer.class, activeId));
     }
 
     private HttpResponse<String> rawPost(HttpClient c, String path, String body) throws Exception {
