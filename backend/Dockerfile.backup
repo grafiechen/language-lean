@@ -1,0 +1,16 @@
+# 可选备份镜像：使用Debian的PostgreSQL工具及已验证可兼容的Temurin JRE。
+FROM maven:3.9-eclipse-temurin-21 AS build
+WORKDIR /workspace
+COPY pom.xml .
+COPY src src
+RUN mvn -B package
+FROM eclipse-temurin:21-jre-jammy AS java_runtime
+FROM postgres:17-bookworm
+COPY --from=java_runtime /opt/java/openjdk /opt/java/openjdk
+ENV JAVA_HOME=/opt/java/openjdk
+ENV PATH=/opt/java/openjdk/bin:$PATH
+WORKDIR /app
+COPY --from=build /workspace/target/language-lean-api-0.1.0-SNAPSHOT.jar app.jar
+USER 10001
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]

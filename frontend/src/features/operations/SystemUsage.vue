@@ -2,6 +2,8 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { getJson } from '../../shared/api'
 import { utcMonth, type SystemUsage } from './usage'
+import DatabaseBackups from './DatabaseBackups.vue'
+const backups = ref<InstanceType<typeof DatabaseBackups> | null>(null)
 const data = ref<SystemUsage | null>(null), month = ref(utcMonth()), busy = ref(false), error = ref('')
 let sequence = 0
 /** 离开或切换账号后旧请求不得写回页面。 */
@@ -9,11 +11,11 @@ async function load() {
   const request = ++sequence; busy.value = true; error.value = ''
   try {
     const value = await getJson<SystemUsage>('/api/v1/admin/system/usage?' + new URLSearchParams({ month: month.value }))
-    if (request === sequence) data.value = value
+    if (request === sequence) { data.value = value; void backups.value?.load() }
   } catch (cause) { if (request === sequence) error.value = cause instanceof Error ? cause.message : '用量加载失败，请重试。' }
   finally { if (request === sequence) busy.value = false }
 }
-function suspend() { sequence++; busy.value = false; data.value = null }
+function suspend() { sequence++; busy.value = false; backups.value?.suspend(); data.value = null }
 onMounted(load); onBeforeUnmount(suspend); defineExpose({ load, suspend })
 const number = (value: number) => new Intl.NumberFormat('zh-CN').format(value)
 const generated = computed(() => data.value ? new Date(data.value.generatedAt).toLocaleString('zh-CN') : '')
@@ -56,6 +58,7 @@ const metrics = computed(() => data.value ? [
         <div><dt>密码传输主密钥</dt><dd>{{ data.configuration.persistentPasswordMasterConfigured ? '已配置服务器主密钥' : '开发模式：进程级临时主密钥' }}</dd></div>
       </dl>
       <p class="note">配置状态不会进行云连接测试，也不证明服务已连通。密钥由服务器私有配置维护，页面不读取或显示密钥明文。</p>
+      <DatabaseBackups ref="backups" />
     </template>
   </section>
 </template>

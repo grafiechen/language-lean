@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.*;
     "spring.datasource.url=jdbc:h2:mem:accountadmin;MODE=PostgreSQL;DB_CLOSE_DELAY=-1",
     "spring.datasource.username=sa", "spring.datasource.password=",
     "spring.flyway.enabled=false", "spring.sql.init.mode=always",
-    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql,classpath:db/migration/V20__password_transport_keys.sql,classpath:db/migration/V21__audio_generation_usage.sql",
+    "spring.sql.init.schema-locations=classpath:db/migration/V1__language_configuration.sql,classpath:db/migration/V2__user_accounts.sql,classpath:db/migration/V3__dictionary.sql,classpath:db/migration/V4__language_edit_version.sql,classpath:db/migration/V5__dictionary_import.sql,classpath:db/migration/V6__system_dictionary.sql,classpath:db/migration/V7__dictionary_source_release.sql,classpath:db/migration/V8__learning_items_and_wordbooks.sql,classpath:db/migration/V9__review_events.sql,classpath:audio/v10-h2.sql,classpath:db/migration/V11__personal_entry_overrides.sql,classpath:db/migration/V12__private_entries.sql,classpath:db/migration/V13__personal_pronunciations_and_examples.sql,classpath:db/migration/V14__dictionary_contributions.sql,classpath:dictionary/v15-h2.sql,classpath:db/migration/V16__native_language.sql,classpath:accounts/v17-h2.sql,classpath:db/migration/V18__account_closure.sql,classpath:db/migration/V19__audio_feedback.sql,classpath:db/migration/V20__password_transport_keys.sql,classpath:db/migration/V21__audio_generation_usage.sql,classpath:db/migration/V22__database_backups.sql",
     "app.bootstrap-admin.username=owner", "app.bootstrap-admin.email=owner@example.test",
     "app.bootstrap-admin.password=Preview12!", "app.mail.public-url=https://learning.example.test", "app.audio.cleanup-enabled=false", "app.audio.auto-save-enabled=false"
 })
@@ -381,6 +381,18 @@ class AccountAdminIntegrationTest {
         assertFalse(response.body().contains("@example.test")); assertFalse(response.body().contains("passwordHash"));
         assertFalse(response.body().contains("Preview12!")); assertFalse(response.body().contains("objectKey"));
         for (var month : new String[]{"2026-13", "tomorrow", "1969-12", "9999-01"}) assertEquals(400, get(admin, path + "?month=" + month).statusCode());
+    }
+    /** 服务器灾备仅管理员可读写，默认关闭时不能通过请求启用或获取归档。 */
+    @Test void serverBackupsAreAdminOnlyDisabledByDefaultAndNeverExposeDownloads() throws Exception {
+        var path = "/api/v1/admin/system/backups"; assertEquals(401, get(client(), path).statusCode());
+        var admin = login("owner", "Preview12!"); var name = unique(); create(admin, name);
+        var user = login(name, mail.passwords.get(name + "@example.test")); assertEquals(403, get(user, path).statusCode());
+        var overview = get(admin, path); assertEquals(200, overview.statusCode()); assertEquals("no-store", overview.headers().firstValue("Cache-Control").orElseThrow());
+        assertFalse(json.readTree(overview.body()).path("enabled").asBoolean());
+        assertEquals(503, post(admin, path, Map.of("requestId", UUID.randomUUID())).statusCode());
+        assertEquals(404, get(admin, path + "/" + UUID.randomUUID() + "/download").statusCode());
+        var raw = admin.send(HttpRequest.newBuilder(uri(path)).header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString("{\"requestId\":\"" + UUID.randomUUID() + "\"}")).build(), HttpResponse.BodyHandlers.ofString()); assertEquals(403, raw.statusCode());
     }
     private HttpClient login(String name, String password) throws Exception { var c = client(); assertEquals(200, loginResponse(c, name, password).statusCode()); return c; }
     private HttpResponse<String> loginResponse(HttpClient c, String name, String password) throws Exception {

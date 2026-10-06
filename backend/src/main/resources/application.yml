@@ -38,6 +38,18 @@ springdoc:
   swagger-ui:
     enabled: false
 app:
+  backup:
+    enabled: ${BACKUP_ENABLED:false}
+    interval-hours: ${BACKUP_INTERVAL_HOURS:0}
+    retention-days: ${BACKUP_RETENTION_DAYS:0}
+    timeout-seconds: ${BACKUP_TIMEOUT_SECONDS:1800}
+    encryption-key: ${BACKUP_ENCRYPTION_KEY:}
+    key-id: ${BACKUP_KEY_ID:}
+    directory: ${BACKUP_WORK_DIRECTORY:/tmp/language-lean-backups}
+    r2-account-id: ${R2_BACKUP_ACCOUNT_ID:}
+    r2-access-key-id: ${R2_BACKUP_ACCESS_KEY_ID:}
+    r2-secret-access-key: ${R2_BACKUP_SECRET_ACCESS_KEY:}
+    r2-bucket: ${R2_BACKUP_BUCKET:}
   password-transport:
     master-key: ${PASSWORD_TRANSPORT_MASTER_KEY:}
   cors:

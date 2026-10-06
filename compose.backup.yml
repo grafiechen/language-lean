@@ -1,0 +1,18 @@
+# 与compose.yml一起使用；只替换API的构建镜像，不创建公开备份桶或下载服务。
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backup
+    environment:
+      BACKUP_ENABLED: ${BACKUP_ENABLED:-false}
+      BACKUP_INTERVAL_HOURS: ${BACKUP_INTERVAL_HOURS:-0}
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-0}
+      BACKUP_TIMEOUT_SECONDS: ${BACKUP_TIMEOUT_SECONDS:-1800}
+      BACKUP_ENCRYPTION_KEY: ${BACKUP_ENCRYPTION_KEY:-}
+      BACKUP_KEY_ID: ${BACKUP_KEY_ID:-}
+      BACKUP_WORK_DIRECTORY: /tmp/language-lean-backups
+      R2_BACKUP_ACCOUNT_ID: ${R2_BACKUP_ACCOUNT_ID:-}
+      R2_BACKUP_ACCESS_KEY_ID: ${R2_BACKUP_ACCESS_KEY_ID:-}
+      R2_BACKUP_SECRET_ACCESS_KEY: ${R2_BACKUP_SECRET_ACCESS_KEY:-}
+      R2_BACKUP_BUCKET: ${R2_BACKUP_BUCKET:-}
