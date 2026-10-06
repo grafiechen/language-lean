@@ -1,0 +1,22 @@
+{
+  "reviewDate": "2026-10-07",
+  "status": "online-reference-upload-completed",
+  "fileKey": "Q6nWK9yDNLyEhhJL4a9dte",
+  "latestReferenceNodeId": "3:2",
+  "source": {
+    "frames": 220,
+    "desktopWidths": [
+      1440
+    ],
+    "mobileWidths": [
+      390
+    ],
+    "contentImages": 0,
+    "loaded": true,
+    "source": "local-design-preview"
+  },
+  "nativeComponentImportVerified": false,
+  "figmaVisualVerified": false,
+  "remainingBlocker": "Starter MCP canvas/readback quota",
+  "note": "Official code-to-canvas conversion completed; raw frames are a reference, not proof of native component/prototype import."
+}

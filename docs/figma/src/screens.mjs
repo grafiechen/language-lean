@@ -11,13 +11,14 @@ export const E=(title,subtitle,selected=false,target)=>({kind:'entry',title,subt
 export const K=(text,checked=true)=>({kind:'check',text,checked});
 export const N=(text,role='muted')=>T(text,role);
 export const TABLE=(headers,rows)=>({kind:'table',headers,rows});
+export const M=(label,value)=>({kind:'metric',label,value});
 const pager=()=>A(B('上一页','secondary'),T('1 / 12'),B('下一页','secondary'));
 const wordrows=()=>[E('猫','ja · 已发布',true,'dictionary-detail'),E('該当','ja · 已发布',false,'dictionary-detail'),E('聞く','ja · 已发布',false,'dictionary-detail')];
 const bookrows=()=>[E('旅行日语','24 个词条 · 出行常用表达',true,'wordbook-detail'),E('听力重点','18 个词条 · 纸质单词本整理',false,'wordbook-detail')];
 const content=()=>[T('ねこ · 主要读音','tag'),N('1. 名词'),T('猫；家猫。'),C('例句',T('猫が窓のそばにいる。'),N('ねこが まどの そばに いる。'),T('猫在窗户旁边。')),N('来源：JMdict · 许可：CC BY-SA 4.0')];
 const editor=()=>[R(F('语言','日语','创建后语言固定','select'),F('书写系统','日语 · Jpan','','select')),F('单词写法','猫','创建后写法、语言和书写系统固定；内容可通过新版本修订。'),A(T('读音','h3'),B('添加读音','secondary')),N('第一项为主要读音。发音文本留空时，不自动生成语音。'),C('主要读音',R(F('读音 / 假名','ねこ'),F('发音文本','ねこ')),B('移除读音','quiet')),A(T('词义与例句','h3'),B('添加词义','secondary')),C('词义 1',F('词性','名词'),F('释义','猫；家猫。','','textarea'),F('例句','猫が窓のそばにいる。'),F('例句发音文本','ねこが まどの そばに いる。'),F('例句译文','猫在窗户旁边。'),A(B('移除例句','quiet'),B('添加例句','secondary'))),R(F('内容来源','手工录入','选项可在后台“系统字典”的“内容来源”字典维护。','select'),F('内容许可','','记录内容允许如何使用、修改或再发布，例如 CC BY-SA 4.0、CC0。原创手工内容可留空。')),B('保存草稿')];
 const catalog=()=>C('词条目录',B('新增词条','primary','admin-create'),F('写法搜索','输入单词'),F('语言','全部语言','','select'),B('搜索','secondary'),...wordrows(),pager());
-const adminTabs=[['基础词典','admin-catalog'],['批量导入','import-upload'],['语言配置','languages'],['系统字典','system-dictionaries']];
+const adminTabs=[['账号管理','admin-accounts'],['基础词典','admin-catalog'],['批量导入','import-upload'],['贡献审核','admin-moderation'],['语言配置','languages'],['系统字典','system-dictionaries'],['TTS配置','admin-tts'],['发音反馈','admin-audio'],['系统用量','admin-usage']];
 export const screens=[];
 function add(id,name,group,children,{implemented=true,route='',state='',dialog=false,wide=false,notes=[],flow=[]}={}){screens.push({id,name,group,children,implemented,route,state,dialog,wide,notes,flow});}
 function planned(id,name,group,children,opts={}){add(id,name,group,children,{...opts,implemented:false});}
@@ -110,10 +111,67 @@ planned('admin-usage','后台用量与配置概览','其他后台',[C('本月音
 planned('home-v1','第一版学习首页／完整功能入口','账户',[T('让熟悉的词，\n也能听得出来。','hero'),F('学习语言','日语','','select'),C('今日待复习',T('到期 12 · 新词 8','h3'),N('到期优先，不设每日配额。'),B('开始今日复习','primary','review-queue')),A(B('我的单词本','secondary','wordbooks'),B('查基础词典','secondary','dictionary-list')),A(B('耳词池','secondary','ear-pool'),B('个人内容','secondary','personal-entry')),A(B('离线准备','secondary','offline-unprepared'),B('同步中心','secondary','sync')),A(B('用户中心','quiet','account'),B('后台管理','quiet','admin-catalog'))],{flow:['review-queue','wordbooks','dictionary-list','ear-pool','offline-unprepared','sync']});
 planned('learning-history','词条学习进度与复习历史','单词本',[C('猫 · 我的学习进度',T('下次复习：10 月 3 日 09:20','h3'),N('完整复习 2 次 · 共享于旅行日语、听力重点'),A(B('额外训练','secondary','extra-training'),B('编辑个人内容','secondary','personal-edit')),K('手动耳词重点')),C('复习历史',E('10 月 1 日 09:20 · ×','Again 后重试通过，最终评分保留最差值。'),E('9 月 30 日 18:10 · ○','听音回忆 · 已上传')),N('同一词跨单词本使用同一份学习进度。')]);
 planned('backup-preview','JSON 恢复预览','离线与同步',[C('备份检查结果',T('账户归属一致 · 数据格式有效'),N('新增内容 12 · 已有内容 8 · 已删除或重置的旧进度 3'),T('旧进度不会恢复被删除或重置的学习状态。','warning'),TABLE(['对象','结果'],[['个人词条','12 项可恢复'],['已有内容','8 项待核对'],['旧学习进度','3 项隔离，不恢复']]),A(B('取消','secondary','backup'),B('确认恢复有效内容')))],{notes:['JSON 恢复为第一版规划能力；正式合并契约需在实现前明确。']});
+// 2026-10-07：以当前实现和最新需求修订旧设计，禁止个人导出及虚构的恢复策略。
+function revise(id,children,options={}) { const screen=screens.find(s=>s.id===id);if(!screen)throw new Error('未知设计状态：'+id);Object.assign(screen,{children,implemented:true,...options}); }
+const homeContent=[T('让熟悉的词，\n也能听得出来。','hero'),N('你好，demo。先把词条加入单词本，再进行听音回忆。'),A(B('我的单词本','primary','wordbooks'),B('基础词典','secondary','dictionary-list')),A(B('我的私有词条','secondary','personal-entry'),B('我的投稿','secondary','contribution-list')),A(B('离线准备','secondary','offline-unprepared'),B('后台管理','secondary','admin-catalog')),C('母语与译文',F('母语','简体中文','','select'),N('释义和例句优先显示母语译文，缺少时显示原有语言。发音保持学习语言。'),B('保存母语')),C('学习语言',T('日语')),A(B('修改密码','quiet','password-change'),B('注销我的账号','quiet','account-delete'))];
+revise('home',homeContent,{flow:['wordbooks','dictionary-list','personal-entry','contribution-list','offline-unprepared','admin-catalog']});
+revise('home-v1',homeContent,{route:'/',notes:['本画板为首页完整入口，不单独新增每日配额或其他未确认题型。']});
+revise('home-error',screens.find(s=>s.id==='home-error').children,{notes:['缓存内容可以离线使用；修改账号与后台管理需要联网登录。']});
+revise('password-recovery',[F('用户名或邮箱','demo@example.test'),B('发送重置链接','primary','password-recovery-sent'),N('如果账号存在，邮件会包含有效30分钟、只能使用一次的重置链接。'),B('返回登录','quiet','login')],{route:'/forgot-password'});
+revise('password-recovery-sent',[C('请检查邮箱',T('如果账号存在且允许找回，系统会发送重置邮件。'),N('请同时检查垃圾邮件文件夹。'),B('返回登录','primary','login'))],{route:'/forgot-password'});
+add('password-reset','设置新密码','账户',[F('新密码','至少8位，含字母、数字和特殊字符','','password'),F('重复新密码','再次输入新密码','','password'),B('保存新密码','primary','password-reset-complete'),N('链接凭证不显示在页面或普通访问地址中。'),B('重新申请链接','quiet','password-recovery')],{route:'/reset-password'});
+add('password-reset-expired','重置链接失效','账户',[C('链接已失效',N('链接可能已使用、已过期，或账号密码已经变更。'),B('重新申请链接','primary','password-recovery'))],{route:'/reset-password',state:'链接失效'});
+add('password-reset-complete','密码重置成功','账户',[C('密码已更新',N('其他设备的旧登录会话已失效。本机离线记录仍保留。'),B('重新登录','primary','login'))],{route:'/reset-password',state:'成功'});
+add('password-recovery-disabled','邮件找回未配置','账户',[C('邮件找回暂不可用',N('请联系管理员配置邮件服务后再申请找回。'),B('返回登录','secondary','login'))],{route:'/forgot-password',state:'服务未配置'});
+revise('account',[C('账户信息',T('demo · demo@example.test'),B('修改密码','secondary','password-change')),C('母语与译文',F('母语','简体中文','','select'),N('母语影响译文，日语发音仍使用日语。'),B('保存母语')),C('本地账户缓存',E('当前账户','3条记录待上传'),N('其他账号的缓存独立保留，不能跨账号上传。'),B('离线与缓存管理','secondary','offline-cache')),B('注销我的账号','quiet','account-delete')],{route:'/',state:'账号与母语'});
+revise('account-delete',[N('注销会删除账号及全部个人学习数据，同名重建使用新身份。'),F('当前密码','••••••••','','password'),F('确认用户名','demo'),A(B('取消','secondary','account'),B('确认注销','primary','login'))],{route:'/',dialog:true,notes:['当前实现为应用内dialog；身份由当前会话确认。']});
+add('native-language-fallback','母语译文缺失回退','基础词典',[C('猫',T('ねこ','tag'),N('母语：简体中文'),T('原文：cat'),N('暂时没有当前母语译文，显示词典原有语言。'),B('播放日语发音'),B('编辑我的内容','secondary','personal-edit'))],{route:'/dictionary/:id',state:'译文回退'});
+add('dictionary-kana','假名查询与返回页码','基础词典',[R(F('写法或假名','いじめる'),F('语言','日语','','select')),B('查询'),C('词条 · 第3页',E('虐める','いじめる · 欺负；虐待',false,'dictionary-detail'),pager()),N('假名与文字使用同一包含搜索逻辑。详情返回保留搜索条件与页码。')],{route:'/dictionary',state:'假名搜索'});
+revise('wordbook-detail',[C('我的单词本',...bookrows()),C('旅行日语',T('到期12 · 新词8 · 今日完成3'),A(B('今日复习','primary','review-queue'),B('耳词训练','secondary','ear-training')),A(B('全部','secondary'),B('到期','secondary'),B('新词','secondary')),A(B('已学习','secondary'),B('重点','secondary')),E('猫','已学习 · 2次复习 · 在多个单词本共享进度',false,'learning-history'),E('該当','新词 · 尚未复习',false,'learning-history'),A(B('额外训练','secondary','extra-training'),B('移除','quiet','wordbook-remove')),A(B('重置进度','secondary','wordbook-reset'),B('删除单词本','quiet','wordbook-delete')))],{route:'/learning',state:'单词本详情'});
+revise('wordbook-edit',[F('名称','旅行日语'),F('说明','出行常用表达','','textarea'),A(B('取消','secondary','wordbooks'),B('保存单词本','primary','wordbooks'))],{implemented:false,group:'扩展预留',notes:['当前版本只提供创建与删除；重命名功能留待实施，不能标成已交付。']});
+for(const s of screens){
+  const routes={个人内容:'/private-entries',复习训练:'/learning/:wordbookId/review',耳词训练:'/learning',音频状态:'/dictionary/:id',离线与同步:'/offline'};
+  if(routes[s.group]){s.implemented=true;s.route=routes[s.group];}
+}
+for(const id of ['contribution-submit','contribution-list'])revise(id,screens.find(s=>s.id===id).children,{route:'/contributions'});
+revise('learning-history',screens.find(s=>s.id==='learning-history').children,{route:'/learning',notes:['服务端保存FSRS状态与复习事件；同一账号跨单词本共享进度。']});
+revise('personal-edit',[C('猫 · 我的内容',F('个人释义','猫；家猫。仅对自己显示。','','textarea'),F('学习笔记','记录易混读音与学习心得。','','textarea'),F('分类标签','动物,日常'),K('覆盖公开读音与例句'),F('个人发音文本','ねこ'),F('我的例句','猫が窓のそばにいる。'),F('例句译文','猫在窗户旁边。'),B('保存个人内容')),N('修改不影响基准词典或其他用户，发音和例句可按个人需要调整。')],{route:'/learning/items/:itemId'});
+revise('personal-new',[R(F('语言','日语','','select'),F('书写系统','Jpan')),F('单词写法','該当'),F('读音 / 假名','がいとう'),F('发音文本','がいとう'),F('释义','符合；适用。','','textarea'),F('例句','この条件に該当します。'),F('例句发音文本','この条件に該当します。'),F('例句译文','符合这个条件。'),N('保存后可从私有词条列表加入所选单词本。不必公开，发音留空不生成音频。'),A(B('取消','secondary','personal-entry'),B('保存私有词条','primary','personal-entry'))],{route:'/private-entries',dialog:true});
+revise('personal-import',[F('所选单词本','旅行日语','','disabled'),F('CSV文件','尚未选择文件','','file'),F('释义与例句译文语言','简体中文','','select'),N('UTF-8文件，每批最多2MB和1000条。列顺序：written, reading, gloss, tags, example, exampleReading, exampleTranslation。前3列不可省略，假名允许空白。'),N('标签使用 | 分隔；例句发音留空不生成例句音频。'),A(B('下载模板','secondary'),B('预检CSV','primary','personal-import-preview'))],{route:'/learning',dialog:true,notes:['CSV已实现；优先复用本人私人身份，再精确匹配公开基准身份，不猜测或覆盖已有学习内容。']});
+revise('personal-import-preview',[TABLE(['行','词条','结果'],[['1','該当','新增公开引用及个人覆盖'],['2','猫','本单词本已存在，跳过'],['3','—','写法无效，不导入']]),N('其他单词本已有的同一身份只增加分类关联，保留正文和共享进度。全新且无基准匹配的内容才创建私有词条。'),A(B('取消','secondary','personal-import'),B('确认导入有效词条','primary','wordbook-detail'))],{route:'/learning',dialog:true});
+revise('personal-delete',screens.find(s=>s.id==='personal-delete').children,{route:'/private-entries',notes:['删除私有词条及其所有学习关联，不影响基准词典。当前代码使用浏览器确认框。']});
+revise('backup',[C('恢复已有学习备份',N('当前版本不提供个人数据导出。恢复只补回所属账号缺失的待上传答题和有效草稿，不覆盖服务器单词本、词典或进度。'),B('恢复本机学习记录','primary','backup-preview'))],{route:'/offline',name:'恢复已有学习备份',notes:['个人导出按最新要求关闭，保留已有备份的本机恢复。']});
+revise('backup-preview',[C('备份预检',F('选择已有JSON备份','已选择学习备份','','file'),T('可恢复答题2条 · 训练草稿1份'),N('已上传3条 · 本机已有1条 · 删除或重置2条 · 冲突1条'),N('本机现有队列优先；旧投影、地址和隔离标记不导入。'),A(B('关闭','secondary','backup'),B('确认恢复到本机','primary','backup-restored')))],{route:'/offline',dialog:true,notes:['恢复需要联网登录同一UUID账号并重新预检；恢复与上传分离。']});
+add('backup-restored','本机学习记录已恢复','离线与同步',[C('恢复完成',T('2条待上传答题和1份训练草稿已补回。'),N('服务器进度尚未由恢复操作修改。'),B('上传本账号待提交记录','primary','sync'),B('继续原训练队列','secondary','review-resume'))],{route:'/offline'});
+add('backup-owner-mismatch','备份归属不匹配','离线与同步',[C('不能恢复此备份',T('备份不属于当前服务器或当前账号。','error'),N('请联网登录备份所属账号后再打开，不能按邮箱或用户名合并历史身份。'),B('关闭','secondary','backup'))],{route:'/offline',dialog:true});
+add('offline-cache','离线缓存管理','离线与同步',[C('当前缓存账号',E('demo','待上传2条 · 有训练草稿',true),E('learner','另一个账号的缓存独立保留')),C('存储用量',T('本账号内容2.4 MiB · 音频8.1 MiB'),N('学习记录与下载文件分开维护。'),A(B('清理未引用音频','secondary'),B('移除本账号下载','secondary')),B('申请保留本机数据','secondary')),N('清理下载不会删除答题或原训练队列。'),B('恢复已有备份','secondary','backup')],{route:'/offline'});
+add('offline-storage-full','离线存储空间不足','离线与同步',[C('准备未完成',T('本机存储空间不足。','warning'),N('已保存的学习记录保留，先清理未引用音频或旧下载后重试。'),B('管理缓存','primary','offline-cache'),B('重试准备','secondary','offline-preparing'))],{route:'/offline'});
+revise('admin-accounts',screens.find(s=>s.id==='admin-accounts').children,{route:'/admin',state:'accounts'});
+revise('admin-account-new',[F('用户名','demo'),F('邮箱','demo@example.test'),K('同时授予管理员角色',false),N('用户名与邮箱均必填，可使用任意一个登录。初始密码只通过邮件发送，不在后台展示。'),A(B('取消','secondary','admin-accounts'),B('创建并发送邮件','primary','admin-account-mail-sent'))],{route:'/admin',dialog:true,state:'accounts'});
+revise('admin-account-delete',[N('删除账号及其个人内容和进度。管理员输入自己的密码，不是被删除账号的密码。'),F('管理员当前密码','••••••••','','password'),F('确认目标用户名','learner'),A(B('取消','secondary','admin-accounts'),B('确认删除','primary','admin-accounts'))],{route:'/admin',dialog:true,state:'accounts',notes:['不能删除最后一个启用管理员；校验管理员会话身份和账号版本。']});
+add('admin-account-mail-sent','账号创建邮件已发送','其他后台',[C('账号已创建',T('已向demo@example.test发送初始密码。'),N('初始密码不会在此页面显示，首次登录应修改。'),B('返回账号管理','primary','admin-accounts'))],{route:'/admin',wide:true,state:'accounts'});
+for(const id of ['admin-moderation','admin-moderation-detail'])revise(id,screens.find(s=>s.id===id).children,{route:'/admin',state:'contributions'});
+revise('admin-tts',[C('服务配置状态',N('Google调用未开启 · R2音频存储未配置')),F('语言','日语','','select'),R(F('服务商','Google Cloud TTS'),F('模型','Chirp 3 HD')),R(F('发音区域','ja-JP'),F('声音','ja-JP-Chirp3-HD-Aoede','','select')),K('启用该语言的音频生成'),K('保存个人内容时自动生成音频'),N('服务凭据只由服务器维护。已有正确音频可复用，缺失或损坏时重新生成。'),B('保存语言声音配置')],{route:'/admin',state:'tts'});
+revise('admin-audio',[F('反馈状态','待处理','','select'),TABLE(['词条 / 对象','问题','状态'],[['該当 / 单词','发音不正确','待处理'],['猫 / 例句','无法播放','待处理']]),B('打开反馈','primary','admin-audio-detail'),N('只管理公开发音问题，不读取用户的私人笔记或私有例句。')],{route:'/admin',state:'audio-feedback'});
+add('admin-audio-detail','公开发音反馈处理','其他后台',[C('該当 · 发音反馈',T('当前发音文本：がいとう'),N('用户说明：声音中的读音不正确。'),A(B('编辑词条','secondary','admin-edit'),B('重新生成音频')),F('处理说明','经核对读音正确。'),A(B('确认已修正'),B('无需修正','secondary'))),N('新版本上传并校验成功后才能切换；失败时保留旧版本，不能直接把失败标成已修正。')],{route:'/admin',wide:true,state:'audio-feedback'});
+const usageNodes=[R(F('统计月份（UTC）','2026-10','','input'),B('查看','secondary')),C('2026-10 音频用量',R(M('生成请求',24),M('请求文本字符',156),M('合成返回',22),M('返回音频字节',312400)),R(M('版本切换成功',20),M('生成或上传失败',3),M('内容变化弃用',1),M('结果未确认',0)),N('只统计接入后的应用合成尝试，缓存复用不计数。不是服务商账单或云存储占用。')),C('数据与任务',T('启用账号2 · 停用账号1'),T('公开词条240 · 未发布3 · 封禁1'),T('音频资源18 · 版本22 · 正在生成0 · 失败1'),T('待清理文件0 · 待审投稿2 · 发音反馈1')),C('运行配置',N('Google TTS未开启 · R2未配置 · 邮件未配置'),N('密码传输主密钥：已配置服务器主密钥。'),N('页面不读取或显示服务密钥。')),B('服务器数据库备份','secondary','admin-backups-disabled')];
+revise('admin-usage',usageNodes,{route:'/admin',state:'usage',notes:['只显示汇总和配置布尔值，不设置未确认的计费或额度阈值。']});
+const backupSettings=[N('服务器灾备不提供个人导出或网页下载，音频对象及服务器配置另行维护。'),N('定时频率：未启用；成功备份不自动清理。')];
+add('admin-backups-disabled','服务器备份／默认关闭','其他后台',[C('服务器数据库备份',...backupSettings,T('备份未开启 · 转储工具已就绪 · 独立加密密钥未配置 · 私有存储未配置'),B('立即备份数据库','disabled'),N('先在服务器配置独立密钥和私有R2存储后开启。'),N('暂无执行记录。'))],{route:'/admin',wide:true,state:'usage'});
+add('admin-backups-ready','服务器备份／已具备执行配置','其他后台',[C('服务器数据库备份',...backupSettings,T('已开启 · 转储工具已就绪 · 加密密钥已配置 · 私有存储已配置'),B('立即备份数据库','primary','admin-backups-running'),N('配置齐备不代表云服务已经连通。'))],{route:'/admin',wide:true,state:'usage'});
+add('admin-backups-running','服务器备份／执行中','其他后台',[C('备份请求已确认',T('已有任务等待完成'),B('已有任务等待完成','disabled'),TABLE(['创建时间','触发方式','结果'],[['10月7日09:20','管理员手动','正在备份']]),N('重复请求不会创建多个转储任务。'),B('刷新记录','secondary','admin-backups-history'))],{route:'/admin',wide:true,state:'usage'});
+add('admin-backups-history','服务器备份／成功失败及清理记录','其他后台',[C('最近执行记录',TABLE(['创建时间','触发方式','结果','归档大小'],[['10月7日09:20','管理员手动','已上传并验证','1200 KiB'],['10月6日09:20','定时','执行失败','—'],['10月5日09:20','定时','归档已清理','1100 KiB']]),N('失败说明：上传或回读核验失败，请检查私有备份存储。'),N('密钥标识：backup-v1。此标识不是解密密钥。')),N('按配置保留最新已验证归档，关闭功能不会删除执行记录。')],{route:'/admin',wide:true,state:'usage'});
+add('review-sync-conflict','复习同步冲突与继续学习','离线与同步',[C('服务器进度已变化',N('本次答题时间早于服务器的新进度，不能覆盖最新结果。'),B('读取当前学习状态'),B('保留未确认记录','secondary')),N('已删除或重置的记录不会因旧缓存重新出现。')],{route:'/offline'});
+for(const s of screens){
+  if(s.id==='dictionary-deleted'){s.group='扩展预留';s.notes=['缺失引用使用删除提示；后台公开删除接口尚未开放，保留此设计状态。'];}
+  if(s.id==='login'||s.id==='login-error')s.children.push(B('忘记密码？','quiet','password-recovery'));
+  if(s.group==='复习训练')s.route='/learning/:wordbookId/review';
+  if(s.group==='耳词训练')s.route='/learning';
+}
 // 图层名描述状态，界面标题使用面向学习者的文字，避免把设计标注放进产品。
 for(const screen of screens){
   screen.heading=screen.name;
-  if(screen.route==='/admin')screen.heading='词典工作台';
+  if(screen.route==='/admin')screen.heading='管理工作台';
   if(screen.route==='/learning')screen.heading='单词本';
   if(screen.route==='/login')screen.heading='继续学习';
   if(screen.route==='/dictionary')screen.heading='查一个词';
@@ -121,6 +179,6 @@ for(const screen of screens){
   if(['review-hidden','review-answer','review-retry'].includes(screen.id))screen.heading='听音回忆';
   if(screen.id.startsWith('offline-')&&screen.id!=='offline-expired')screen.heading='离线准备';
   if(screen.group==='音频状态')screen.heading='词条音频';
-  screen.activeAdminTab=screen.route==='/admin'?screen.group==='后台导入'?'import-upload':screen.id.startsWith('language')?'languages':screen.id.startsWith('system-')?'system-dictionaries':'admin-catalog':null;
+  screen.activeAdminTab=screen.route==='/admin'?screen.state==='accounts'?'admin-accounts':screen.state==='contributions'?'admin-moderation':screen.state==='tts'?'admin-tts':screen.state==='audio-feedback'?'admin-audio':screen.state==='usage'?'admin-usage':screen.group==='后台导入'?'import-upload':screen.id.startsWith('language')?'languages':screen.id.startsWith('system-')?'system-dictionaries':'admin-catalog':null;
 }
 export const tabs=adminTabs;

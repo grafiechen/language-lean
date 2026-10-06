@@ -46,6 +46,12 @@
           "kind": "text",
           "text": "第一版账号由管理员创建。",
           "role": "muted"
+        },
+        {
+          "kind": "button",
+          "text": "忘记密码？",
+          "tone": "quiet",
+          "target": "password-recovery"
         }
       ],
       "implemented": true,
@@ -94,6 +100,12 @@
           "kind": "text",
           "text": "第一版账号由管理员创建。",
           "role": "muted"
+        },
+        {
+          "kind": "button",
+          "text": "忘记密码？",
+          "tone": "quiet",
+          "target": "password-recovery"
         }
       ],
       "implemented": true,
@@ -118,18 +130,12 @@
         },
         {
           "kind": "text",
-          "text": "配合你的单词本，练习听觉回忆。",
+          "text": "你好，demo。先把词条加入单词本，再进行听音回忆。",
           "role": "muted"
         },
         {
           "kind": "actions",
           "children": [
-            {
-              "kind": "button",
-              "text": "浏览基础词典",
-              "tone": "primary",
-              "target": "dictionary-list"
-            },
             {
               "kind": "button",
               "text": "我的单词本",
@@ -138,9 +144,66 @@
             },
             {
               "kind": "button",
-              "text": "后台词典管理",
+              "text": "基础词典",
+              "tone": "secondary",
+              "target": "dictionary-list"
+            }
+          ]
+        },
+        {
+          "kind": "actions",
+          "children": [
+            {
+              "kind": "button",
+              "text": "我的私有词条",
+              "tone": "secondary",
+              "target": "personal-entry"
+            },
+            {
+              "kind": "button",
+              "text": "我的投稿",
+              "tone": "secondary",
+              "target": "contribution-list"
+            }
+          ]
+        },
+        {
+          "kind": "actions",
+          "children": [
+            {
+              "kind": "button",
+              "text": "离线准备",
+              "tone": "secondary",
+              "target": "offline-unprepared"
+            },
+            {
+              "kind": "button",
+              "text": "后台管理",
               "tone": "secondary",
               "target": "admin-catalog"
+            }
+          ]
+        },
+        {
+          "kind": "card",
+          "title": "母语与译文",
+          "children": [
+            {
+              "kind": "field",
+              "label": "母语",
+              "value": "简体中文",
+              "note": "",
+              "mode": "select"
+            },
+            {
+              "kind": "text",
+              "text": "释义和例句优先显示母语译文，缺少时显示原有语言。发音保持学习语言。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "保存母语",
+              "tone": "primary"
             }
           ]
         },
@@ -156,9 +219,21 @@
           ]
         },
         {
-          "kind": "text",
-          "text": "基础词典已开放查看，复习功能正在准备中。",
-          "role": "muted"
+          "kind": "actions",
+          "children": [
+            {
+              "kind": "button",
+              "text": "修改密码",
+              "tone": "quiet",
+              "target": "password-change"
+            },
+            {
+              "kind": "button",
+              "text": "注销我的账号",
+              "tone": "quiet",
+              "target": "account-delete"
+            }
+          ]
         }
       ],
       "implemented": true,
@@ -168,8 +243,11 @@
       "wide": false,
       "notes": [],
       "flow": [
-        "dictionary-list",
         "wordbooks",
+        "dictionary-list",
+        "personal-entry",
+        "contribution-list",
+        "offline-unprepared",
         "admin-catalog"
       ],
       "heading": "",
@@ -272,7 +350,7 @@
       "dialog": false,
       "wide": false,
       "notes": [
-        "离线入口属于第一版待实现功能。"
+        "缓存内容可以离线使用；修改账号与后台管理需要联网登录。"
       ],
       "flow": [],
       "heading": "",
@@ -286,18 +364,19 @@
         {
           "kind": "field",
           "label": "用户名或邮箱",
-          "value": "请输入注册时的用户名或邮箱",
+          "value": "demo@example.test",
           "note": "",
           "mode": "input"
         },
         {
           "kind": "button",
-          "text": "发送找回邮件",
-          "tone": "primary"
+          "text": "发送重置链接",
+          "tone": "primary",
+          "target": "password-recovery-sent"
         },
         {
           "kind": "text",
-          "text": "请检查注册邮箱，按照邮件说明完成密码重置。",
+          "text": "如果账号存在，邮件会包含有效30分钟、只能使用一次的重置链接。",
           "role": "muted"
         },
         {
@@ -307,8 +386,8 @@
           "target": "login"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/forgot-password",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -328,7 +407,7 @@
           "children": [
             {
               "kind": "text",
-              "text": "如果账户存在，找回邮件将发送到注册邮箱。",
+              "text": "如果账号存在且允许找回，系统会发送重置邮件。",
               "role": "body"
             },
             {
@@ -345,8 +424,8 @@
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/forgot-password",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -365,18 +444,9 @@
           "title": "账户信息",
           "children": [
             {
-              "kind": "field",
-              "label": "用户名",
-              "value": "demo",
-              "note": "",
-              "mode": "input"
-            },
-            {
-              "kind": "field",
-              "label": "邮箱",
-              "value": "demo@example.test",
-              "note": "",
-              "mode": "input"
+              "kind": "text",
+              "text": "demo · demo@example.test",
+              "role": "body"
             },
             {
               "kind": "button",
@@ -388,37 +458,60 @@
         },
         {
           "kind": "card",
+          "title": "母语与译文",
+          "children": [
+            {
+              "kind": "field",
+              "label": "母语",
+              "value": "简体中文",
+              "note": "",
+              "mode": "select"
+            },
+            {
+              "kind": "text",
+              "text": "母语影响译文，日语发音仍使用日语。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "保存母语",
+              "tone": "primary"
+            }
+          ]
+        },
+        {
+          "kind": "card",
           "title": "本地账户缓存",
           "children": [
             {
               "kind": "entry",
               "title": "当前账户",
-              "subtitle": "有 3 条完成记录待上传",
+              "subtitle": "3条记录待上传",
               "selected": false
             },
             {
               "kind": "text",
-              "text": "其他账户的缓存单独保留，需重新登录对应账户上传。",
+              "text": "其他账号的缓存独立保留，不能跨账号上传。",
               "role": "muted"
             },
             {
               "kind": "button",
-              "text": "同步与离线",
+              "text": "离线与缓存管理",
               "tone": "secondary",
-              "target": "sync"
+              "target": "offline-cache"
             }
           ]
         },
         {
           "kind": "button",
-          "text": "注销账户",
+          "text": "注销我的账号",
           "tone": "quiet",
           "target": "account-delete"
         }
       ],
-      "implemented": false,
-      "route": "",
-      "state": "",
+      "implemented": true,
+      "route": "/",
+      "state": "账号与母语",
       "dialog": false,
       "wide": false,
       "notes": [],
@@ -433,8 +526,22 @@
       "children": [
         {
           "kind": "text",
-          "text": "注销会彻底删除本账户的个人内容和学习进度。再次注册相同邮箱或用户名，也不会关联之前的数据。",
+          "text": "注销会删除账号及全部个人学习数据，同名重建使用新身份。",
           "role": "muted"
+        },
+        {
+          "kind": "field",
+          "label": "当前密码",
+          "value": "••••••••",
+          "note": "",
+          "mode": "password"
+        },
+        {
+          "kind": "field",
+          "label": "确认用户名",
+          "value": "demo",
+          "note": "",
+          "mode": "input"
         },
         {
           "kind": "actions",
@@ -449,18 +556,18 @@
               "kind": "button",
               "text": "确认注销",
               "tone": "primary",
-              "target": "account"
+              "target": "login"
             }
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/",
       "state": "",
       "dialog": true,
       "wide": false,
       "notes": [
-        "当前实现使用浏览器原生确认框；这里提供应用内弹窗的设计。"
+        "当前实现为应用内dialog；身份由当前会话确认。"
       ],
       "flow": [],
       "heading": "注销账户",
@@ -613,8 +720,96 @@
         },
         {
           "kind": "card",
-          "title": "当前单词本词条",
+          "title": "旅行日语",
           "children": [
+            {
+              "kind": "text",
+              "text": "到期12 · 新词8 · 今日完成3",
+              "role": "body"
+            },
+            {
+              "kind": "actions",
+              "children": [
+                {
+                  "kind": "button",
+                  "text": "今日复习",
+                  "tone": "primary",
+                  "target": "review-queue"
+                },
+                {
+                  "kind": "button",
+                  "text": "耳词训练",
+                  "tone": "secondary",
+                  "target": "ear-training"
+                }
+              ]
+            },
+            {
+              "kind": "actions",
+              "children": [
+                {
+                  "kind": "button",
+                  "text": "全部",
+                  "tone": "secondary"
+                },
+                {
+                  "kind": "button",
+                  "text": "到期",
+                  "tone": "secondary"
+                },
+                {
+                  "kind": "button",
+                  "text": "新词",
+                  "tone": "secondary"
+                }
+              ]
+            },
+            {
+              "kind": "actions",
+              "children": [
+                {
+                  "kind": "button",
+                  "text": "已学习",
+                  "tone": "secondary"
+                },
+                {
+                  "kind": "button",
+                  "text": "重点",
+                  "tone": "secondary"
+                }
+              ]
+            },
+            {
+              "kind": "entry",
+              "title": "猫",
+              "subtitle": "已学习 · 2次复习 · 在多个单词本共享进度",
+              "selected": false,
+              "target": "learning-history"
+            },
+            {
+              "kind": "entry",
+              "title": "該当",
+              "subtitle": "新词 · 尚未复习",
+              "selected": false,
+              "target": "learning-history"
+            },
+            {
+              "kind": "actions",
+              "children": [
+                {
+                  "kind": "button",
+                  "text": "额外训练",
+                  "tone": "secondary",
+                  "target": "extra-training"
+                },
+                {
+                  "kind": "button",
+                  "text": "移除",
+                  "tone": "quiet",
+                  "target": "wordbook-remove"
+                }
+              ]
+            },
             {
               "kind": "actions",
               "children": [
@@ -631,38 +826,13 @@
                   "target": "wordbook-delete"
                 }
               ]
-            },
-            {
-              "kind": "text",
-              "text": "在基础词典详情页选择单词本即可加入词条。",
-              "role": "muted"
-            },
-            {
-              "kind": "entry",
-              "title": "猫",
-              "subtitle": "ja · 待复习 · 2 次完整复习",
-              "selected": false,
-              "target": "dictionary-detail"
-            },
-            {
-              "kind": "button",
-              "text": "从此单词本移除",
-              "tone": "quiet",
-              "target": "wordbook-remove"
-            },
-            {
-              "kind": "entry",
-              "title": "該当",
-              "subtitle": "ja · 未学习 · 0 次完整复习",
-              "selected": false,
-              "target": "dictionary-detail"
             }
           ]
         }
       ],
       "implemented": true,
       "route": "/learning",
-      "state": "已选单词本",
+      "state": "单词本详情",
       "dialog": false,
       "wide": false,
       "notes": [],
@@ -793,7 +963,7 @@
     {
       "id": "wordbook-edit",
       "name": "编辑单词本",
-      "group": "单词本",
+      "group": "扩展预留",
       "children": [
         {
           "kind": "field",
@@ -808,13 +978,6 @@
           "value": "出行常用表达",
           "note": "",
           "mode": "textarea"
-        },
-        {
-          "kind": "field",
-          "label": "语言",
-          "value": "日语",
-          "note": "",
-          "mode": "select"
         },
         {
           "kind": "actions",
@@ -839,7 +1002,9 @@
       "state": "",
       "dialog": true,
       "wide": false,
-      "notes": [],
+      "notes": [
+        "当前版本只提供创建与删除；重命名功能留待实施，不能标成已交付。"
+      ],
       "flow": [],
       "heading": "编辑单词本",
       "activeAdminTab": null
@@ -1376,7 +1541,7 @@
     {
       "id": "dictionary-deleted",
       "name": "已引用词条被删除",
-      "group": "基础词典",
+      "group": "扩展预留",
       "children": [
         {
           "kind": "card",
@@ -1406,7 +1571,9 @@
       "state": "删除标记",
       "dialog": false,
       "wide": false,
-      "notes": [],
+      "notes": [
+        "缺失引用使用删除提示；后台公开删除接口尚未开放，保留此设计状态。"
+      ],
       "flow": [],
       "heading": "已引用词条被删除",
       "activeAdminTab": null
@@ -1518,7 +1685,7 @@
         "languages",
         "system-dictionaries"
       ],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "admin-catalog"
     },
     {
@@ -1793,7 +1960,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "admin-catalog"
     },
     {
@@ -2114,7 +2281,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "admin-catalog"
     },
     {
@@ -2237,7 +2404,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "admin-catalog"
     },
     {
@@ -2373,7 +2540,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "admin-catalog"
     },
     {
@@ -2533,7 +2700,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "admin-catalog"
     },
     {
@@ -2654,7 +2821,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "admin-catalog"
     },
     {
@@ -2884,7 +3051,7 @@
       "flow": [
         "import-preview"
       ],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "import-upload"
     },
     {
@@ -2985,7 +3152,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "import-upload"
     },
     {
@@ -3090,7 +3257,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "import-upload"
     },
     {
@@ -3129,7 +3296,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "import-upload"
     },
     {
@@ -3255,7 +3422,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "languages"
     },
     {
@@ -3313,7 +3480,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "languages"
     },
     {
@@ -3366,7 +3533,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "languages"
     },
     {
@@ -3468,7 +3635,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "system-dictionaries"
     },
     {
@@ -3501,7 +3668,7 @@
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "system-dictionaries"
     },
     {
@@ -3565,7 +3732,7 @@
       "wide": false,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "system-dictionaries"
     },
     {
@@ -3641,7 +3808,7 @@
       "wide": false,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "system-dictionaries"
     },
     {
@@ -3705,7 +3872,7 @@
       "wide": false,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "system-dictionaries"
     },
     {
@@ -3781,7 +3948,7 @@
       "wide": false,
       "notes": [],
       "flow": [],
-      "heading": "词典工作台",
+      "heading": "管理工作台",
       "activeAdminTab": "system-dictionaries"
     },
     {
@@ -3845,8 +4012,8 @@
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/private-entries",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -3861,9 +4028,28 @@
       "group": "个人内容",
       "children": [
         {
+          "kind": "row",
+          "children": [
+            {
+              "kind": "field",
+              "label": "语言",
+              "value": "日语",
+              "note": "",
+              "mode": "select"
+            },
+            {
+              "kind": "field",
+              "label": "书写系统",
+              "value": "Jpan",
+              "note": "",
+              "mode": "input"
+            }
+          ]
+        },
+        {
           "kind": "field",
-          "label": "写法",
-          "value": "例如：該当",
+          "label": "单词写法",
+          "value": "該当",
           "note": "",
           "mode": "input"
         },
@@ -3890,28 +4076,52 @@
         },
         {
           "kind": "field",
-          "label": "单词本",
-          "value": "旅行日语",
-          "note": "",
-          "mode": "select"
-        },
-        {
-          "kind": "field",
-          "label": "标签",
-          "value": "N2、新闻",
+          "label": "例句",
+          "value": "この条件に該当します。",
           "note": "",
           "mode": "input"
         },
         {
-          "kind": "button",
-          "text": "保存个人词条",
-          "tone": "primary"
+          "kind": "field",
+          "label": "例句发音文本",
+          "value": "この条件に該当します。",
+          "note": "",
+          "mode": "input"
+        },
+        {
+          "kind": "field",
+          "label": "例句译文",
+          "value": "符合这个条件。",
+          "note": "",
+          "mode": "input"
+        },
+        {
+          "kind": "text",
+          "text": "保存后可从私有词条列表加入所选单词本。不必公开，发音留空不生成音频。",
+          "role": "muted"
+        },
+        {
+          "kind": "actions",
+          "children": [
+            {
+              "kind": "button",
+              "text": "取消",
+              "tone": "secondary",
+              "target": "personal-entry"
+            },
+            {
+              "kind": "button",
+              "text": "保存私有词条",
+              "tone": "primary",
+              "target": "personal-entry"
+            }
+          ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/private-entries",
       "state": "",
-      "dialog": false,
+      "dialog": true,
       "wide": false,
       "notes": [],
       "flow": [],
@@ -3924,65 +4134,71 @@
       "group": "个人内容",
       "children": [
         {
+          "kind": "card",
+          "title": "猫 · 我的内容",
+          "children": [
+            {
+              "kind": "field",
+              "label": "个人释义",
+              "value": "猫；家猫。仅对自己显示。",
+              "note": "",
+              "mode": "textarea"
+            },
+            {
+              "kind": "field",
+              "label": "学习笔记",
+              "value": "记录易混读音与学习心得。",
+              "note": "",
+              "mode": "textarea"
+            },
+            {
+              "kind": "field",
+              "label": "分类标签",
+              "value": "动物,日常",
+              "note": "",
+              "mode": "input"
+            },
+            {
+              "kind": "check",
+              "text": "覆盖公开读音与例句",
+              "checked": true
+            },
+            {
+              "kind": "field",
+              "label": "个人发音文本",
+              "value": "ねこ",
+              "note": "",
+              "mode": "input"
+            },
+            {
+              "kind": "field",
+              "label": "我的例句",
+              "value": "猫が窓のそばにいる。",
+              "note": "",
+              "mode": "input"
+            },
+            {
+              "kind": "field",
+              "label": "例句译文",
+              "value": "猫在窗户旁边。",
+              "note": "",
+              "mode": "input"
+            },
+            {
+              "kind": "button",
+              "text": "保存个人内容",
+              "tone": "primary"
+            }
+          ]
+        },
+        {
           "kind": "text",
-          "text": "这里只修改你的学习内容，公开词典保持原样。未覆盖的内容沿用公开词条。",
+          "text": "修改不影响基准词典或其他用户，发音和例句可按个人需要调整。",
           "role": "muted"
-        },
-        {
-          "kind": "field",
-          "label": "个人读音",
-          "value": "がいとう",
-          "note": "",
-          "mode": "input"
-        },
-        {
-          "kind": "field",
-          "label": "个人发音文本",
-          "value": "がいとう",
-          "note": "",
-          "mode": "input"
-        },
-        {
-          "kind": "field",
-          "label": "个人释义",
-          "value": "符合；适用。",
-          "note": "",
-          "mode": "textarea"
-        },
-        {
-          "kind": "field",
-          "label": "个人例句",
-          "value": "条件に該当する。",
-          "note": "",
-          "mode": "input"
-        },
-        {
-          "kind": "field",
-          "label": "例句发音文本",
-          "value": "じょうけんに がいとうする。",
-          "note": "",
-          "mode": "input"
-        },
-        {
-          "kind": "field",
-          "label": "个人笔记",
-          "value": "纸质本第 12 页",
-          "note": "",
-          "mode": "textarea"
-        },
-        {
-          "kind": "check",
-          "text": "手动加入耳词重点",
-          "checked": true
-        },
-        {
-          "kind": "button",
-          "text": "保存并检查音频",
-          "tone": "primary"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning/items/:itemId",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4019,13 +4235,13 @@
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/private-entries",
       "state": "",
       "dialog": true,
       "wide": false,
       "notes": [
-        "当前实现使用浏览器原生确认框；这里提供应用内弹窗的设计。"
+        "删除私有词条及其所有学习关联，不影响基准词典。当前代码使用浏览器确认框。"
       ],
       "flow": [],
       "heading": "删除个人学习条目",
@@ -4038,40 +4254,62 @@
       "children": [
         {
           "kind": "field",
-          "label": "选择单词本",
+          "label": "所选单词本",
           "value": "旅行日语",
           "note": "",
-          "mode": "select"
+          "mode": "disabled"
         },
         {
           "kind": "field",
-          "label": "CSV 文件",
+          "label": "CSV文件",
           "value": "尚未选择文件",
           "note": "",
           "mode": "file"
         },
         {
+          "kind": "field",
+          "label": "释义与例句译文语言",
+          "value": "简体中文",
+          "note": "",
+          "mode": "select"
+        },
+        {
           "kind": "text",
-          "text": "示例：該当,がいとう,符合,N2。正式字段契约在导入开发前确定。",
+          "text": "UTF-8文件，每批最多2MB和1000条。列顺序：written, reading, gloss, tags, example, exampleReading, exampleTranslation。前3列不可省略，假名允许空白。",
           "role": "muted"
         },
         {
-          "kind": "button",
-          "text": "检查文件",
-          "tone": "primary",
-          "target": "personal-import-preview"
+          "kind": "text",
+          "text": "标签使用 | 分隔；例句发音留空不生成例句音频。",
+          "role": "muted"
+        },
+        {
+          "kind": "actions",
+          "children": [
+            {
+              "kind": "button",
+              "text": "下载模板",
+              "tone": "secondary"
+            },
+            {
+              "kind": "button",
+              "text": "预检CSV",
+              "tone": "primary",
+              "target": "personal-import-preview"
+            }
+          ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning",
       "state": "",
-      "dialog": false,
+      "dialog": true,
       "wide": false,
       "notes": [
-        "CSV 细节未定，设计保留预览、重复提示与确认步骤。"
+        "CSV已实现；优先复用本人私人身份，再精确匹配公开基准身份，不猜测或覆盖已有学习内容。"
       ],
       "flow": [],
-      "heading": "个人 CSV 导入",
+      "heading": "单词本",
       "activeAdminTab": null
     },
     {
@@ -4090,39 +4328,51 @@
             [
               "1",
               "該当",
-              "可导入"
+              "新增公开引用及个人覆盖"
             ],
             [
               "2",
               "猫",
-              "已存在，跳过"
+              "本单词本已存在，跳过"
             ],
             [
               "3",
               "—",
-              "无效"
+              "写法无效，不导入"
             ]
           ]
         },
         {
           "kind": "text",
-          "text": "已存在词条默认跳过，不覆盖你的内容。",
+          "text": "其他单词本已有的同一身份只增加分类关联，保留正文和共享进度。全新且无基准匹配的内容才创建私有词条。",
           "role": "muted"
         },
         {
-          "kind": "button",
-          "text": "确认导入",
-          "tone": "primary"
+          "kind": "actions",
+          "children": [
+            {
+              "kind": "button",
+              "text": "取消",
+              "tone": "secondary",
+              "target": "personal-import"
+            },
+            {
+              "kind": "button",
+              "text": "确认导入有效词条",
+              "tone": "primary",
+              "target": "wordbook-detail"
+            }
+          ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning",
       "state": "",
-      "dialog": false,
+      "dialog": true,
       "wide": false,
       "notes": [],
       "flow": [],
-      "heading": "个人 CSV 导入预览",
+      "heading": "单词本",
       "activeAdminTab": null
     },
     {
@@ -4181,8 +4431,8 @@
           "tone": "primary"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/contributions",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4220,8 +4470,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/contributions",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4311,8 +4561,8 @@
           "target": "sync-today"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning/:wordbookId/review",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4352,8 +4602,8 @@
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning/:wordbookId/review",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4400,8 +4650,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning/:wordbookId/review",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4453,8 +4703,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning/:wordbookId/review",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4573,8 +4823,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning/:wordbookId/review",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4629,8 +4879,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning/:wordbookId/review",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4675,8 +4925,8 @@
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning/:wordbookId/review",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4714,8 +4964,8 @@
           "target": "review-hidden"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning/:wordbookId/review",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4758,8 +5008,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning/:wordbookId/review",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4806,8 +5056,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning/:wordbookId/review",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4850,8 +5100,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/dictionary/:id",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4888,8 +5138,8 @@
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/dictionary/:id",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4925,8 +5175,8 @@
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/dictionary/:id",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -4967,8 +5217,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/dictionary/:id",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -5007,8 +5257,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/dictionary/:id",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -5051,8 +5301,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/offline",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -5100,8 +5350,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/offline",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -5150,8 +5400,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/offline",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -5199,8 +5449,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/offline",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -5243,8 +5493,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/offline",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -5309,8 +5559,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/offline",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -5357,8 +5607,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/offline",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -5400,8 +5650,8 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/offline",
       "state": "",
       "dialog": false,
       "wide": false,
@@ -5412,57 +5662,37 @@
     },
     {
       "id": "backup",
-      "name": "个人备份与恢复",
+      "name": "恢复已有学习备份",
       "group": "离线与同步",
       "children": [
         {
           "kind": "card",
-          "title": "导出 JSON 备份",
+          "title": "恢复已有学习备份",
           "children": [
             {
               "kind": "text",
-              "text": "包含词典引用、个人词条、例句、分类标签、复习状态、耳词状态及音频版本。",
+              "text": "当前版本不提供个人数据导出。恢复只补回所属账号缺失的待上传答题和有效草稿，不覆盖服务器单词本、词典或进度。",
               "role": "muted"
             },
             {
               "kind": "button",
-              "text": "导出当前账户数据",
-              "tone": "primary"
-            }
-          ]
-        },
-        {
-          "kind": "card",
-          "title": "从 JSON 恢复",
-          "children": [
-            {
-              "kind": "field",
-              "label": "选择备份",
-              "value": "尚未选择文件",
-              "note": "",
-              "mode": "file"
-            },
-            {
-              "kind": "button",
-              "text": "检查备份",
-              "tone": "primary"
-            },
-            {
-              "kind": "text",
-              "text": "恢复前检查账号归属、已删除条目和重置进度，防止旧备份恢复已清除状态。",
-              "role": "muted"
+              "text": "恢复本机学习记录",
+              "tone": "primary",
+              "target": "backup-preview"
             }
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/offline",
       "state": "",
       "dialog": false,
       "wide": false,
-      "notes": [],
+      "notes": [
+        "个人导出按最新要求关闭，保留已有备份的本机恢复。"
+      ],
       "flow": [],
-      "heading": "个人备份与恢复",
+      "heading": "恢复已有学习备份",
       "activeAdminTab": null
     },
     {
@@ -5505,15 +5735,15 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
-      "state": "",
+      "implemented": true,
+      "route": "/admin",
+      "state": "accounts",
       "dialog": false,
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "后台账户管理",
-      "activeAdminTab": null
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-accounts"
     },
     {
       "id": "admin-account-new",
@@ -5523,44 +5753,54 @@
         {
           "kind": "field",
           "label": "用户名",
-          "value": "必填",
+          "value": "demo",
           "note": "",
           "mode": "input"
         },
         {
           "kind": "field",
           "label": "邮箱",
-          "value": "必填",
+          "value": "demo@example.test",
           "note": "",
           "mode": "input"
         },
         {
-          "kind": "field",
-          "label": "角色",
-          "value": "USER",
-          "note": "",
-          "mode": "select"
+          "kind": "check",
+          "text": "同时授予管理员角色",
+          "checked": false
         },
         {
           "kind": "text",
-          "text": "初始密码通过邮件发送，首次登录需修改。密码不少于 8 位，必须包含字母、数字和特殊字符。",
+          "text": "用户名与邮箱均必填，可使用任意一个登录。初始密码只通过邮件发送，不在后台展示。",
           "role": "muted"
         },
         {
-          "kind": "button",
-          "text": "创建并发送邮件",
-          "tone": "primary"
+          "kind": "actions",
+          "children": [
+            {
+              "kind": "button",
+              "text": "取消",
+              "tone": "secondary",
+              "target": "admin-accounts"
+            },
+            {
+              "kind": "button",
+              "text": "创建并发送邮件",
+              "tone": "primary",
+              "target": "admin-account-mail-sent"
+            }
+          ]
         }
       ],
-      "implemented": false,
-      "route": "",
-      "state": "",
+      "implemented": true,
+      "route": "/admin",
+      "state": "accounts",
       "dialog": true,
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "后台创建账户",
-      "activeAdminTab": null
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-accounts"
     },
     {
       "id": "admin-account-delete",
@@ -5569,8 +5809,22 @@
       "children": [
         {
           "kind": "text",
-          "text": "删除账户会彻底删除其个人内容和学习进度。相同邮箱或用户名再创建也不会关联之前的数据。",
+          "text": "删除账号及其个人内容和进度。管理员输入自己的密码，不是被删除账号的密码。",
           "role": "muted"
+        },
+        {
+          "kind": "field",
+          "label": "管理员当前密码",
+          "value": "••••••••",
+          "note": "",
+          "mode": "password"
+        },
+        {
+          "kind": "field",
+          "label": "确认目标用户名",
+          "value": "learner",
+          "note": "",
+          "mode": "input"
         },
         {
           "kind": "actions",
@@ -5590,17 +5844,17 @@
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
-      "state": "",
+      "implemented": true,
+      "route": "/admin",
+      "state": "accounts",
       "dialog": true,
       "wide": false,
       "notes": [
-        "当前实现使用浏览器原生确认框；这里提供应用内弹窗的设计。"
+        "不能删除最后一个启用管理员；校验管理员会话身份和账号版本。"
       ],
       "flow": [],
-      "heading": "后台删除账户",
-      "activeAdminTab": null
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-accounts"
     },
     {
       "id": "admin-moderation",
@@ -5641,15 +5895,15 @@
           "target": "admin-moderation-detail"
         }
       ],
-      "implemented": false,
-      "route": "",
-      "state": "",
+      "implemented": true,
+      "route": "/admin",
+      "state": "contributions",
       "dialog": false,
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "后台贡献审核列表",
-      "activeAdminTab": null
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-moderation"
     },
     {
       "id": "admin-moderation-detail",
@@ -5773,21 +6027,32 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
-      "state": "",
+      "implemented": true,
+      "route": "/admin",
+      "state": "contributions",
       "dialog": false,
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "后台贡献审核详情",
-      "activeAdminTab": null
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-moderation"
     },
     {
       "id": "admin-tts",
       "name": "后台 TTS 配置",
       "group": "其他后台",
       "children": [
+        {
+          "kind": "card",
+          "title": "服务配置状态",
+          "children": [
+            {
+              "kind": "text",
+              "text": "Google调用未开启 · R2音频存储未配置",
+              "role": "muted"
+            }
+          ]
+        },
         {
           "kind": "field",
           "label": "语言",
@@ -5826,12 +6091,17 @@
             },
             {
               "kind": "field",
-              "label": "默认声音",
-              "value": "待配置声音",
+              "label": "声音",
+              "value": "ja-JP-Chirp3-HD-Aoede",
               "note": "",
               "mode": "select"
             }
           ]
+        },
+        {
+          "kind": "check",
+          "text": "启用该语言的音频生成",
+          "checked": true
         },
         {
           "kind": "check",
@@ -5840,24 +6110,24 @@
         },
         {
           "kind": "text",
-          "text": "个人音频自动生成当前默认开启。服务凭据只保存在服务端。",
+          "text": "服务凭据只由服务器维护。已有正确音频可复用，缺失或损坏时重新生成。",
           "role": "muted"
         },
         {
           "kind": "button",
-          "text": "保存配置",
+          "text": "保存语言声音配置",
           "tone": "primary"
         }
       ],
-      "implemented": false,
-      "route": "",
-      "state": "",
+      "implemented": true,
+      "route": "/admin",
+      "state": "tts",
       "dialog": false,
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "后台 TTS 配置",
-      "activeAdminTab": null
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-tts"
     },
     {
       "id": "admin-audio",
@@ -5865,55 +6135,53 @@
       "group": "其他后台",
       "children": [
         {
+          "kind": "field",
+          "label": "反馈状态",
+          "value": "待处理",
+          "note": "",
+          "mode": "select"
+        },
+        {
           "kind": "table",
           "headers": [
-            "对象",
-            "状态",
-            "版本",
-            "操作"
+            "词条 / 对象",
+            "问题",
+            "状态"
           ],
           "rows": [
             [
               "該当 / 单词",
-              "待修正发音",
-              "3",
-              "查看反馈"
+              "发音不正确",
+              "待处理"
             ],
             [
               "猫 / 例句",
-              "生成失败",
-              "2",
-              "重试"
+              "无法播放",
+              "待处理"
             ]
           ]
         },
         {
-          "kind": "field",
-          "label": "发音文本",
-          "value": "がいとう",
-          "note": "",
-          "mode": "input"
-        },
-        {
           "kind": "button",
-          "text": "修正并重新生成",
-          "tone": "primary"
+          "text": "打开反馈",
+          "tone": "primary",
+          "target": "admin-audio-detail"
         },
         {
           "kind": "text",
-          "text": "新文件上传成功后才切换版本。失败时旧版本继续可用，只更新对应音频文件。",
+          "text": "只管理公开发音问题，不读取用户的私人笔记或私有例句。",
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
-      "state": "",
+      "implemented": true,
+      "route": "/admin",
+      "state": "audio-feedback",
       "dialog": false,
       "wide": true,
       "notes": [],
       "flow": [],
-      "heading": "后台音频任务与反馈",
-      "activeAdminTab": null
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-audio"
     },
     {
       "id": "admin-usage",
@@ -5921,12 +6189,105 @@
       "group": "其他后台",
       "children": [
         {
+          "kind": "row",
+          "children": [
+            {
+              "kind": "field",
+              "label": "统计月份（UTC）",
+              "value": "2026-10",
+              "note": "",
+              "mode": "input"
+            },
+            {
+              "kind": "button",
+              "text": "查看",
+              "tone": "secondary"
+            }
+          ]
+        },
+        {
           "kind": "card",
-          "title": "本月音频用量",
+          "title": "2026-10 音频用量",
+          "children": [
+            {
+              "kind": "row",
+              "children": [
+                {
+                  "kind": "metric",
+                  "label": "生成请求",
+                  "value": 24
+                },
+                {
+                  "kind": "metric",
+                  "label": "请求文本字符",
+                  "value": 156
+                },
+                {
+                  "kind": "metric",
+                  "label": "合成返回",
+                  "value": 22
+                },
+                {
+                  "kind": "metric",
+                  "label": "返回音频字节",
+                  "value": 312400
+                }
+              ]
+            },
+            {
+              "kind": "row",
+              "children": [
+                {
+                  "kind": "metric",
+                  "label": "版本切换成功",
+                  "value": 20
+                },
+                {
+                  "kind": "metric",
+                  "label": "生成或上传失败",
+                  "value": 3
+                },
+                {
+                  "kind": "metric",
+                  "label": "内容变化弃用",
+                  "value": 1
+                },
+                {
+                  "kind": "metric",
+                  "label": "结果未确认",
+                  "value": 0
+                }
+              ]
+            },
+            {
+              "kind": "text",
+              "text": "只统计接入后的应用合成尝试，缓存复用不计数。不是服务商账单或云存储占用。",
+              "role": "muted"
+            }
+          ]
+        },
+        {
+          "kind": "card",
+          "title": "数据与任务",
           "children": [
             {
               "kind": "text",
-              "text": "生成次数与用量等待服务端统计接入。",
+              "text": "启用账号2 · 停用账号1",
+              "role": "body"
+            },
+            {
+              "kind": "text",
+              "text": "公开词条240 · 未发布3 · 封禁1",
+              "role": "body"
+            },
+            {
+              "kind": "text",
+              "text": "音频资源18 · 版本22 · 正在生成0 · 失败1",
+              "role": "body"
+            },
+            {
+              "kind": "text",
+              "text": "待清理文件0 · 待审投稿2 · 发音反馈1",
               "role": "body"
             }
           ]
@@ -5937,28 +6298,39 @@
           "children": [
             {
               "kind": "text",
-              "text": "查看服务状态及备份执行记录。",
+              "text": "Google TTS未开启 · R2未配置 · 邮件未配置",
               "role": "muted"
             },
             {
               "kind": "text",
-              "text": "服务密钥不在界面显示明文。",
+              "text": "密码传输主密钥：已配置服务器主密钥。",
+              "role": "muted"
+            },
+            {
+              "kind": "text",
+              "text": "页面不读取或显示服务密钥。",
               "role": "muted"
             }
           ]
+        },
+        {
+          "kind": "button",
+          "text": "服务器数据库备份",
+          "tone": "secondary",
+          "target": "admin-backups-disabled"
         }
       ],
-      "implemented": false,
-      "route": "",
-      "state": "",
+      "implemented": true,
+      "route": "/admin",
+      "state": "usage",
       "dialog": false,
       "wide": true,
       "notes": [
-        "概要仅确定“管理用量”，未确定计费或限额策略；本页不设未确认阈值。"
+        "只显示汇总和配置布尔值，不设置未确认的计费或额度阈值。"
       ],
       "flow": [],
-      "heading": "后台用量与配置概览",
-      "activeAdminTab": null
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-usage"
     },
     {
       "id": "home-v1",
@@ -5971,33 +6343,9 @@
           "role": "hero"
         },
         {
-          "kind": "field",
-          "label": "学习语言",
-          "value": "日语",
-          "note": "",
-          "mode": "select"
-        },
-        {
-          "kind": "card",
-          "title": "今日待复习",
-          "children": [
-            {
-              "kind": "text",
-              "text": "到期 12 · 新词 8",
-              "role": "h3"
-            },
-            {
-              "kind": "text",
-              "text": "到期优先，不设每日配额。",
-              "role": "muted"
-            },
-            {
-              "kind": "button",
-              "text": "开始今日复习",
-              "tone": "primary",
-              "target": "review-queue"
-            }
-          ]
+          "kind": "text",
+          "text": "你好，demo。先把词条加入单词本，再进行听音回忆。",
+          "role": "muted"
         },
         {
           "kind": "actions",
@@ -6005,12 +6353,12 @@
             {
               "kind": "button",
               "text": "我的单词本",
-              "tone": "secondary",
+              "tone": "primary",
               "target": "wordbooks"
             },
             {
               "kind": "button",
-              "text": "查基础词典",
+              "text": "基础词典",
               "tone": "secondary",
               "target": "dictionary-list"
             }
@@ -6021,15 +6369,15 @@
           "children": [
             {
               "kind": "button",
-              "text": "耳词池",
+              "text": "我的私有词条",
               "tone": "secondary",
-              "target": "ear-pool"
+              "target": "personal-entry"
             },
             {
               "kind": "button",
-              "text": "个人内容",
+              "text": "我的投稿",
               "tone": "secondary",
-              "target": "personal-entry"
+              "target": "contribution-list"
             }
           ]
         },
@@ -6044,9 +6392,43 @@
             },
             {
               "kind": "button",
-              "text": "同步中心",
+              "text": "后台管理",
               "tone": "secondary",
-              "target": "sync"
+              "target": "admin-catalog"
+            }
+          ]
+        },
+        {
+          "kind": "card",
+          "title": "母语与译文",
+          "children": [
+            {
+              "kind": "field",
+              "label": "母语",
+              "value": "简体中文",
+              "note": "",
+              "mode": "select"
+            },
+            {
+              "kind": "text",
+              "text": "释义和例句优先显示母语译文，缺少时显示原有语言。发音保持学习语言。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "保存母语",
+              "tone": "primary"
+            }
+          ]
+        },
+        {
+          "kind": "card",
+          "title": "学习语言",
+          "children": [
+            {
+              "kind": "text",
+              "text": "日语",
+              "role": "body"
             }
           ]
         },
@@ -6055,25 +6437,27 @@
           "children": [
             {
               "kind": "button",
-              "text": "用户中心",
+              "text": "修改密码",
               "tone": "quiet",
-              "target": "account"
+              "target": "password-change"
             },
             {
               "kind": "button",
-              "text": "后台管理",
+              "text": "注销我的账号",
               "tone": "quiet",
-              "target": "admin-catalog"
+              "target": "account-delete"
             }
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/",
       "state": "",
       "dialog": false,
       "wide": false,
-      "notes": [],
+      "notes": [
+        "本画板为首页完整入口，不单独新增每日配额或其他未确认题型。"
+      ],
       "flow": [
         "review-queue",
         "wordbooks",
@@ -6152,14 +6536,16 @@
           "role": "muted"
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning",
       "state": "",
       "dialog": false,
       "wide": false,
-      "notes": [],
+      "notes": [
+        "服务端保存FSRS状态与复习事件；同一账号跨单词本共享进度。"
+      ],
       "flow": [],
-      "heading": "词条学习进度与复习历史",
+      "heading": "单词本",
       "activeAdminTab": null
     },
     {
@@ -6169,77 +6555,931 @@
       "children": [
         {
           "kind": "card",
-          "title": "备份检查结果",
+          "title": "备份预检",
           "children": [
             {
+              "kind": "field",
+              "label": "选择已有JSON备份",
+              "value": "已选择学习备份",
+              "note": "",
+              "mode": "file"
+            },
+            {
               "kind": "text",
-              "text": "账户归属一致 · 数据格式有效",
+              "text": "可恢复答题2条 · 训练草稿1份",
               "role": "body"
             },
             {
               "kind": "text",
-              "text": "新增内容 12 · 已有内容 8 · 已删除或重置的旧进度 3",
+              "text": "已上传3条 · 本机已有1条 · 删除或重置2条 · 冲突1条",
               "role": "muted"
             },
             {
               "kind": "text",
-              "text": "旧进度不会恢复被删除或重置的学习状态。",
-              "role": "warning"
-            },
-            {
-              "kind": "table",
-              "headers": [
-                "对象",
-                "结果"
-              ],
-              "rows": [
-                [
-                  "个人词条",
-                  "12 项可恢复"
-                ],
-                [
-                  "已有内容",
-                  "8 项待核对"
-                ],
-                [
-                  "旧学习进度",
-                  "3 项隔离，不恢复"
-                ]
-              ]
+              "text": "本机现有队列优先；旧投影、地址和隔离标记不导入。",
+              "role": "muted"
             },
             {
               "kind": "actions",
               "children": [
                 {
                   "kind": "button",
-                  "text": "取消",
+                  "text": "关闭",
                   "tone": "secondary",
                   "target": "backup"
                 },
                 {
                   "kind": "button",
-                  "text": "确认恢复有效内容",
-                  "tone": "primary"
+                  "text": "确认恢复到本机",
+                  "tone": "primary",
+                  "target": "backup-restored"
                 }
               ]
             }
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/offline",
       "state": "",
-      "dialog": false,
+      "dialog": true,
       "wide": false,
       "notes": [
-        "JSON 恢复为第一版规划能力；正式合并契约需在实现前明确。"
+        "恢复需要联网登录同一UUID账号并重新预检；恢复与上传分离。"
       ],
       "flow": [],
       "heading": "JSON 恢复预览",
       "activeAdminTab": null
+    },
+    {
+      "id": "password-reset",
+      "name": "设置新密码",
+      "group": "账户",
+      "children": [
+        {
+          "kind": "field",
+          "label": "新密码",
+          "value": "至少8位，含字母、数字和特殊字符",
+          "note": "",
+          "mode": "password"
+        },
+        {
+          "kind": "field",
+          "label": "重复新密码",
+          "value": "再次输入新密码",
+          "note": "",
+          "mode": "password"
+        },
+        {
+          "kind": "button",
+          "text": "保存新密码",
+          "tone": "primary",
+          "target": "password-reset-complete"
+        },
+        {
+          "kind": "text",
+          "text": "链接凭证不显示在页面或普通访问地址中。",
+          "role": "muted"
+        },
+        {
+          "kind": "button",
+          "text": "重新申请链接",
+          "tone": "quiet",
+          "target": "password-recovery"
+        }
+      ],
+      "implemented": true,
+      "route": "/reset-password",
+      "state": "",
+      "dialog": false,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "设置新密码",
+      "activeAdminTab": null
+    },
+    {
+      "id": "password-reset-expired",
+      "name": "重置链接失效",
+      "group": "账户",
+      "children": [
+        {
+          "kind": "card",
+          "title": "链接已失效",
+          "children": [
+            {
+              "kind": "text",
+              "text": "链接可能已使用、已过期，或账号密码已经变更。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "重新申请链接",
+              "tone": "primary",
+              "target": "password-recovery"
+            }
+          ]
+        }
+      ],
+      "implemented": true,
+      "route": "/reset-password",
+      "state": "链接失效",
+      "dialog": false,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "重置链接失效",
+      "activeAdminTab": null
+    },
+    {
+      "id": "password-reset-complete",
+      "name": "密码重置成功",
+      "group": "账户",
+      "children": [
+        {
+          "kind": "card",
+          "title": "密码已更新",
+          "children": [
+            {
+              "kind": "text",
+              "text": "其他设备的旧登录会话已失效。本机离线记录仍保留。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "重新登录",
+              "tone": "primary",
+              "target": "login"
+            }
+          ]
+        }
+      ],
+      "implemented": true,
+      "route": "/reset-password",
+      "state": "成功",
+      "dialog": false,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "密码重置成功",
+      "activeAdminTab": null
+    },
+    {
+      "id": "password-recovery-disabled",
+      "name": "邮件找回未配置",
+      "group": "账户",
+      "children": [
+        {
+          "kind": "card",
+          "title": "邮件找回暂不可用",
+          "children": [
+            {
+              "kind": "text",
+              "text": "请联系管理员配置邮件服务后再申请找回。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "返回登录",
+              "tone": "secondary",
+              "target": "login"
+            }
+          ]
+        }
+      ],
+      "implemented": true,
+      "route": "/forgot-password",
+      "state": "服务未配置",
+      "dialog": false,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "邮件找回未配置",
+      "activeAdminTab": null
+    },
+    {
+      "id": "native-language-fallback",
+      "name": "母语译文缺失回退",
+      "group": "基础词典",
+      "children": [
+        {
+          "kind": "card",
+          "title": "猫",
+          "children": [
+            {
+              "kind": "text",
+              "text": "ねこ",
+              "role": "tag"
+            },
+            {
+              "kind": "text",
+              "text": "母语：简体中文",
+              "role": "muted"
+            },
+            {
+              "kind": "text",
+              "text": "原文：cat",
+              "role": "body"
+            },
+            {
+              "kind": "text",
+              "text": "暂时没有当前母语译文，显示词典原有语言。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "播放日语发音",
+              "tone": "primary"
+            },
+            {
+              "kind": "button",
+              "text": "编辑我的内容",
+              "tone": "secondary",
+              "target": "personal-edit"
+            }
+          ]
+        }
+      ],
+      "implemented": true,
+      "route": "/dictionary/:id",
+      "state": "译文回退",
+      "dialog": false,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "",
+      "activeAdminTab": null
+    },
+    {
+      "id": "dictionary-kana",
+      "name": "假名查询与返回页码",
+      "group": "基础词典",
+      "children": [
+        {
+          "kind": "row",
+          "children": [
+            {
+              "kind": "field",
+              "label": "写法或假名",
+              "value": "いじめる",
+              "note": "",
+              "mode": "input"
+            },
+            {
+              "kind": "field",
+              "label": "语言",
+              "value": "日语",
+              "note": "",
+              "mode": "select"
+            }
+          ]
+        },
+        {
+          "kind": "button",
+          "text": "查询",
+          "tone": "primary"
+        },
+        {
+          "kind": "card",
+          "title": "词条 · 第3页",
+          "children": [
+            {
+              "kind": "entry",
+              "title": "虐める",
+              "subtitle": "いじめる · 欺负；虐待",
+              "selected": false,
+              "target": "dictionary-detail"
+            },
+            {
+              "kind": "actions",
+              "children": [
+                {
+                  "kind": "button",
+                  "text": "上一页",
+                  "tone": "secondary"
+                },
+                {
+                  "kind": "text",
+                  "text": "1 / 12",
+                  "role": "body"
+                },
+                {
+                  "kind": "button",
+                  "text": "下一页",
+                  "tone": "secondary"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "假名与文字使用同一包含搜索逻辑。详情返回保留搜索条件与页码。",
+          "role": "muted"
+        }
+      ],
+      "implemented": true,
+      "route": "/dictionary",
+      "state": "假名搜索",
+      "dialog": false,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "查一个词",
+      "activeAdminTab": null
+    },
+    {
+      "id": "backup-restored",
+      "name": "本机学习记录已恢复",
+      "group": "离线与同步",
+      "children": [
+        {
+          "kind": "card",
+          "title": "恢复完成",
+          "children": [
+            {
+              "kind": "text",
+              "text": "2条待上传答题和1份训练草稿已补回。",
+              "role": "body"
+            },
+            {
+              "kind": "text",
+              "text": "服务器进度尚未由恢复操作修改。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "上传本账号待提交记录",
+              "tone": "primary",
+              "target": "sync"
+            },
+            {
+              "kind": "button",
+              "text": "继续原训练队列",
+              "tone": "secondary",
+              "target": "review-resume"
+            }
+          ]
+        }
+      ],
+      "implemented": true,
+      "route": "/offline",
+      "state": "",
+      "dialog": false,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "本机学习记录已恢复",
+      "activeAdminTab": null
+    },
+    {
+      "id": "backup-owner-mismatch",
+      "name": "备份归属不匹配",
+      "group": "离线与同步",
+      "children": [
+        {
+          "kind": "card",
+          "title": "不能恢复此备份",
+          "children": [
+            {
+              "kind": "text",
+              "text": "备份不属于当前服务器或当前账号。",
+              "role": "error"
+            },
+            {
+              "kind": "text",
+              "text": "请联网登录备份所属账号后再打开，不能按邮箱或用户名合并历史身份。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "关闭",
+              "tone": "secondary",
+              "target": "backup"
+            }
+          ]
+        }
+      ],
+      "implemented": true,
+      "route": "/offline",
+      "state": "",
+      "dialog": true,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "备份归属不匹配",
+      "activeAdminTab": null
+    },
+    {
+      "id": "offline-cache",
+      "name": "离线缓存管理",
+      "group": "离线与同步",
+      "children": [
+        {
+          "kind": "card",
+          "title": "当前缓存账号",
+          "children": [
+            {
+              "kind": "entry",
+              "title": "demo",
+              "subtitle": "待上传2条 · 有训练草稿",
+              "selected": true
+            },
+            {
+              "kind": "entry",
+              "title": "learner",
+              "subtitle": "另一个账号的缓存独立保留",
+              "selected": false
+            }
+          ]
+        },
+        {
+          "kind": "card",
+          "title": "存储用量",
+          "children": [
+            {
+              "kind": "text",
+              "text": "本账号内容2.4 MiB · 音频8.1 MiB",
+              "role": "body"
+            },
+            {
+              "kind": "text",
+              "text": "学习记录与下载文件分开维护。",
+              "role": "muted"
+            },
+            {
+              "kind": "actions",
+              "children": [
+                {
+                  "kind": "button",
+                  "text": "清理未引用音频",
+                  "tone": "secondary"
+                },
+                {
+                  "kind": "button",
+                  "text": "移除本账号下载",
+                  "tone": "secondary"
+                }
+              ]
+            },
+            {
+              "kind": "button",
+              "text": "申请保留本机数据",
+              "tone": "secondary"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "清理下载不会删除答题或原训练队列。",
+          "role": "muted"
+        },
+        {
+          "kind": "button",
+          "text": "恢复已有备份",
+          "tone": "secondary",
+          "target": "backup"
+        }
+      ],
+      "implemented": true,
+      "route": "/offline",
+      "state": "",
+      "dialog": false,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "离线准备",
+      "activeAdminTab": null
+    },
+    {
+      "id": "offline-storage-full",
+      "name": "离线存储空间不足",
+      "group": "离线与同步",
+      "children": [
+        {
+          "kind": "card",
+          "title": "准备未完成",
+          "children": [
+            {
+              "kind": "text",
+              "text": "本机存储空间不足。",
+              "role": "warning"
+            },
+            {
+              "kind": "text",
+              "text": "已保存的学习记录保留，先清理未引用音频或旧下载后重试。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "管理缓存",
+              "tone": "primary",
+              "target": "offline-cache"
+            },
+            {
+              "kind": "button",
+              "text": "重试准备",
+              "tone": "secondary",
+              "target": "offline-preparing"
+            }
+          ]
+        }
+      ],
+      "implemented": true,
+      "route": "/offline",
+      "state": "",
+      "dialog": false,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "离线准备",
+      "activeAdminTab": null
+    },
+    {
+      "id": "admin-account-mail-sent",
+      "name": "账号创建邮件已发送",
+      "group": "其他后台",
+      "children": [
+        {
+          "kind": "card",
+          "title": "账号已创建",
+          "children": [
+            {
+              "kind": "text",
+              "text": "已向demo@example.test发送初始密码。",
+              "role": "body"
+            },
+            {
+              "kind": "text",
+              "text": "初始密码不会在此页面显示，首次登录应修改。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "返回账号管理",
+              "tone": "primary",
+              "target": "admin-accounts"
+            }
+          ]
+        }
+      ],
+      "implemented": true,
+      "route": "/admin",
+      "state": "accounts",
+      "dialog": false,
+      "wide": true,
+      "notes": [],
+      "flow": [],
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-accounts"
+    },
+    {
+      "id": "admin-audio-detail",
+      "name": "公开发音反馈处理",
+      "group": "其他后台",
+      "children": [
+        {
+          "kind": "card",
+          "title": "該当 · 发音反馈",
+          "children": [
+            {
+              "kind": "text",
+              "text": "当前发音文本：がいとう",
+              "role": "body"
+            },
+            {
+              "kind": "text",
+              "text": "用户说明：声音中的读音不正确。",
+              "role": "muted"
+            },
+            {
+              "kind": "actions",
+              "children": [
+                {
+                  "kind": "button",
+                  "text": "编辑词条",
+                  "tone": "secondary",
+                  "target": "admin-edit"
+                },
+                {
+                  "kind": "button",
+                  "text": "重新生成音频",
+                  "tone": "primary"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "label": "处理说明",
+              "value": "经核对读音正确。",
+              "note": "",
+              "mode": "input"
+            },
+            {
+              "kind": "actions",
+              "children": [
+                {
+                  "kind": "button",
+                  "text": "确认已修正",
+                  "tone": "primary"
+                },
+                {
+                  "kind": "button",
+                  "text": "无需修正",
+                  "tone": "secondary"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "新版本上传并校验成功后才能切换；失败时保留旧版本，不能直接把失败标成已修正。",
+          "role": "muted"
+        }
+      ],
+      "implemented": true,
+      "route": "/admin",
+      "state": "audio-feedback",
+      "dialog": false,
+      "wide": true,
+      "notes": [],
+      "flow": [],
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-audio"
+    },
+    {
+      "id": "admin-backups-disabled",
+      "name": "服务器备份／默认关闭",
+      "group": "其他后台",
+      "children": [
+        {
+          "kind": "card",
+          "title": "服务器数据库备份",
+          "children": [
+            {
+              "kind": "text",
+              "text": "服务器灾备不提供个人导出或网页下载，音频对象及服务器配置另行维护。",
+              "role": "muted"
+            },
+            {
+              "kind": "text",
+              "text": "定时频率：未启用；成功备份不自动清理。",
+              "role": "muted"
+            },
+            {
+              "kind": "text",
+              "text": "备份未开启 · 转储工具已就绪 · 独立加密密钥未配置 · 私有存储未配置",
+              "role": "body"
+            },
+            {
+              "kind": "button",
+              "text": "立即备份数据库",
+              "tone": "disabled"
+            },
+            {
+              "kind": "text",
+              "text": "先在服务器配置独立密钥和私有R2存储后开启。",
+              "role": "muted"
+            },
+            {
+              "kind": "text",
+              "text": "暂无执行记录。",
+              "role": "muted"
+            }
+          ]
+        }
+      ],
+      "implemented": true,
+      "route": "/admin",
+      "state": "usage",
+      "dialog": false,
+      "wide": true,
+      "notes": [],
+      "flow": [],
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-usage"
+    },
+    {
+      "id": "admin-backups-ready",
+      "name": "服务器备份／已具备执行配置",
+      "group": "其他后台",
+      "children": [
+        {
+          "kind": "card",
+          "title": "服务器数据库备份",
+          "children": [
+            {
+              "kind": "text",
+              "text": "服务器灾备不提供个人导出或网页下载，音频对象及服务器配置另行维护。",
+              "role": "muted"
+            },
+            {
+              "kind": "text",
+              "text": "定时频率：未启用；成功备份不自动清理。",
+              "role": "muted"
+            },
+            {
+              "kind": "text",
+              "text": "已开启 · 转储工具已就绪 · 加密密钥已配置 · 私有存储已配置",
+              "role": "body"
+            },
+            {
+              "kind": "button",
+              "text": "立即备份数据库",
+              "tone": "primary",
+              "target": "admin-backups-running"
+            },
+            {
+              "kind": "text",
+              "text": "配置齐备不代表云服务已经连通。",
+              "role": "muted"
+            }
+          ]
+        }
+      ],
+      "implemented": true,
+      "route": "/admin",
+      "state": "usage",
+      "dialog": false,
+      "wide": true,
+      "notes": [],
+      "flow": [],
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-usage"
+    },
+    {
+      "id": "admin-backups-running",
+      "name": "服务器备份／执行中",
+      "group": "其他后台",
+      "children": [
+        {
+          "kind": "card",
+          "title": "备份请求已确认",
+          "children": [
+            {
+              "kind": "text",
+              "text": "已有任务等待完成",
+              "role": "body"
+            },
+            {
+              "kind": "button",
+              "text": "已有任务等待完成",
+              "tone": "disabled"
+            },
+            {
+              "kind": "table",
+              "headers": [
+                "创建时间",
+                "触发方式",
+                "结果"
+              ],
+              "rows": [
+                [
+                  "10月7日09:20",
+                  "管理员手动",
+                  "正在备份"
+                ]
+              ]
+            },
+            {
+              "kind": "text",
+              "text": "重复请求不会创建多个转储任务。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "刷新记录",
+              "tone": "secondary",
+              "target": "admin-backups-history"
+            }
+          ]
+        }
+      ],
+      "implemented": true,
+      "route": "/admin",
+      "state": "usage",
+      "dialog": false,
+      "wide": true,
+      "notes": [],
+      "flow": [],
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-usage"
+    },
+    {
+      "id": "admin-backups-history",
+      "name": "服务器备份／成功失败及清理记录",
+      "group": "其他后台",
+      "children": [
+        {
+          "kind": "card",
+          "title": "最近执行记录",
+          "children": [
+            {
+              "kind": "table",
+              "headers": [
+                "创建时间",
+                "触发方式",
+                "结果",
+                "归档大小"
+              ],
+              "rows": [
+                [
+                  "10月7日09:20",
+                  "管理员手动",
+                  "已上传并验证",
+                  "1200 KiB"
+                ],
+                [
+                  "10月6日09:20",
+                  "定时",
+                  "执行失败",
+                  "—"
+                ],
+                [
+                  "10月5日09:20",
+                  "定时",
+                  "归档已清理",
+                  "1100 KiB"
+                ]
+              ]
+            },
+            {
+              "kind": "text",
+              "text": "失败说明：上传或回读核验失败，请检查私有备份存储。",
+              "role": "muted"
+            },
+            {
+              "kind": "text",
+              "text": "密钥标识：backup-v1。此标识不是解密密钥。",
+              "role": "muted"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "按配置保留最新已验证归档，关闭功能不会删除执行记录。",
+          "role": "muted"
+        }
+      ],
+      "implemented": true,
+      "route": "/admin",
+      "state": "usage",
+      "dialog": false,
+      "wide": true,
+      "notes": [],
+      "flow": [],
+      "heading": "管理工作台",
+      "activeAdminTab": "admin-usage"
+    },
+    {
+      "id": "review-sync-conflict",
+      "name": "复习同步冲突与继续学习",
+      "group": "离线与同步",
+      "children": [
+        {
+          "kind": "card",
+          "title": "服务器进度已变化",
+          "children": [
+            {
+              "kind": "text",
+              "text": "本次答题时间早于服务器的新进度，不能覆盖最新结果。",
+              "role": "muted"
+            },
+            {
+              "kind": "button",
+              "text": "读取当前学习状态",
+              "tone": "primary"
+            },
+            {
+              "kind": "button",
+              "text": "保留未确认记录",
+              "tone": "secondary"
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "已删除或重置的记录不会因旧缓存重新出现。",
+          "role": "muted"
+        }
+      ],
+      "implemented": true,
+      "route": "/offline",
+      "state": "",
+      "dialog": false,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "复习同步冲突与继续学习",
+      "activeAdminTab": null
     }
   ],
   "tabs": [
+    [
+      "账号管理",
+      "admin-accounts"
+    ],
     [
       "基础词典",
       "admin-catalog"
@@ -6249,12 +7489,28 @@
       "import-upload"
     ],
     [
+      "贡献审核",
+      "admin-moderation"
+    ],
+    [
       "语言配置",
       "languages"
     ],
     [
       "系统字典",
       "system-dictionaries"
+    ],
+    [
+      "TTS配置",
+      "admin-tts"
+    ],
+    [
+      "发音反馈",
+      "admin-audio"
+    ],
+    [
+      "系统用量",
+      "admin-usage"
     ]
   ]
 }

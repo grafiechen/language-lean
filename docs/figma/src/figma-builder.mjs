@@ -7,7 +7,7 @@ export async function buildFigma(figma, data, progress = () => {}) {
   const stamp = 'Language Lean · 第一版完整界面';
   if (figma.root.children.some(p => p.name === stamp)) throw new Error('已存在同名设计页。请先重命名旧页再运行，避免覆盖你的修改。');
   const available = (await figma.listAvailableFontsAsync()).map(f => f.fontName);
-  const families = ['Microsoft YaHei', 'Microsoft YaHei UI', 'PingFang SC', 'Noto Sans CJK SC'];
+  const families = ['Microsoft YaHei', 'Microsoft YaHei UI', 'PingFang SC', 'Noto Sans CJK SC', 'Noto Sans SC'];
   const family = families.find(f => available.some(n => n.family === f));
   if (!family) throw new Error('缺少产品中文字体。请在 Figma 桌面端安装或启用 Microsoft YaHei，再运行插件。不会自动改用 Inter。');
   const font = available.find(f => f.family === family && /^(Regular|Normal|Book)$/.test(f.style)) || available.find(f => f.family === family);
@@ -15,7 +15,9 @@ export async function buildFigma(figma, data, progress = () => {}) {
   await Promise.all([figma.loadFontAsync(font), figma.loadFontAsync(bold)]);
   const created = [], variables = [], styles = [], links = [], frameMap = new Map();
   const track = node => { created.push(node.id); return node; };
-  const page = track(figma.createPage()); page.name = stamp;
+  // 复用用户当前选中的空白页，可避免免费方案的页数限制；绝不覆盖非空页面。
+  const reuseEmptyPage = figma.currentPage && figma.currentPage.children.length === 0;
+  const page = reuseEmptyPage ? figma.currentPage : track(figma.createPage()); page.name = stamp;
   await figma.setCurrentPageAsync(page);
   const collection = figma.variables.createVariableCollection('Language Lean / 第一版主题');
   collection.renameMode(collection.defaultModeId, '默认');
@@ -24,7 +26,7 @@ export async function buildFigma(figma, data, progress = () => {}) {
   // 基础值隐藏在 picker 外，语义色通过 alias 引用，范围覆盖实际用途。
   for (const [key, hex] of Object.entries(colors)) {
     const primitive = figma.variables.createVariable('primitive/'+key, collection, 'COLOR');
-    primitive.scopes=[]; primitive.setValueForMode(collection.defaultModeId,rgb(hex)); variables.push(primitive.id);
+    primitive.scopes=[]; primitive.setValueForMode(collection.defaultModeId,{...rgb(hex),a:1}); variables.push(primitive.id);
     const semantic = figma.variables.createVariable('color/'+key, collection, 'COLOR');
     semantic.scopes=['FRAME_FILL','SHAPE_FILL','TEXT_FILL','STROKE_COLOR'];
     semantic.setValueForMode(collection.defaultModeId,{type:'VARIABLE_ALIAS',id:primitive.id}); variables.push(semantic.id);
@@ -39,7 +41,7 @@ export async function buildFigma(figma, data, progress = () => {}) {
   const bind = (node,field,value) => { if(vars['space'+value]) node.setBoundVariable(field,vars['space'+value]); else node[field]=value; };
   const fill = (node,key) => { node.fills=[paint(key)]; };
   const border = (node,key='border') => { node.strokes=[paint(key)]; node.strokeWeight=1; };
-  const roleSpec={body:[16,'text',false],muted:[14,'muted',false],label:[14,'label',false],small:[12,'muted',false],h2:[18,'text',true],h3:[16,'text',true],hero:[56,'text',true],title:[42,'text',true],error:[14,'error',false],warning:[14,'warning',false],tag:[13,'text',false],button:[16,'white',false]};
+  const roleSpec={body:[16,'text',false],muted:[14,'muted',false],label:[14,'label',false],small:[12,'muted',false],h2:[18,'text',true],h3:[16,'text',true],hero:[56,'text',true],title:[42,'text',true],error:[14,'error',false],warning:[14,'warning',false],tag:[13,'text',false],button:[16,'white',false],metric:[22,'text',true]};
   const textStyles={}, pendingTextStyles=[];
   for(const [role,[size,key,isBold]] of Object.entries(roleSpec)){
     const style=figma.createTextStyle(); style.name='Language Lean/'+role; style.fontName=isBold?bold:font; style.fontSize=size; style.lineHeight={unit:'PERCENT',value:role==='hero'?130:160}; styles.push(style.id); textStyles[role]=style;
@@ -97,6 +99,9 @@ export async function buildFigma(figma, data, progress = () => {}) {
   }
   const tag=container('Tag',180,'VERTICAL',4,4,true);fill(tag,'tag');bind(tag,'cornerRadius',7);
   const tagLabel=append(tag,makeText('状态',172,'tag'));comps.tag={node:tag,keys:{text:expose(tag,tagLabel,'文字')}};
+  const metric=container('Metric',220,'VERTICAL',8,14,true);metric.description='系统用量指标卡，名称和数值均可编辑。';fill(metric,'white');border(metric);bind(metric,'cornerRadius',10);
+  const metricLabel=append(metric,makeText('指标',192,'muted'));const metricValue=append(metric,makeText('0',192,'metric'));
+  comps.metric={node:metric,keys:{label:expose(metric,metricLabel,'指标'),value:expose(metric,metricValue,'数值')}};
   for(const checked of [true,false]){
     const c=container('Checkbox/'+checked,300,'HORIZONTAL',8,0,true);
     const box=append(c,container('复选框',18,'VERTICAL',0,0));border(box,'inputBorder');fill(box,checked?'primary':'white');box.resize(18,18);box.primaryAxisSizingMode='FIXED';
@@ -105,12 +110,33 @@ export async function buildFigma(figma, data, progress = () => {}) {
   }
   await applyTextStyles();
   const library=track(figma.createSection());library.name='00 · 基础组件';page.appendChild(library);
-  let cx=24,cy=24,rowHeight=0;
-  for(const comp of Object.values(comps)){
-    if(cx+comp.node.width>1500){cx=24;cy+=rowHeight+48;rowHeight=0;}
-    library.appendChild(comp.node);comp.node.x=cx;comp.node.y=cy;cx+=comp.node.width+48;rowHeight=Math.max(rowHeight,comp.node.height);
+  // 在组件集上统一文字属性，变体与画板实例共用同一编辑接口。
+  const componentSets=[];
+  for(const [prefix,name,axis] of [['button/','Button','Tone'],['field/','Field','Mode'],['entry/','Entry','Selected'],['check/','Checkbox','Checked']]){
+    const entries=Object.entries(comps).filter(([key])=>key.startsWith(prefix));
+    const textNodes=entries.map(([key,c])=>({key,c,fields:Object.fromEntries(Object.entries(c.keys).map(([field,property])=>[field,c.node.findAllWithCriteria({types:['TEXT']}).find(n=>n.componentPropertyReferences?.characters===property)]))}));
+    for(const {key,c} of textNodes)c.node.name=axis+'='+key.slice(prefix.length);
+    const set=track(figma.combineAsVariants(entries.map(([,c])=>c.node),library));set.name=name;set.description='Language Lean '+name+'；通过变体与文字属性编辑，保持主题变量绑定。';
+    const definitions=set.componentPropertyDefinitions;
+    const usedProperties=new Set();
+    for(const [field,original] of Object.entries(textNodes[0].c.keys)){
+      const label=original.split('#')[0];
+      const existing=Object.entries(definitions).find(([key,definition])=>key.split('#')[0]===label&&definition.type==='TEXT');
+      const common=existing?existing[0]:set.addComponentProperty(label,'TEXT',textNodes[0].fields[field].characters);
+      usedProperties.add(common);
+      for(const {c,fields} of textNodes){if(!fields[field])throw new Error('组件文字属性缺失：'+name+'/'+field);fields[field].componentPropertyReferences={characters:common};c.keys[field]=common;}
+    }
+    for(const [property,definition] of Object.entries(set.componentPropertyDefinitions))if(definition.type==='TEXT'&&!usedProperties.has(property))set.deleteComponentProperty(property);
+    set.layoutMode='HORIZONTAL';set.itemSpacing=24;set.paddingTop=set.paddingBottom=set.paddingLeft=set.paddingRight=24;
+    set.primaryAxisSizingMode='AUTO';set.counterAxisSizingMode='AUTO';componentSets.push(set);
   }
-  library.resizeWithoutConstraints(1640,cy+rowHeight+24);
+  let cx=24,cy=24,rowHeight=0;
+  const showcase=[...componentSets,comps.tag.node,comps.metric.node];let libraryWidth=1640;
+  for(const node of showcase){
+    if(cx+node.width>2400){cx=24;cy+=rowHeight+48;rowHeight=0;}
+    library.appendChild(node);node.x=cx;node.y=cy;cx+=node.width+48;rowHeight=Math.max(rowHeight,node.height);libraryWidth=Math.max(libraryWidth,cx+24);
+  }
+  library.resizeWithoutConstraints(libraryWidth,cy+rowHeight+24);
   function fit(instance,width){
     instance.resize(width,instance.height);
     instance.primaryAxisSizingMode=instance.layoutMode==='VERTICAL'?'AUTO':'FIXED';
@@ -132,6 +158,11 @@ export async function buildFigma(figma, data, progress = () => {}) {
     return n;
   };
   function render(spec,width,mobile){
+    if(spec.kind==='metric')return use('metric',{label:spec.label,value:String(spec.value)},width);
+    if(spec.kind==='tabs'){
+      const navigation=container('后台模块导航',width,'VERTICAL',8);
+      for(let start=0;start<spec.children.length;start+=mobile?3:spec.children.length){const children=spec.children.slice(start,start+(mobile?3:spec.children.length));const row=append(navigation,container('导航行',width,'HORIZONTAL',8));for(const child of children)append(row,render(child,(width-8*(children.length-1))/children.length,mobile));}return navigation;
+    }
     if(spec.kind==='text')return spec.role==='tag'?use('tag',{text:spec.text},width):makeText(spec.text,width,spec.role,mobile);
     if(spec.kind==='button'){
       const n=use('button/'+spec.tone,{text:spec.text},width);n.name='操作 / '+spec.text;
@@ -185,7 +216,7 @@ export async function buildFigma(figma, data, progress = () => {}) {
           for(const child of s.children)append(modal,render(child,mw,mobile));
         }else{
           if(s.heading&&s.id!=='dictionary-list')append(root,makeText(s.heading,inner,s.wide?'title':'hero',mobile));
-          if(s.wide&&s.route==='/admin')append(root,render({kind:'actions',children:tabs.map(([text,target])=>({kind:'button',text,tone:target===s.activeAdminTab?'primary':'secondary',target}))},inner,mobile));
+          if(s.wide&&s.route==='/admin')append(root,render({kind:'tabs',children:tabs.map(([text,target])=>({kind:'button',text,tone:target===s.activeAdminTab?'primary':'secondary',target}))},inner,mobile));
           for(const child of s.children)append(root,render(child,inner,mobile));
         }
         const note=makeText(s.implemented?'已有实现 · '+(s.route||'应用内状态'):'第一版设计 · 待开发',width-48,'small',mobile);
@@ -220,5 +251,5 @@ export async function buildFigma(figma, data, progress = () => {}) {
   }
   if(layoutIssues.length)throw new Error('实际画板存在 '+layoutIssues.length+' 个布局问题：'+JSON.stringify(layoutIssues.slice(0,6))+'。请保留该设计页用于排查，暂勿当作完成稿。');
   figma.currentPage.selection=[frameMap.get('home/false')];figma.viewport.scrollAndZoomIntoView(figma.currentPage.selection);
-  return {status:'generated-awaiting-visual-review',pageId:page.id,font:family,fontStyles:[font.style,bold.style],screenCount:screens.length,frameCount:results.length,componentCount:Object.keys(comps).length,instanceCount:all.filter(n=>n.type==='INSTANCE').length,textCount:texts.length,imageCount:0,createdNodeIds:[page.id,...all.map(n=>n.id)],variableIds:variables,styleIds:styles,frames:results,layoutAudit:{checkedFrames:results.length,checkedVisibleNodes,issues:layoutIssues},visualReview:false};
+  return {status:'generated-awaiting-visual-review',pageId:page.id,reusedEmptyPage:reuseEmptyPage,font:family,fontStyles:[font.style,bold.style],screenCount:screens.length,frameCount:results.length,componentCount:Object.keys(comps).length,componentSetCount:componentSets.length,instanceCount:all.filter(n=>n.type==='INSTANCE').length,textCount:texts.length,imageCount:0,createdNodeIds:[...(reuseEmptyPage?[]:[page.id]),...all.map(n=>n.id)],mutatedNodeIds:reuseEmptyPage?[page.id]:[],variableIds:variables,styleIds:styles,frames:results,layoutAudit:{checkedFrames:results.length,checkedVisibleNodes,issues:layoutIssues},visualReview:false};
 }

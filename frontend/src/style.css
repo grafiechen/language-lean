@@ -1,4 +1,4 @@
-:root { --ion-font-family: system-ui, "Microsoft YaHei", sans-serif; --ion-background-color: #f6f5ef; --ion-text-color: #183b36; --ion-color-primary: #286557; --ion-color-primary-contrast: #ffffff; }
+:root { --ion-font-family: system-ui, "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; --ion-background-color: #f6f5ef; --ion-text-color: #183b36; --ion-color-primary: #286557; --ion-color-primary-contrast: #ffffff; }
 main { max-width: 760px; margin: 0 auto; padding: 64px 24px; }
 .account-bar { display: flex; align-items: center; justify-content: space-between; }
 .login { max-width: 440px; }
