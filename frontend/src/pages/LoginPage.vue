@@ -1,18 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
-import { IonPage, IonContent, IonInput, IonButton } from '@ionic/vue'
+import { IonPage, IonContent, IonInput, IonButton, onIonViewWillLeave } from '@ionic/vue'
 import { useAuth } from '../features/auth/store'
 const identifier = ref('')
 const password = ref('')
 const auth = useAuth()
 const router = useRouter()
 const route = useRoute()
+/** Ionic 隐藏页面不会卸载，离开登录页时也必须清除密码。 */
+function clearPassword() { password.value = '' }
+onIonViewWillLeave(clearPassword)
+onBeforeUnmount(clearPassword)
 /** 提交登录信息；成功后进入受保护的首页。 */
 async function submit() {
-  if (!identifier.value.trim() || !password.value) return
-  if (await auth.login(identifier.value.trim(), password.value)) await router.replace('/')
+  if (auth.busy || !identifier.value.trim() || !password.value) return
+  if (await auth.login(identifier.value.trim(), password.value)) {
+    clearPassword()
+    await router.replace('/')
+  }
 }
 </script>
 <template>

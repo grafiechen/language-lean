@@ -30,6 +30,9 @@
     "vite": "^7.0.0",
     "vitest": "^4.1.11",
     "vue-tsc": "^3.0.0",
-    "wrangler": "4.147.0"
+    "wrangler": "4.148.0"
+  },
+  "overrides": {
+    "sharp": "0.35.5"
   }
 }

@@ -10,7 +10,7 @@ function worker() {
   runInNewContext(renderWorker('test', ['/index.html', '/assets/app.js']), {
     self: { location: { origin: 'https://example.test' }, clients: { claim: vi.fn() },
       addEventListener: (type: string, listener: (event: unknown) => void) => { listeners[type] = listener } },
-    caches: { open, keys: vi.fn().mockResolvedValue([]), delete: vi.fn() }, URL, Request, fetch: vi.fn(),
+    caches: { open, keys: vi.fn().mockResolvedValue([]), delete: vi.fn() }, URL, Request, Response, fetch: vi.fn(),
   })
   return { listeners, match, open }
 }
@@ -34,4 +34,18 @@ it('returns the same static shell for unvisited routes without caching personal 
     respondWith: (result: Promise<Response>) => { response = result } })
   expect(await (await response!).text()).toBe('static shell')
   expect(match).toHaveBeenCalledWith('/index.html')
+})
+
+it('serves a redirected Cloudflare index for offline navigation while retaining its CSP headers', async () => {
+  const { listeners, match } = worker()
+  const cached = new Response('static shell', { headers: { 'Content-Security-Policy': "frame-ancestors 'none'", 'Content-Type': 'text/html' } })
+  Object.defineProperty(cached, 'redirected', { value: true })
+  match.mockResolvedValue(cached)
+  let response: Promise<Response> | undefined
+  listeners.fetch({ request: { method: 'GET', url: 'https://example.test/login', mode: 'navigate', redirect: 'manual' },
+    respondWith: (result: Promise<Response>) => { response = result } })
+  const result = await response!
+  expect(result.redirected).toBe(false)
+  expect(result.headers.get('Content-Security-Policy')).toBe("frame-ancestors 'none'")
+  expect(await result.text()).toBe('static shell')
 })

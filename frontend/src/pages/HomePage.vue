@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
-import { IonPage, IonContent, IonButton, IonSpinner, IonInput } from '@ionic/vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { IonPage, IonContent, IonButton, IonSpinner, IonInput, onIonViewWillLeave } from '@ionic/vue'
 import { useLanguages } from '../features/languages/store'
 import { useAuth } from '../features/auth/store'
 import AccountClosureDialog from '../features/accounts/AccountClosureDialog.vue'
@@ -12,6 +12,11 @@ const currentPassword = ref('')
 const newPassword = ref('')
 const confirmation = ref('')
 const passwordChanged = ref(false)
+/** 离开页面或切换账号后，缓存的页面不得保留上一位用户的密码。 */
+function clearPasswords() { currentPassword.value = newPassword.value = confirmation.value = '' }
+onIonViewWillLeave(clearPasswords)
+onBeforeUnmount(clearPasswords)
+watch(() => auth.user?.id, clearPasswords)
 import { nativeLanguages } from '../features/dictionary/translations'
 const nativeLanguage = ref(auth.user?.nativeLanguage ?? 'zh-Hans')
 const preferenceSaved = ref(false)
@@ -21,8 +26,9 @@ async function savePreference() { preferenceSaved.value = false; preferenceSaved
 onMounted(() => languages.refresh())
 /** 修改初始密码，并在成功后清空页面中的敏感输入。 */
 async function changePassword() {
+  if (auth.busy) return
   passwordChanged.value = await auth.changePassword(currentPassword.value, newPassword.value, confirmation.value)
-  if (passwordChanged.value) currentPassword.value = newPassword.value = confirmation.value = ''
+  if (passwordChanged.value) clearPasswords()
 }
 </script>
 <template>
