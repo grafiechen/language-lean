@@ -55,6 +55,10 @@ class LearningController {
             @AuthenticationPrincipal UserAccountPrincipal user) {
         return learning.createWordbook(user.userId(), request);
     }
+    /** 不能通过请求指定别人的账号；版本冲突返回409，重复名称由数据库唯一约束兜底。 */
+    @org.springframework.web.bind.annotation.PutMapping("/wordbooks/{wordbookId}")
+    LearningService.WordbookView editWordbook(@PathVariable UUID wordbookId, @RequestBody LearningService.EditWordbook request,
+            @AuthenticationPrincipal UserAccountPrincipal user) { return learning.editWordbook(user.userId(), wordbookId, request); }
 
     /** 查看指定单词本中的共享学习条目。 */
     @GetMapping("/wordbooks/{wordbookId}/items")

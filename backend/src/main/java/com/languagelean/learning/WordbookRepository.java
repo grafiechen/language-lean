@@ -14,4 +14,5 @@ interface WordbookRepository extends JpaRepository<Wordbook, UUID> {
     @org.springframework.data.jpa.repository.Query("select b from Wordbook b where b.id = :id and b.userId = :userId")
     Optional<Wordbook> lockOwned(UUID id, UUID userId);
     boolean existsByUserIdAndName(UUID userId, String name);
+    boolean existsByUserIdAndNameAndIdNot(UUID userId, String name, UUID id);
 }

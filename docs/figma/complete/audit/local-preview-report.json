@@ -1,7 +1,7 @@
 {
   "status": "local-preview-passed",
-  "screenCount": 110,
-  "frameCount": 220,
+  "screenCount": 111,
+  "frameCount": 222,
   "checkedSourceFiles": [
     "frontend/src/App.vue",
     "frontend/src/core/fsrs.test.ts",
@@ -46,6 +46,7 @@
     "frontend/src/features/learning/sync.ts",
     "frontend/src/features/learning/trainingTypes.ts",
     "frontend/src/features/learning/types.ts",
+    "frontend/src/features/learning/WordbookEditor.vue",
     "frontend/src/features/operations/backups.test.ts",
     "frontend/src/features/operations/backups.ts",
     "frontend/src/features/operations/DatabaseBackups.vue",
@@ -93,6 +94,8 @@
     "frontend/src/platform/web/syncIssues.ts",
     "frontend/src/platform/web/trainingSessions.test.ts",
     "frontend/src/platform/web/trainingSessions.ts",
+    "frontend/src/platform/web/wordbookMetadata.test.ts",
+    "frontend/src/platform/web/wordbookMetadata.ts",
     "frontend/src/shared/api.test.ts",
     "frontend/src/shared/api.ts",
     "frontend/src/shared/passwordEncryption.test.ts",

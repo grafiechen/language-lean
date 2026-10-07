@@ -1,12 +1,12 @@
 {
   "status": "local-model-passed",
   "actualFigmaVerified": false,
-  "frameCount": 220,
+  "frameCount": 222,
   "componentCount": 17,
   "componentSetCount": 4,
-  "instanceCount": 1892,
-  "textCount": 4234,
-  "simulatedNodeCount": 7832,
+  "instanceCount": 1908,
+  "textCount": 4276,
+  "simulatedNodeCount": 7904,
   "localModelOverflow": [],
   "checks": [
     "all screen pairs generated",

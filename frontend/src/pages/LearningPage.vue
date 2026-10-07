@@ -3,6 +3,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { onBeforeRouteLeave, useRoute, useRouter } from 'vue-router'
 import { deleteJson, getJson, postJson } from '../shared/api'
 import type { LearningItem, Wordbook, ReviewHistory } from '../features/learning/types'
+import WordbookEditor from '../features/learning/WordbookEditor.vue'
 import { learningStatusLabel } from '../features/learning/types'
 import { useAuth } from '../features/auth/store'
 import { learningDatabase, pendingReviews, reviewUploader } from '../platform/web/reviewSync'
@@ -27,6 +28,19 @@ const message = ref('')
 const auth = useAuth()
 const route = useRoute(), router = useRouter()
 const createDialog = ref<HTMLDialogElement | null>(null)
+const wordbookEditor = ref<InstanceType<typeof WordbookEditor> | null>(null)
+const bookMenu = ref<HTMLDetailsElement | null>(null)
+function openBookEditor() {
+  if (!selectedBook.value || !online.value || busy.value) return
+  wordbookEditor.value?.open(selectedBook.value)
+  if (bookMenu.value) bookMenu.value.open = false
+}
+/** 保存分类信息只替换对应列表摘要，保留当前学习范围和队列。 */
+function wordbookEdited(book: Wordbook, warning: string) {
+  loadSequence++; loading.value = false
+  wordbooks.value = wordbooks.value.map(value => value.id === book.id ? book : value)
+  message.value = warning || '单词本信息已保存。'
+}
 const filter = ref<LearningFilter>('all')
 const bookItems = ref<Record<string, LearningItem[]>>({})
 const loading = ref(false)
@@ -238,7 +252,7 @@ watch(() => route.query.book, value => {
 })
 /** 弹窗关闭不清空未提交输入；保存成功才清空，防止误关丢失录入。 */
 function openCreate() { error.value = ''; createDialog.value?.showModal() }
-onBeforeRouteLeave(() => createDialog.value?.close())
+onBeforeRouteLeave(() => { createDialog.value?.close(); wordbookEditor.value?.close() })
 /** Ionic 可保留页面实例；切换账号先清空展示，旧账号网络响应不能写入新展示。 */
 watch(() => scope.value ? accountKey(scope.value) : '', () => {
   loadSequence++; wordbooks.value = []; bookItems.value = {}; items.value = []; selectedId.value = ''
@@ -257,7 +271,7 @@ onIonViewWillEnter(enter)
     <div class="section-heading study-title">
       <div><router-link v-if="showingBook" to="/learning" class="study-back">← 背词总览</router-link><h1>{{ showingBook ? selectedBook?.name : '今天，也记住一点。' }}</h1></div>
       <button v-if="!showingBook" :disabled="busy || !online" @click="openCreate">新建单词本</button>
-      <details v-else class="book-menu"><summary>管理单词本</summary><div class="book-menu-actions"><button class="quiet" :disabled="busy || !online" @click="resetWordbook">重置进度</button><button class="quiet danger" :disabled="busy || !online" @click="removeWordbook(selectedBook!)">删除单词本</button></div></details>
+      <details v-else ref="bookMenu" class="book-menu"><summary>管理单词本</summary><div class="book-menu-actions"><button class="quiet" :disabled="busy || !online" @click="openBookEditor">编辑单词本信息</button><button class="quiet" :disabled="busy || !online" @click="resetWordbook">重置进度</button><button class="quiet danger" :disabled="busy || !online" @click="removeWordbook(selectedBook!)">删除单词本</button></div></details>
     </div>
     <p class="intro">{{ showingBook ? selectedBook?.description || '分类管理词条，学习进度跨单词本共享。' : '先复习熟悉的词，再遇见新的词。' }}</p>
     <p v-if="!online" class="note">正在查看当前账号的本地缓存。新建、删除、重置和历史查询需要联网登录。</p>
@@ -321,5 +335,6 @@ onIonViewWillEnter(enter)
       <div class="section-heading"><h2 id="create-wordbook-title">新建单词本</h2><button type="button" class="quiet" :disabled="busy" aria-label="关闭新建单词本" @click="createDialog?.close()">关闭</button></div>
       <form class="editor-fields" @submit.prevent="createWordbook"><label>名称<input v-model="name" maxlength="100" required placeholder="例如：旅行日语"></label><label>说明<textarea v-model="description" maxlength="500" rows="3" placeholder="可留空"></textarea></label><p v-if="error" class="error" role="alert">{{ error }}</p><div class="dialog-actions"><button type="button" class="secondary" :disabled="busy" @click="createDialog?.close()">取消</button><button :disabled="busy || !online">{{ busy ? '正在创建…' : '创建单词本' }}</button></div></form>
     </dialog>
+    <WordbookEditor ref="wordbookEditor" :scope="scope" :online="online" @saved="wordbookEdited" />
   </main></ion-content></ion-page>
 </template>

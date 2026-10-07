@@ -815,6 +815,12 @@
               "children": [
                 {
                   "kind": "button",
+                  "text": "编辑单词本信息",
+                  "tone": "secondary",
+                  "target": "wordbook-edit"
+                },
+                {
+                  "kind": "button",
                   "text": "重置进度",
                   "tone": "secondary",
                   "target": "wordbook-reset"
@@ -963,8 +969,13 @@
     {
       "id": "wordbook-edit",
       "name": "编辑单词本",
-      "group": "扩展预留",
+      "group": "单词本",
       "children": [
+        {
+          "kind": "text",
+          "text": "修改分类信息，保留所有词条、共享学习进度和未完成训练。",
+          "role": "muted"
+        },
         {
           "kind": "field",
           "label": "名称",
@@ -986,27 +997,27 @@
               "kind": "button",
               "text": "取消",
               "tone": "secondary",
-              "target": "wordbooks"
+              "target": "wordbook-detail"
             },
             {
               "kind": "button",
-              "text": "保存单词本",
+              "text": "保存修改",
               "tone": "primary",
-              "target": "wordbooks"
+              "target": "wordbook-detail"
             }
           ]
         }
       ],
-      "implemented": false,
-      "route": "",
+      "implemented": true,
+      "route": "/learning",
       "state": "",
       "dialog": true,
       "wide": false,
       "notes": [
-        "当前版本只提供创建与删除；重命名功能留待实施，不能标成已交付。"
+        "同账号名称唯一；表单携带元信息编辑版本，旧表单不能自动覆盖新版本。"
       ],
       "flow": [],
-      "heading": "编辑单词本",
+      "heading": "单词本",
       "activeAdminTab": null
     },
     {
@@ -6886,6 +6897,84 @@
       "notes": [],
       "flow": [],
       "heading": "查一个词",
+      "activeAdminTab": null
+    },
+    {
+      "id": "wordbook-edit-conflict",
+      "name": "单词本编辑／版本冲突",
+      "group": "单词本",
+      "children": [
+        {
+          "kind": "text",
+          "text": "单词本已被修改，请读取最新版本后重试。",
+          "role": "error"
+        },
+        {
+          "kind": "field",
+          "label": "我的名称输入",
+          "value": "我保留的输入",
+          "note": "",
+          "mode": "input"
+        },
+        {
+          "kind": "field",
+          "label": "我的说明输入",
+          "value": "我的说明",
+          "note": "",
+          "mode": "textarea"
+        },
+        {
+          "kind": "button",
+          "text": "读取服务器当前版本",
+          "tone": "secondary"
+        },
+        {
+          "kind": "card",
+          "title": "服务器当前版本",
+          "children": [
+            {
+              "kind": "text",
+              "text": "另一设备修改",
+              "role": "body"
+            },
+            {
+              "kind": "text",
+              "text": "远程说明",
+              "role": "muted"
+            },
+            {
+              "kind": "actions",
+              "children": [
+                {
+                  "kind": "button",
+                  "text": "采用服务器内容",
+                  "tone": "secondary",
+                  "target": "wordbook-edit"
+                },
+                {
+                  "kind": "button",
+                  "text": "保留输入并采用最新基准",
+                  "tone": "secondary",
+                  "target": "wordbook-edit"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "明确选择后仍需要点击保存才会提交。",
+          "role": "muted"
+        }
+      ],
+      "implemented": true,
+      "route": "/learning",
+      "state": "",
+      "dialog": true,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "单词本",
       "activeAdminTab": null
     },
     {

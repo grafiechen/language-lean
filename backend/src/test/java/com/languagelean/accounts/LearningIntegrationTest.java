@@ -165,6 +165,15 @@ class LearningIntegrationTest {
         var me = client.send(HttpRequest.newBuilder(URI.create(root + "/api/v1/auth/me")).GET().build(), HttpResponse.BodyHandlers.ofString());
         var ownerId = UUID.fromString(json.readTree(me.body()).get("id").asText());
         var book = learning.createWordbook(ownerId, new LearningService.CreateWordbook("http-" + UUID.randomUUID(), ""));
+        var bookEdit = json.writeValueAsString(new LearningService.EditWordbook(ownerId, book.version(), "edited-" + book.id(), "HTTP修改说明"));
+        var bookUrl = URI.create(root + "/api/v1/learning/wordbooks/" + book.id());
+        assertEquals(403, client.send(HttpRequest.newBuilder(bookUrl).header("Content-Type", "application/json")
+            .PUT(HttpRequest.BodyPublishers.ofString(bookEdit)).build(), HttpResponse.BodyHandlers.ofString()).statusCode());
+        var editedBook = client.send(HttpRequest.newBuilder(bookUrl).header("Content-Type", "application/json").header("X-XSRF-TOKEN", csrf)
+            .PUT(HttpRequest.BodyPublishers.ofString(bookEdit)).build(), HttpResponse.BodyHandlers.ofString());
+        assertEquals(200, editedBook.statusCode()); assertTrue(json.readTree(editedBook.body()).get("version").asLong() > book.version());
+        assertEquals(409, client.send(HttpRequest.newBuilder(bookUrl).header("Content-Type", "application/json").header("X-XSRF-TOKEN", csrf)
+            .PUT(HttpRequest.BodyPublishers.ofString(bookEdit)).build(), HttpResponse.BodyHandlers.ofString()).statusCode());
         var item = learning.addDictionaryEntry(ownerId, book.id(), foreign.item().dictionaryEntryId());
         var event = submission(item, Instant.parse("2026-09-30T12:00:00Z"), "0", null, Rating.GOOD);
         assertEquals(403, httpSubmit(client, root, null, event).statusCode());
@@ -344,6 +353,26 @@ class LearningIntegrationTest {
             assertEquals(Set.of("APPLIED", "DUPLICATE"), Set.of(a.get(), b.get()));
         }
         assertEquals(1, learning.listItems(f.userId(), f.bookId()).getFirst().reviewCount());
+    }
+
+    /** 为每个用例创建独立账户、公开词条和单词本，避免测试顺序互相影响。 */
+    @Test void editingWordbookPreservesSharedProgressAndRejectsStaleVersions() {
+        var f = fixture(); var shared = learning.createWordbook(f.userId(), new LearningService.CreateWordbook("shared", ""));
+        learning.addDictionaryEntry(f.userId(), shared.id(), f.item().dictionaryEntryId());
+        var event = submission(f.item(), Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MILLIS), f.item().progressVersion(), null, Rating.GOOD); reviews.submit(f.userId(), event);
+        var before = learning.listItems(f.userId(), f.bookId()).getFirst();
+        var book = learning.listWordbooks(f.userId()).stream().filter(b -> b.id().equals(f.bookId())).findFirst().orElseThrow();
+        var changed = learning.editWordbook(f.userId(), book.id(), new LearningService.EditWordbook(f.userId(), book.version(), "新名称", "新说明"));
+        assertEquals("新名称", changed.name()); assertEquals("新说明", changed.description()); assertEquals(1, changed.itemCount()); assertTrue(changed.version() > book.version());
+        assertEquals(json.writeValueAsString(before), json.writeValueAsString(learning.listItems(f.userId(), book.id()).getFirst()));
+        assertEquals(json.writeValueAsString(before), json.writeValueAsString(learning.listItems(f.userId(), shared.id()).getFirst()));
+        rejects(409, () -> learning.editWordbook(f.userId(), book.id(), new LearningService.EditWordbook(f.userId(), book.version(), "旧表单", "")));
+        rejects(409, () -> learning.editWordbook(f.userId(), book.id(), new LearningService.EditWordbook(f.userId(), changed.version(), shared.name(), "")));
+        rejects(409, () -> learning.editWordbook(f.userId(), book.id(), new LearningService.EditWordbook(UUID.randomUUID(), changed.version(), "其他账号", "")));
+        rejects(400, () -> learning.editWordbook(f.userId(), book.id(), new LearningService.EditWordbook(f.userId(), changed.version(), "  ", "")));
+        var other = fixture(); rejects(404, () -> learning.editWordbook(other.userId(), book.id(), new LearningService.EditWordbook(other.userId(), changed.version(), "越权", "")));
+        var same = learning.editWordbook(f.userId(), book.id(), new LearningService.EditWordbook(f.userId(), changed.version(), changed.name(), changed.description()));
+        assertEquals(changed.version(), same.version()); assertEquals(changed.updatedAt(), same.updatedAt());
     }
 
     /** 为每个用例创建独立账户、公开词条和单词本，避免测试顺序互相影响。 */

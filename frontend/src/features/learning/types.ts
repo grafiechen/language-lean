@@ -8,6 +8,8 @@ export interface Wordbook {
   itemCount: number
   createdAt: string
   updatedAt: string
+  /** 旧离线缓存可以没有版本；编辑必须在线重新读取包含版本的服务器摘要。 */
+  version?: number
 }
 /** 单词本中的共享学习条目及 FSRS 调度状态。 */
 export interface LearningItem {

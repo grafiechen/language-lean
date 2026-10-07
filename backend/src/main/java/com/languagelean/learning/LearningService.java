@@ -63,6 +63,17 @@ public class LearningService {
         return wordbookView(wordbook);
     }
 
+    /** 持锁核对归属和编辑版本；改名只修改单词本元信息，不能清空共享进度。 */
+    @Transactional
+    public WordbookView editWordbook(UUID userId, UUID wordbookId, EditWordbook request) {
+        if (request == null || !userId.equals(request.accountId())) throw new ResponseStatusException(CONFLICT, "登录账号已变化，请刷新后重试");
+        var book = wordbooks.lockOwned(wordbookId, userId).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "单词本不存在"));
+        if (request.version() == null || book.version != request.version()) throw new ResponseStatusException(CONFLICT, "单词本已被修改，请读取最新版本后重试");
+        var name = required(request.name(), 100, "单词本名称"); var description = text(request.description(), 500, "单词本说明");
+        if (wordbooks.existsByUserIdAndNameAndIdNot(userId, name, wordbookId)) throw new ResponseStatusException(CONFLICT, "该单词本名称已存在");
+        book.edit(name, description); wordbooks.flush(); return wordbookView(book);
+    }
+
     /** 查看某个单词本中的学习条目，已封禁词条仍返回身份和状态提示。 */
     @Transactional(readOnly = true)
     public List<LearningItemView> listItems(UUID userId, UUID wordbookId) {
@@ -220,10 +231,10 @@ public class LearningService {
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "单词本不存在"));
     }
 
-    /** 单词本摘要统一从实体转换，隐藏 JPA 版本字段。 */
+    /** 编辑版本只保护分类元信息，不与复习时间戳版本混用。 */
     private WordbookView wordbookView(Wordbook wordbook) {
         return new WordbookView(wordbook.id, wordbook.name, wordbook.description,
-                links.countByIdWordbookId(wordbook.id), wordbook.createdAt, wordbook.updatedAt);
+                links.countByIdWordbookId(wordbook.id), wordbook.createdAt, wordbook.updatedAt, wordbook.version);
     }
 
     /** 学习视图合并词典身份和进度存储，封禁词条只显示身份不读取内容。 */
@@ -254,6 +265,7 @@ public class LearningService {
 
     /** 创建单词本请求。 */
     public record CreateWordbook(String name, String description) {}
+    public record EditWordbook(UUID accountId, Long version, String name, String description) {}
     /** 返回真正被删除的学习身份，客户端不会因移除一个关联误清其他单词本共享进度。 */
     public record DeletionResult(List<UUID> deletedLearningItemIds) {}
     /** 本机持有的稳定身份，不接受客户端自报的账户归属。 */
@@ -265,7 +277,7 @@ public class LearningService {
                                 List<BookState> books, List<UUID> missingBookIds) {}
     /** 单词本列表摘要。 */
     public record WordbookView(UUID id, String name, String description, long itemCount,
-                               Instant createdAt, Instant updatedAt) {}
+                               Instant createdAt, Instant updatedAt, long version) {}
     /** 单词本中的学习条目及当前调度状态。 */
     public record LearningItemView(UUID id, UUID dictionaryEntryId, String written, String languageCode,
                                    String status, int currentRevision, boolean manualEarFocus,

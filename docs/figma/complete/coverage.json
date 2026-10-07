@@ -1,9 +1,9 @@
 {
   "status": "online-reference-and-native-import-materials-ready",
-  "screenCount": 110,
-  "frameCount": 220,
-  "implementedScreens": 108,
-  "plannedScreens": 2,
+  "screenCount": 111,
+  "frameCount": 222,
+  "implementedScreens": 110,
+  "plannedScreens": 1,
   "sourceHashes": {
     "frontend/src/App.vue": "b255f1564b0d078c23181326d6aab1d2bbe7829d21e3a7c7676de4eb2eeed62e",
     "frontend/src/core/fsrs.test.ts": "d7353dbf675de632d0dce7190151d8e8fc09bd1210606fe37c4c0b843a71a325",
@@ -47,7 +47,8 @@
     "frontend/src/features/learning/sync.test.ts": "7e03bc516ea3e6e769adf45dc379b01ae85deccf952b649ad8c5913ac8733456",
     "frontend/src/features/learning/sync.ts": "a9963a28307d7dcc8b04c74818176d5715fad47e1d54cbeaba02fb174569d175",
     "frontend/src/features/learning/trainingTypes.ts": "ef501c79f3805e406b1b30423dfe9e13dac6340ebf12b0f1b8fd2e095738c0bf",
-    "frontend/src/features/learning/types.ts": "ee35584377bf54c40f19afe13f6a5745ac72760a49678df55ce8d6b94bab5fcf",
+    "frontend/src/features/learning/types.ts": "ff8b54ca929e5f93010e4931e9d5aa05df425f7a25b154742a0197f852ea948d",
+    "frontend/src/features/learning/WordbookEditor.vue": "1f413e3037d3899a9eb8ec38be5f08571abb431a71833a9b8a73f1f0f70c1f7e",
     "frontend/src/features/operations/backups.test.ts": "ad1f2e5caf50daa9eaf68deaebf188f7d9ce377af0cb4a03f0bb28757ac5d103",
     "frontend/src/features/operations/backups.ts": "900cc7dd9d1a23c941eb8c251935c88adf8c8903a1bb08bcd6ed6a34211b45c5",
     "frontend/src/features/operations/DatabaseBackups.vue": "82105d0c2f6b190e0173cc29be470c29b20847555a1279d577a7844dd279cfea",
@@ -60,7 +61,7 @@
     "frontend/src/pages/DictionaryPage.vue": "f67f386747c0d9dfbb73fdce92466c0d56130312de259355906d9a53e116161b",
     "frontend/src/pages/HomePage.vue": "37c11cf87425c7f6249b12ae23079eb0eae44bf54ba4c2699d71b49ebecc4b62",
     "frontend/src/pages/LearningContentPage.vue": "7cb67c474af2141b254129f77b05a337b9e9dfa5615b91d35bec10e372af78d5",
-    "frontend/src/pages/LearningPage.vue": "6c943f2c6536e79b7bc18a3fb3af0981b09b6187f7ec6ae0f71730f22047a493",
+    "frontend/src/pages/LearningPage.vue": "262d6765fbe227256a0439642c13e3b0e02994d5b383b1f86878614e5815a493",
     "frontend/src/pages/LoginPage.vue": "90777d39d3c6979533439479bdeb763318aab4bf9f0b4419ef12c73d0b6fe901",
     "frontend/src/pages/OfflinePage.vue": "7171321574db264823b8a7232ea350c93799c91c73d9c5e4a5f949b9fc5ef58d",
     "frontend/src/pages/PasswordRecoveryPage.vue": "f624b760f1451d83ec725ab80ee22fa8f60bf11097b40c924fbe186aed644216",
@@ -95,6 +96,8 @@
     "frontend/src/platform/web/syncIssues.ts": "6c928bce6432b0e2c86b027f880c0a4742ca0beceb58334a38794669551a0d5f",
     "frontend/src/platform/web/trainingSessions.test.ts": "b789c18903f8d18122b1c4dd82de679afbe095dd1c79825974f41712aebc3c66",
     "frontend/src/platform/web/trainingSessions.ts": "eb2b6fc5e6b74f8fd7660126e5e8bb3e28c382e92dbd88802348a6208fcb5d1a",
+    "frontend/src/platform/web/wordbookMetadata.test.ts": "9c5f9708ca654b53731779591fae5c5ecc69c562d526261b963ac43d0e5d45f4",
+    "frontend/src/platform/web/wordbookMetadata.ts": "016994d1b0dc5dc823cda61774a214f15a4557e4e17322fecaf9f321b9505e40",
     "frontend/src/shared/api.test.ts": "bd016c2edc51a5d3b157b0865e6c5822c139fc3a8386efce221c3eb95e1517c7",
     "frontend/src/shared/api.ts": "2a8e0a8060729011b4b92b3c56b9bd40baed02feed6fb380296b060b9cf00e6f",
     "frontend/src/shared/passwordEncryption.test.ts": "ab678439872b3c8b9eb18fe39f23e8cab2f9467a3de6230056aca515953d8d6b",
@@ -102,7 +105,7 @@
     "frontend/src/style.css": "1bb3512390eab36c23dc1537784fd5338d8bbf0390ca2b93ffbc1a93f1ba85dc",
     "docs/设计文档.md": "ce478b4cdd524f2f8b77d7d3b0cdf2ea95f7b19be371bbaecafc931f0d283aa7",
     "docs/项目概要.md": "52d4b9448de28f19c557417baabf2aa47ade213cb5db505198196da69eb29c63",
-    "docs/figma/src/screens.mjs": "276a4a126ad7717c72a26e0864d09e60de2b0ced55029cd3f8b7a817b52e0335",
+    "docs/figma/src/screens.mjs": "f27f6f9030b20208210d4a4034d317ea6226012e5edf290d094fb597140ba81b",
     "docs/figma/src/figma-builder.mjs": "e106907c442fd6d8c63ff3d097939fc8cc65372c839e1de7696e419a8822669f"
   },
   "onlineFileKey": "Q6nWK9yDNLyEhhJL4a9dte",
@@ -348,17 +351,17 @@
     {
       "id": "wordbook-edit",
       "name": "编辑单词本",
-      "group": "扩展预留",
-      "implemented": false,
-      "route": "",
+      "group": "单词本",
+      "implemented": true,
+      "route": "/learning",
       "state": "",
       "dialog": true,
       "wide": false,
       "notes": [
-        "当前版本只提供创建与删除；重命名功能留待实施，不能标成已交付。"
+        "同账号名称唯一；表单携带元信息编辑版本，旧表单不能自动覆盖新版本。"
       ],
       "flow": [],
-      "heading": "编辑单词本",
+      "heading": "单词本",
       "activeAdminTab": null
     },
     {
@@ -1579,6 +1582,20 @@
       "notes": [],
       "flow": [],
       "heading": "查一个词",
+      "activeAdminTab": null
+    },
+    {
+      "id": "wordbook-edit-conflict",
+      "name": "单词本编辑／版本冲突",
+      "group": "单词本",
+      "implemented": true,
+      "route": "/learning",
+      "state": "",
+      "dialog": true,
+      "wide": false,
+      "notes": [],
+      "flow": [],
+      "heading": "单词本",
       "activeAdminTab": null
     },
     {

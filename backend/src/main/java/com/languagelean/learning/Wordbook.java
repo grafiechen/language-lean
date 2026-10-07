@@ -34,4 +34,9 @@ class Wordbook {
         wordbook.updatedAt = wordbook.createdAt;
         return wordbook;
     }
+    /** 分类元信息编辑不改变关联、学习身份、进度或离线训练范围。 */
+    void edit(String name, String description) {
+        if (this.name.equals(name) && this.description.equals(description)) return;
+        this.name = name; this.description = description; this.updatedAt = Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+    }
 }
